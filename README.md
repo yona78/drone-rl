@@ -52,27 +52,6 @@ uv run pytest -v
 uv run pytest tests/unit/test_rl/test_grid_types.py -v
 ```
 
-## Project Structure
-
-```
-drone-rl/
-  src/drone_rl/       Python package root
-    types/            Canonical dataclasses (no logic)
-    rl/               Pure RL engine (no GUI imports)
-    sdk/              SDK layer (single entry point for business logic)
-    gui/              Thin tkinter presentation layer
-    shared/           Configuration, version, gatekeeper
-    constants.py      Immutable project constants
-    utils.py          Helper functions
-    main.py           Application entry point
-  tests/              pytest suite (mirrors src/ structure)
-  config/             JSON configuration files
-  docs/               Project documentation
-  policies/           Saved Q-tables (JSON)
-  layouts/            Saved grid layouts (JSON)
-  logs/               Episode CSV logs
-```
-
 ## Obstacle Types
 
 | Type | Color | Reward | Behavior |
@@ -93,7 +72,123 @@ drone-rl/
 
 ## Keyboard Shortcuts
 
-(Will be documented in Phase 5 — GUI implementation)
+| Shortcut | Action |
+|----------|--------|
+| `Space` | Toggle Pause / Resume training |
+| `Ctrl+S` | Save current policy to JSON |
+| `Ctrl+L` | Load policy from JSON |
+| `Ctrl+R` | Reset Q-table and episode log |
+| `Ctrl+E` | Export episode log to CSV |
+| `Delete` | Clear selected grid cell to Empty |
+| Mouse drag | Paint multiple cells in one gesture |
+
+## Development
+
+### Lint & Format
+
+```bash
+# Check all files (ruff)
+uv run ruff check src/ tests/
+
+# Auto-fix lint issues
+uv run ruff check --fix src/ tests/
+
+# Format code
+uv run ruff format src/ tests/
+```
+
+### Tests & Coverage
+
+```bash
+# Full test suite
+uv run pytest
+
+# With coverage report
+uv run pytest --cov=src/drone_rl --cov-report=term-missing
+
+# Single module
+uv run pytest tests/unit/test_rl/ -v
+
+# Integration tests only
+uv run pytest tests/integration/ -v
+
+# Coverage gate (fails below 85%)
+uv run pytest --cov=src/drone_rl --cov-fail-under=85
+```
+
+### Line-count audit (150-line rule §3.2)
+
+```bash
+find src/ tests/ -name "*.py" | xargs wc -l | sort -n | tail -20
+```
+
+### Run the parameter sensitivity notebook
+
+```bash
+uv run jupyter nbconvert --to notebook --execute \
+  notebooks/parameter_sensitivity.ipynb \
+  --output notebooks/parameter_sensitivity_executed.ipynb
+```
+
+## Project Structure
+
+```
+drone-rl/
+  src/drone_rl/       Python package root
+    types/            Canonical dataclasses (no logic)
+    rl/               Pure RL engine (no GUI imports)
+    sdk/              SDK layer (single entry point for business logic)
+    gui/              Thin tkinter presentation layer
+    shared/           Configuration, version, gatekeeper
+    constants.py      Immutable project constants
+    utils.py          Helper functions
+    main.py           Application entry point
+  tests/
+    unit/             Fast isolated unit tests
+    integration/      Multi-module integration tests
+  config/             JSON configuration files
+  docs/               Project documentation
+  notebooks/          Jupyter parameter sensitivity analysis
+  results/            Sensitivity analysis output JSON
+  assets/             Exported notebook HTML
+  policies/           Saved Q-tables (JSON)
+  layouts/            Saved grid layouts (JSON)
+  logs/               Episode CSV logs
+```
+
+## Troubleshooting
+
+**`ModuleNotFoundError: No module named 'drone_rl'`**
+Run via `uv run python -m drone_rl.main`, not `python main.py`. The `src/` layout
+requires the package to be installed in the `uv` virtual environment (`uv sync`).
+
+**`_tkinter.TclError: no display name and no $DISPLAY environment variable`**
+tkinter requires a display. On headless Linux servers, run with a virtual display:
+```bash
+sudo apt install xvfb
+Xvfb :99 &
+DISPLAY=:99 uv run python -m drone_rl.main
+```
+
+**`ImportError: cannot import name 'tkinter'` on Ubuntu/Debian**
+```bash
+sudo apt install python3-tk
+```
+
+**Training appears frozen**
+The agent may be stuck in a large state space. Try: reduce grid size, increase
+`epsilon` (more exploration), or raise `alpha` (faster learning) in the
+Hyperparameters panel, then click Reset → Train.
+
+**Q-table heatmap is all the same colour**
+The Q-table is uninitialized (all zeros). Start a training run first.
+Values diverge after the first successful episode reaches the goal.
+
+**`git index.lock` errors during development**
+The git index lock can accumulate in some environments. Clear with:
+```bash
+rm -f .git/index.lock .git/HEAD.lock
+```
 
 ## Saving & Loading Policies
 

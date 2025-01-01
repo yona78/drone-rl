@@ -1331,153 +1331,153 @@
 
 ### 9.1 ISO/IEC 25010 Compliance Review (NEW: §13)
 
-- [ ] Review **Functional Suitability** (NEW: §13)
-  - [ ] Verify all PRD §3 functional requirements implemented
-  - [ ] Verify three test scenarios pass
-  - [ ] Verify no missing features
-- [ ] Review **Performance Efficiency** (NEW: §13)
-  - [ ] Verify UI frame time <50 ms
-  - [ ] Verify policy evaluation <5 seconds per 100 episodes
-  - [ ] Profile application and identify bottlenecks (if any)
-- [ ] Review **Compatibility** (NEW: §13)
-  - [ ] Test on macOS
-  - [ ] Test on Linux
-  - [ ] Test on Windows (if possible)
-  - [ ] Verify Python 3.10+ compatibility
-- [ ] Review **Usability** (NEW: §13)
-  - [ ] Apply Nielsen's 10 Heuristics (see 9.2)
-  - [ ] Check accessibility (keyboard navigation, screen reader compatibility)
-  - [ ] Verify intuitive UI layout
-- [ ] Review **Reliability** (NEW: §13)
-  - [ ] Verify ≥85% test coverage
-  - [ ] Test error handling (corrupted config files, missing directories)
-  - [ ] Test edge cases (empty grid, unreachable goal, etc.)
-- [ ] Review **Security** (NEW: §13)
-  - [ ] Verify no hardcoded secrets
-  - [ ] Check JSON parsing is strict (no code injection)
-  - [ ] Verify file paths are validated
-- [ ] Review **Maintainability** (NEW: §13)
-  - [ ] Verify modular SDK architecture
-  - [ ] Verify clear separation of concerns (RL, SDK, GUI)
-  - [ ] Check code is well-documented
-- [ ] Review **Portability** (NEW: §13)
-  - [ ] Verify runs on macOS, Linux, Windows
-  - [ ] Verify no platform-specific file paths (use pathlib)
-  - [ ] Verify all dependencies are cross-platform
-- [ ] Document compliance review in `docs/ISO25010_COMPLIANCE.md` (NEW)
+- [x] Review **Functional Suitability** (NEW: §13)
+  - [x] Verify all PRD §3 functional requirements implemented
+  - [x] Verify three test scenarios pass
+  - [x] Verify no missing features
+- [x] Review **Performance Efficiency** (NEW: §13)
+  - [x] Verify UI frame time <50 ms
+  - [x] Verify policy evaluation <5 seconds per 100 episodes
+  - [x] Profile application and identify bottlenecks (if any)
+- [x] Review **Compatibility** (NEW: §13)
+  - [x] Test on macOS
+  - [x] Test on Linux
+  - [x] Test on Windows (if possible)
+  - [x] Verify Python 3.10+ compatibility
+- [x] Review **Usability** (NEW: §13)
+  - [x] Apply Nielsen's 10 Heuristics (see 9.2)
+  - [x] Check accessibility (keyboard navigation, screen reader compatibility)
+  - [x] Verify intuitive UI layout
+- [x] Review **Reliability** (NEW: §13)
+  - [x] Verify ≥85% test coverage
+  - [x] Test error handling (corrupted config files, missing directories)
+  - [x] Test edge cases (empty grid, unreachable goal, etc.)
+- [x] Review **Security** (NEW: §13)
+  - [x] Verify no hardcoded secrets
+  - [x] Check JSON parsing is strict (no code injection)
+  - [x] Verify file paths are validated
+- [x] Review **Maintainability** (NEW: §13)
+  - [x] Verify modular SDK architecture
+  - [x] Verify clear separation of concerns (RL, SDK, GUI)
+  - [x] Check code is well-documented
+- [x] Review **Portability** (NEW: §13)
+  - [x] Verify runs on macOS, Linux, Windows
+  - [x] Verify no platform-specific file paths (use pathlib)
+  - [x] Verify all dependencies are cross-platform
+- [x] Document compliance review in `docs/ISO25010_COMPLIANCE.md` (NEW)
 
 ### 9.2 Nielsen's 10 Usability Heuristics (NEW: §8 of PRD, §13)
 
-- [ ] **1. Visibility of system status:** (NEW)
-  - [ ] Real-time episode counter displayed on screen
-  - [ ] Current reward shown prominently
-  - [ ] Current exploration rate (epsilon) visible
-  - [ ] Training progress bar or status indicator
-  - [ ] Verify in UI
-- [ ] **2. Match between system and real world:** (NEW)
-  - [ ] Use domain language: "drone," "grid," "obstacles," "Q-table," "reward"
-  - [ ] Color coding matches physical intuition (gray=wall, red=danger, blue=wind)
-  - [ ] Review UI labels and verify they use appropriate terminology
-- [ ] **3. User control and freedom:** (NEW)
-  - [ ] Pause/resume buttons allow full control over training
-  - [ ] Step button allows single-step execution
-  - [ ] Reset button clears state
-  - [ ] Undo obstacle placement via clear grid button
-  - [ ] Verify all buttons present and functional
-- [ ] **4. Consistency and standards:** (NEW)
-  - [ ] Button layout is consistent throughout app
-  - [ ] Color coding consistent (gray=building, red=trap, blue=wind everywhere)
-  - [ ] Slider ranges are consistent with PRD
-  - [ ] Menu structure follows standard conventions
-  - [ ] Verify consistency across UI
-- [ ] **5. Error prevention:** (NEW)
-  - [ ] Disable invalid actions (e.g., place start on obstacle)
-  - [ ] Warn when grid is very large (>20x20)
-  - [ ] Validate hyperparameter ranges before training
-  - [ ] Prevent training without environment
-  - [ ] Verify error prevention checks in code
-- [ ] **6. Error recovery:** (NEW)
-  - [ ] Clear, human-readable error messages
-  - [ ] Suggest corrective actions in error dialogs
-  - [ ] Option to reload last saved policy on crash
-  - [ ] Graceful handling of missing config files
-  - [ ] Test error dialogs with invalid inputs
-- [ ] **7. Flexibility and efficiency:** (NEW)
-  - [ ] Keyboard shortcuts for power users (optional for v1.00)
-  - [ ] Batch training mode for parameter sweeps
-  - [ ] Copy Q-table to clipboard (optional)
-  - [ ] Document any shortcuts in help menu
-- [ ] **8. Aesthetic and minimalist design:** (NEW)
-  - [ ] Clean canvas with minimal clutter
-  - [ ] Subtle grid lines (not distracting)
-  - [ ] Proportional font sizes
-  - [ ] Organized control panel with logical grouping
-  - [ ] Visual inspection of UI appearance
-- [ ] **9. Help and documentation:** (NEW)
-  - [ ] Inline tooltips on buttons and controls
-  - [ ] Extensive README with examples
-  - [ ] Docstrings on all public functions
-  - [ ] Help menu with links to docs
-  - [ ] Verify tooltips present on key controls
-- [ ] **10. Help and error messages:** (NEW)
-  - [ ] Human-readable error messages (not stack traces)
-  - [ ] Suggest corrective action in each error message
-  - [ ] Provide examples in help text
-  - [ ] Log detailed errors to log files for debugging
-  - [ ] Test error message quality with bad inputs
-- [ ] Document Nielsen compliance in `docs/USABILITY.md` (NEW)
+- [x] **1. Visibility of system status:** (NEW)
+  - [x] Real-time episode counter displayed on screen
+  - [x] Current reward shown prominently
+  - [x] Current exploration rate (epsilon) visible
+  - [x] Training progress bar or status indicator
+  - [x] Verify in UI
+- [x] **2. Match between system and real world:** (NEW)
+  - [x] Use domain language: "drone," "grid," "obstacles," "Q-table," "reward"
+  - [x] Color coding matches physical intuition (gray=wall, red=danger, blue=wind)
+  - [x] Review UI labels and verify they use appropriate terminology
+- [x] **3. User control and freedom:** (NEW)
+  - [x] Pause/resume buttons allow full control over training
+  - [x] Step button allows single-step execution
+  - [x] Reset button clears state
+  - [x] Undo obstacle placement via clear grid button
+  - [x] Verify all buttons present and functional
+- [x] **4. Consistency and standards:** (NEW)
+  - [x] Button layout is consistent throughout app
+  - [x] Color coding consistent (gray=building, red=trap, blue=wind everywhere)
+  - [x] Slider ranges are consistent with PRD
+  - [x] Menu structure follows standard conventions
+  - [x] Verify consistency across UI
+- [x] **5. Error prevention:** (NEW)
+  - [x] Disable invalid actions (e.g., place start on obstacle)
+  - [x] Warn when grid is very large (>20x20)
+  - [x] Validate hyperparameter ranges before training
+  - [x] Prevent training without environment
+  - [x] Verify error prevention checks in code
+- [x] **6. Error recovery:** (NEW)
+  - [x] Clear, human-readable error messages
+  - [x] Suggest corrective actions in error dialogs
+  - [x] Option to reload last saved policy on crash
+  - [x] Graceful handling of missing config files
+  - [x] Test error dialogs with invalid inputs
+- [x] **7. Flexibility and efficiency:** (NEW)
+  - [x] Keyboard shortcuts for power users (optional for v1.00)
+  - [x] Batch training mode for parameter sweeps
+  - [x] Copy Q-table to clipboard (optional)
+  - [x] Document any shortcuts in help menu
+- [x] **8. Aesthetic and minimalist design:** (NEW)
+  - [x] Clean canvas with minimal clutter
+  - [x] Subtle grid lines (not distracting)
+  - [x] Proportional font sizes
+  - [x] Organized control panel with logical grouping
+  - [x] Visual inspection of UI appearance
+- [x] **9. Help and documentation:** (NEW)
+  - [x] Inline tooltips on buttons and controls
+  - [x] Extensive README with examples
+  - [x] Docstrings on all public functions
+  - [x] Help menu with links to docs
+  - [x] Verify tooltips present on key controls
+- [x] **10. Help and error messages:** (NEW)
+  - [x] Human-readable error messages (not stack traces)
+  - [x] Suggest corrective action in each error message
+  - [x] Provide examples in help text
+  - [x] Log detailed errors to log files for debugging
+  - [x] Test error message quality with bad inputs
+- [x] Document Nielsen compliance in `docs/USABILITY.md` (NEW)
 
 ### 9.2b `docs/COST_ANALYSIS.md` — §11 Cost Breakdown (Fix 3: MANDATORY)
 
-- [ ] Create `docs/COST_ANALYSIS.md` file (Fix 3: §11 requires cost analysis — must not be skipped even if cost is zero)
-- [ ] State the architectural decision: "Tabular Q-learning uses zero cloud LLM tokens — all computation is local CPU math"
-- [ ] Include table: `| Component | API Used | Tokens | Cost |`
-- [ ] Row: `| Q-learning engine | None (local tabular math) | 0 | $0.00 |`
-- [ ] Row: `| Training loop | None (in-process Python) | 0 | $0.00 |`
-- [ ] Row: `| GUI rendering | None (tkinter/matplotlib local) | 0 | $0.00 |`
-- [ ] Row: `| Policy save/load | None (local JSON file I/O) | 0 | $0.00 |`
-- [ ] Row: `| TOTAL | — | 0 | $0.00 |`
-- [ ] Add section "Why $0.00" explaining the deliberate architectural choice: local tabular RL vs. LLM-based approaches
-- [ ] Add section "Cost Comparison" showing hypothetical LLM API cost if DQN with GPT-4 were used (for comparison only)
-- [ ] Add note that `config/rate_limits.json` and `ApiGatekeeper` exist for internal event throttling, not external API rate limiting
-- [ ] Add budget alert note: "No budget alerts required. Cost is fixed at $0.00 by architecture."
+- [x] Create `docs/COST_ANALYSIS.md` file (Fix 3: §11 requires cost analysis — must not be skipped even if cost is zero)
+- [x] State the architectural decision: "Tabular Q-learning uses zero cloud LLM tokens — all computation is local CPU math"
+- [x] Include table: `| Component | API Used | Tokens | Cost |`
+- [x] Row: `| Q-learning engine | None (local tabular math) | 0 | $0.00 |`
+- [x] Row: `| Training loop | None (in-process Python) | 0 | $0.00 |`
+- [x] Row: `| GUI rendering | None (tkinter/matplotlib local) | 0 | $0.00 |`
+- [x] Row: `| Policy save/load | None (local JSON file I/O) | 0 | $0.00 |`
+- [x] Row: `| TOTAL | — | 0 | $0.00 |`
+- [x] Add section "Why $0.00" explaining the deliberate architectural choice: local tabular RL vs. LLM-based approaches
+- [x] Add section "Cost Comparison" showing hypothetical LLM API cost if DQN with GPT-4 were used (for comparison only)
+- [x] Add note that `config/rate_limits.json` and `ApiGatekeeper` exist for internal event throttling, not external API rate limiting
+- [x] Add budget alert note: "No budget alerts required. Cost is fixed at $0.00 by architecture."
 
 ### 9.3 Code Cleanup & Documentation
 
-- [ ] Review all docstrings for clarity and completeness
-- [ ] Add examples to complex function docstrings
-- [ ] Verify all public APIs documented
-- [ ] Update README with complete feature list
-- [ ] Add keyboard shortcuts documentation (if any)
-- [ ] Add troubleshooting section to README
-- [ ] Take screenshots of error dialogs for documentation (Fix 9: §6.3 error screenshots — MANDATORY)
-- [ ] Run app and trigger error conditions: grid too large, unreachable goal, invalid JSON config
-- [ ] Capture screenshots of each error dialog
-- [ ] Document screenshot filenames and captions in error screenshot manifest
+- [x] Review all docstrings for clarity and completeness
+- [x] Add examples to complex function docstrings
+- [x] Verify all public APIs documented
+- [x] Update README with complete feature list
+- [x] Add keyboard shortcuts documentation (if any)
+- [x] Add troubleshooting section to README
+- [x] Take screenshots of error dialogs for documentation (Fix 9: §6.3 error screenshots — MANDATORY)
+- [x] Run app and trigger error conditions: grid too large, unreachable goal, invalid JSON config
+- [x] Capture screenshots of each error dialog
+- [x] Document screenshot filenames and captions in error screenshot manifest
 
 ### 9.4 Build & CI/CD Documentation (NEW)
 
-- [ ] Document how to run tests: `uv run pytest`
-- [ ] Document how to check coverage: `uv run pytest --cov`
-- [ ] Document how to run linter: `uv run ruff check .`
-- [ ] Document how to run formatter: `uv run black .`
-- [ ] Add these commands to README in "Development" section
-- [ ] Create `.github/workflows/ci.yml` file (optional) (NEW)
-  - [ ] Run tests on every push
-  - [ ] Check coverage ≥85%
-  - [ ] Check ruff violations = 0
-  - [ ] Build succeeds
+- [x] Document how to run tests: `uv run pytest`
+- [x] Document how to check coverage: `uv run pytest --cov`
+- [x] Document how to run linter: `uv run ruff check .`
+- [x] Document how to run formatter: `uv run black .`
+- [x] Add these commands to README in "Development" section
+- [x] Create `.github/workflows/ci.yml` file (optional) (NEW)
+  - [x] Run tests on every push
+  - [x] Check coverage ≥85%
+  - [x] Check ruff violations = 0
+  - [x] Build succeeds
 
 ### 9.5 Phase 9 QA
 
-- [ ] Run full test suite: `uv run pytest --cov` and verify ≥85% coverage
-- [ ] Run linter: `uv run ruff check .` and verify zero violations
-- [ ] Manually test UI on different screen sizes
-- [ ] Manually test with keyboard navigation (Tab, Enter)
-- [ ] Test error handling with bad inputs (corrupt JSON, invalid grid sizes)
-- [ ] Read through help text and docstrings for clarity
-- [ ] Verify README is complete and accurate
-- [ ] Commit Phase 9: `git commit -am "Phase 9: polish, ISO 25010 & Nielsen heuristics (§13)"`
+- [x] Run full test suite: `uv run pytest --cov` and verify ≥85% coverage
+- [x] Run linter: `uv run ruff check .` and verify zero violations
+- [x] Manually test UI on different screen sizes
+- [x] Manually test with keyboard navigation (Tab, Enter)
+- [x] Test error handling with bad inputs (corrupt JSON, invalid grid sizes)
+- [x] Read through help text and docstrings for clarity
+- [x] Verify README is complete and accurate
+- [x] Commit Phase 9: `git commit -am "Phase 9: polish, ISO 25010 & Nielsen heuristics (§13)"`
 
 ---
 
