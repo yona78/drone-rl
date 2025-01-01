@@ -1485,108 +1485,108 @@
 
 ### 10.1 Test Scenario 1: Direct Route (Empty Grid) (from PRD §11.2)
 
-- [ ] Create `tests/integration/test_scenarios/test_direct_route.py` file
-- [ ] Set up 10×10 empty grid with start at (0, 0), goal at (9, 9)
-- [ ] Train for 500 episodes with α=0.1, γ=0.95, ε=0.1
-- [ ] Assert convergence reached (success rate ≥90%)
-- [ ] Assert path is near-optimal (Manhattan distance or less)
-- [ ] Assert convergence graph shows upward trend
-- [ ] Document test in `tests/integration/test_scenarios/test_direct_route.py`
-- [ ] Run test: `uv run pytest tests/integration/test_scenarios/test_direct_route.py -v`
+- [x] Create `tests/integration/test_scenarios/test_direct_route.py` file
+- [x] Set up 10×10 empty grid with start at (0, 0), goal at (9, 9)
+- [x] Train for 500 episodes with α=0.1, γ=0.95, ε=0.1
+- [x] Assert convergence reached (success rate ≥90%)
+- [x] Assert path is near-optimal (Manhattan distance or less)
+- [x] Assert convergence graph shows upward trend
+- [x] Document test in `tests/integration/test_scenarios/test_direct_route.py`
+- [x] Run test: `uv run pytest tests/integration/test_scenarios/test_direct_route.py -v`
 
 ### 10.2 Test Scenario 2: Maze Navigation (Gray Walls)
 
-- [ ] Create `tests/integration/test_scenarios/test_maze_navigation.py` file
-- [ ] Set up 10×10 grid with gray building walls forming maze
-- [ ] Set start at (0, 0), goal at (9, 9)
-- [ ] Train for 1000 episodes with α=0.1, γ=0.95, ε=0.1
-- [ ] Assert convergence reached (success rate ≥90%)
-- [ ] Assert learned policy avoids repeated wall collisions
-- [ ] Assert path navigates maze corridors
-- [ ] Run test: `uv run pytest tests/integration/test_scenarios/test_maze_navigation.py -v`
+- [x] Create `tests/integration/test_scenarios/test_maze_navigation.py` file
+- [x] Set up 10×10 grid with gray building walls forming maze
+- [x] Set start at (0, 0), goal at (9, 9)
+- [x] Train for 1000 episodes with α=0.1, γ=0.95, ε=0.1
+- [x] Assert convergence reached (success rate ≥90%)
+- [x] Assert learned policy avoids repeated wall collisions
+- [x] Assert path navigates maze corridors
+- [x] Run test: `uv run pytest tests/integration/test_scenarios/test_maze_navigation.py -v`
 
 ### 10.3 Test Scenario 3: Risk Aversion (Red Traps)
 
-- [ ] Create `tests/integration/test_scenarios/test_risk_aversion.py` file
-- [ ] Set up 10×10 grid with red trap tiles near shortest path
-- [ ] Set start at (0, 0), goal at (9, 9)
-- [ ] Train for 1000 episodes with α=0.1, γ=0.95, ε=0.1
-- [ ] Assert agent learns to avoid traps
-- [ ] Assert learned policy prefers slightly longer safe route
-- [ ] Assert convergence graph shows risk aversion learning
-- [ ] Run test: `uv run pytest tests/integration/test_scenarios/test_risk_aversion.py -v`
+- [x] Create `tests/integration/test_scenarios/test_risk_aversion.py` file
+- [x] Set up 10×10 grid with red trap tiles near shortest path
+- [x] Set start at (0, 0), goal at (9, 9)
+- [x] Train for 1000 episodes with α=0.1, γ=0.95, ε=0.1
+- [x] Assert agent learns to avoid traps
+- [x] Assert learned policy prefers slightly longer safe route
+- [x] Assert convergence graph shows risk aversion learning
+- [x] Run test: `uv run pytest tests/integration/test_scenarios/test_risk_aversion.py -v`
 
 ### 10.4 Edge Cases Testing (NEW: §4.3)
 
-- [ ] Create `tests/integration/test_edge_cases.py` file
-- [ ] Test empty grid (no obstacles) — should learn optimal path
-- [ ] Test unreachable goal (completely surrounded) — should terminate at max steps
-- [ ] Test start position = goal position — should reach goal immediately
-- [ ] Test grid boundaries — should not allow out-of-bounds movement
-- [ ] Test zero learning rate (α=0) — Q-table should not change
-- [ ] Test zero discount factor (γ=0) — should maximize immediate reward only
-- [ ] Test zero exploration rate (ε=0) — should never explore (pure exploitation)
-- [ ] Test max grid size (20×20) — should not crash
-- [ ] Document edge cases in `docs/TESTING.md` (NEW)
-- [ ] Include error screenshots in `docs/TESTING.md` (Fix 9: §6.3 error screenshots — MANDATORY)
-- [ ] Document each error condition with descriptive text AND associated screenshot
-- [ ] Screenshot captions should explain: error message, cause, expected recovery action
+- [x] Create `tests/integration/test_edge_cases.py` file
+- [x] Test empty grid (no obstacles) — should learn optimal path
+- [x] Test unreachable goal (completely surrounded) — should terminate at max steps
+- [x] Test start position = goal position — should reach goal immediately
+- [x] Test grid boundaries — should not allow out-of-bounds movement
+- [x] Test zero learning rate (α=0) — Q-table should not change
+- [x] Test zero discount factor (γ=0) — should maximize immediate reward only
+- [x] Test zero exploration rate (ε=0) — should never explore (pure exploitation)
+- [x] Test max grid size (20×20) — should not crash
+- [x] Document edge cases in `docs/TESTING.md` (NEW)
+- [x] Include error screenshots in `docs/TESTING.md` (Fix 9: §6.3 error screenshots — MANDATORY)
+- [x] Document each error condition with descriptive text AND associated screenshot
+- [x] Screenshot captions should explain: error message, cause, expected recovery action
 
 ### 10.5 Coverage & Quality Gates (NEW: §6 & Fix 16: §6.4 Test Logs & JUnit XML)
 
-- [ ] Create `reports/` directory for test execution logs (Fix 16: §6.4 — MANDATORY)
-- [ ] Run pytest with JUnit XML export (Fix 16: §6.4 — MANDATORY)
-- [ ] `uv run pytest --junitxml=reports/test_results.xml --cov=src/drone_rl --cov-report=html`
-- [ ] Save test execution output to log file: `uv run pytest > reports/test_run.log 2>&1`
-- [ ] Verify JUnit XML file exists: `reports/test_results.xml` (contains pass/fail counts, timing, details)
-- [ ] Verify coverage ≥85% across all modules
-- [ ] Run `uv run ruff check .`
-- [ ] Verify zero Ruff violations
-- [ ] Run `uv run black --check .`
-- [ ] Verify code formatting complies with Black
-- [ ] Run `uv run mypy src/` (optional, for type checking)
-- [ ] Document coverage goals and test reports location in README
+- [x] Create `reports/` directory for test execution logs (Fix 16: §6.4 — MANDATORY)
+- [x] Run pytest with JUnit XML export (Fix 16: §6.4 — MANDATORY)
+- [x] `uv run pytest --junitxml=reports/test_results.xml --cov=src/drone_rl --cov-report=html`
+- [x] Save test execution output to log file: `uv run pytest > reports/test_run.log 2>&1`
+- [x] Verify JUnit XML file exists: `reports/test_results.xml` (contains pass/fail counts, timing, details)
+- [x] Verify coverage ≥85% across all modules
+- [x] Run `uv run ruff check .`
+- [x] Verify zero Ruff violations
+- [x] Run `uv run black --check .`
+- [x] Verify code formatting complies with Black
+- [x] Run `uv run mypy src/` (optional, for type checking)
+- [x] Document coverage goals and test reports location in README
 
 ### 10.6 Acceptance Checklist (from PRD §15)
 
-- [ ] All three test scenarios pass with expected convergence behavior
-- [ ] Bellman equation implemented exactly as specified in PRD §5.3
-- [ ] All reward values match PRD §6: goal=+100, step=-1, building=-10, trap=-100, wind=-10
-- [ ] Obstacle colors correct: Building=Gray, Trap=Red, Crosswind=Blue
-- [ ] Q-table policy save/load functional with JSON format
-- [ ] UI responsive (<50 ms frame time); no lag during training
-- [ ] Live convergence graph, episode statistics, heatmap all rendering correctly
-- [ ] Minimum 85% test coverage achieved (verified by pytest-cov)
-- [ ] TDD red-green-refactor workflow followed for all features
-- [ ] All source files ≤150 lines; test files ≤150 lines
-- [ ] No hardcoded configuration values; all in JSON config or constants
-- [ ] SDK architecture enforced: all business logic in `drone_rl.sdk`, GUI is thin wrapper
-- [ ] pyproject.toml and uv.lock present; `uv` used exclusively
-- [ ] Version number set to 1.00
-- [ ] README complete with installation instructions, quick start, API overview
-- [ ] Docstrings on all public functions and classes
-- [ ] Parameter sensitivity analysis notebook complete with visualizations
-- [ ] Nielsen's 10 Heuristics documented in `docs/USABILITY.md`
-- [ ] Extension points documented in `docs/EXTENSIONS.md` with examples
-- [ ] ISO/IEC 25010 characteristics reviewed; no critical deficiencies
-- [ ] Edge cases tested and documented (empty grid, unreachable goal, etc.)
-- [ ] No SQL injection, arbitrary code execution, or security vulnerabilities
-- [ ] Cross-platform tested or compatibility documented
-- [ ] All workflow steps documented: PRD → PLAN → TODO → Development
-- [ ] Reference to algorithm document (`docs/PRD_rl_algorithm.md`) in place
+- [x] All three test scenarios pass with expected convergence behavior
+- [x] Bellman equation implemented exactly as specified in PRD §5.3
+- [x] All reward values match PRD §6: goal=+100, step=-1, building=-10, trap=-100, wind=-10
+- [x] Obstacle colors correct: Building=Gray, Trap=Red, Crosswind=Blue
+- [x] Q-table policy save/load functional with JSON format
+- [x] UI responsive (<50 ms frame time); no lag during training
+- [x] Live convergence graph, episode statistics, heatmap all rendering correctly
+- [x] Minimum 85% test coverage achieved (verified by pytest-cov)
+- [x] TDD red-green-refactor workflow followed for all features
+- [x] All source files ≤150 lines; test files ≤150 lines
+- [x] No hardcoded configuration values; all in JSON config or constants
+- [x] SDK architecture enforced: all business logic in `drone_rl.sdk`, GUI is thin wrapper
+- [x] pyproject.toml and uv.lock present; `uv` used exclusively
+- [x] Version number set to 1.00
+- [x] README complete with installation instructions, quick start, API overview
+- [x] Docstrings on all public functions and classes
+- [x] Parameter sensitivity analysis notebook complete with visualizations
+- [x] Nielsen's 10 Heuristics documented in `docs/USABILITY.md`
+- [x] Extension points documented in `docs/EXTENSIONS.md` with examples
+- [x] ISO/IEC 25010 characteristics reviewed; no critical deficiencies
+- [x] Edge cases tested and documented (empty grid, unreachable goal, etc.)
+- [x] No SQL injection, arbitrary code execution, or security vulnerabilities
+- [x] Cross-platform tested or compatibility documented
+- [x] All workflow steps documented: PRD → PLAN → TODO → Development
+- [x] Reference to algorithm document (`docs/PRD_rl_algorithm.md`) in place
 
 ### 10.7 Phase 10 QA
 
-- [ ] Run all integration tests: `uv run pytest tests/integration/ -v`
-- [ ] Verify all three scenarios pass
-- [ ] Verify edge cases pass
-- [ ] Run full test suite with coverage: `uv run pytest --cov --cov-report=html`
-- [ ] Verify coverage ≥85%
-- [ ] Manually run app: `uv run python -m drone_rl.main`
-- [ ] Verify app launches, trains, saves/loads policies and layouts
-- [ ] Verify all menu options work
-- [ ] Verify README is accurate and complete
-- [ ] Commit Phase 10: `git commit -am "Phase 10: final acceptance tests"`
+- [x] Run all integration tests: `uv run pytest tests/integration/ -v`
+- [x] Verify all three scenarios pass
+- [x] Verify edge cases pass
+- [x] Run full test suite with coverage: `uv run pytest --cov --cov-report=html`
+- [x] Verify coverage ≥85%
+- [x] Manually run app: `uv run python -m drone_rl.main`
+- [x] Verify app launches, trains, saves/loads policies and layouts
+- [x] Verify all menu options work
+- [x] Verify README is accurate and complete
+- [x] Commit Phase 10: `git commit -am "Phase 10: final acceptance tests"`
 
 ---
 
