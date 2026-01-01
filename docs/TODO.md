@@ -1594,125 +1594,125 @@
 
 ### C1. Ruff Configuration & Enforcement (NEW: §7.1)
 
-- [ ] Verify `[tool.ruff]` section in `pyproject.toml` with categories: E, F, W, I, N, UP, B, C4, SIM
-- [ ] Run `uv run ruff check .` after every commit
-- [ ] Zero violations mandatory in CI/CD
-- [ ] Document Ruff configuration in README or contributing guide
+- [x] Verify `[tool.ruff]` section in `pyproject.toml` with categories: E, F, W, I, N, UP, B, C4, SIM
+- [x] Run `uv run ruff check .` after every commit
+- [x] Zero violations mandatory in CI/CD
+- [x] Document Ruff configuration in README or contributing guide
 
 ### C2. Test Coverage Enforcement (NEW: §6)
 
-- [ ] Add `--cov-fail-under=85` to pytest config in `pyproject.toml`
-- [ ] Run `uv run pytest --cov` before every commit
-- [ ] Verify coverage ≥85%
-- [ ] Generate HTML coverage report: `uv run pytest --cov --cov-report=html`
-- [ ] Document coverage requirements in README
+- [x] Add `--cov-fail-under=85` to pytest config in `pyproject.toml`
+- [x] Run `uv run pytest --cov` before every commit
+- [x] Verify coverage ≥85%
+- [x] Generate HTML coverage report: `uv run pytest --cov --cov-report=html`
+- [x] Document coverage requirements in README
 
 ### C3. File Size Limit Enforcement (NEW: §3.2)
 
-- [ ] After writing each file, run `wc -l src/drone_rl/<module>.py`
-- [ ] Verify ≤150 lines (excluding docstrings and comments per PEP standards)
-- [ ] If exceeding, split file into two modules
-- [ ] Document split in commit message
+- [x] After writing each file, run `wc -l src/drone_rl/<module>.py`
+- [x] Verify ≤150 lines (excluding docstrings and comments per PEP standards)
+- [x] If exceeding, split file into two modules
+- [x] Document split in commit message
 
 ### C4. SDK Boundary Enforcement (NEW: §4 & Fix 18: §14.3 Relative Imports)
 
-- [ ] Run `grep -r "from drone_rl.rl" src/drone_rl/gui/` — should be EMPTY
-- [ ] Run `grep -r "import tkinter" src/drone_rl/rl/` — should be EMPTY
-- [ ] Verify GUI never calls RL functions directly
-- [ ] All coupling through SDK only
-- [ ] Verify all imports are relative, NOT absolute (Fix 18: §14.3 — MANDATORY)
-- [ ] Run `grep -r "from src\.drone_rl" src/` — should be EMPTY (no absolute imports)
-- [ ] Ensure all imports use relative paths: `from .agent import Action` NOT `from src.drone_rl.types.agent import Action`
-- [ ] Document relative import requirement in ARCHITECTURE.md
+- [x] Run `grep -r "from drone_rl.rl" src/drone_rl/gui/` — should be EMPTY
+- [x] Run `grep -r "import tkinter" src/drone_rl/rl/` — should be EMPTY
+- [x] Verify GUI never calls RL functions directly
+- [x] All coupling through SDK only
+- [x] Verify all imports are relative, NOT absolute (Fix 18: §14.3 — MANDATORY)
+- [x] Run `grep -r "from src\.drone_rl" src/` — should be EMPTY (no absolute imports)
+- [x] Ensure all imports use relative paths: `from .agent import Action` NOT `from src.drone_rl.types.agent import Action`
+- [x] Document relative import requirement in ARCHITECTURE.md
 
 ### C5. Hardcoded Values Check (NEW: §7)
 
-- [ ] Grep for magic numbers in source code
-- [ ] Verify all constants in constants.py or config files
-- [ ] Verify no `= 0.1` or `= 100` in middle of code
-- [ ] Document policy in README
+- [x] Grep for magic numbers in source code
+- [x] Verify all constants in constants.py or config files
+- [x] Verify no `= 0.1` or `= 100` in middle of code
+- [x] Document policy in README
 
 ### C6. Configuration File Validation (NEW: §7)
 
-- [ ] Verify `config/setup.json`, `config/rewards.json`, `config/hyperparameters.json` exist
-- [ ] Verify all have `"version": "1.00"` field
-- [ ] Verify valid JSON: `python -c "import json; json.load(open('config/setup.json'))"`
-- [ ] Verify ConfigManager loads all files without errors
+- [x] Verify `config/setup.json`, `config/rewards.json`, `config/hyperparameters.json` exist
+- [x] Verify all have `"version": "1.00"` field
+- [x] Verify valid JSON: `python -c "import json; json.load(open('config/setup.json'))"`
+- [x] Verify ConfigManager loads all files without errors
 
 ### C7. Version Consistency (NEW: §8.1)
 
-- [ ] Verify `__version__ = "1.00"` in `src/drone_rl/shared/version.py`
-- [ ] Verify version imported in `src/drone_rl/__init__.py`
-- [ ] Verify app displays version in title bar
-- [ ] Verify all config files have `"version": "1.00"`
-- [ ] Verify `pyproject.toml` version matches
+- [x] Verify `__version__ = "1.00"` in `src/drone_rl/shared/version.py`
+- [x] Verify version imported in `src/drone_rl/__init__.py`
+- [x] Verify app displays version in title bar
+- [x] Verify all config files have `"version": "1.00"`
+- [x] Verify `pyproject.toml` version matches
 
 ### C8. Documentation Completeness (NEW: §2.2)
 
-- [ ] Verify `docs/PRD.md` exists (or symlink to PRD_2D_Drone_Pathfinding_RL.md)
-- [ ] Verify `docs/PLAN.md` exists (or symlink to CODE_PLAN.md)
-- [ ] Verify `docs/TODO.md` exists (or symlink to this file)
-- [ ] Verify `docs/PRD_rl_algorithm.md` exists with RL algorithm deep dive
-- [ ] Verify `docs/ARCHITECTURE.md` exists with SDK design details
-- [ ] Verify `docs/EXTENSIONS.md` exists with extension points
-- [ ] Verify `docs/TESTING.md` exists with test strategy
-- [ ] Verify `docs/USABILITY.md` exists with Nielsen heuristics
-- [ ] Verify `docs/prompts.md` exists with prompt engineering log
-- [ ] Verify `docs/COST_ANALYSIS.md` exists with §11 cost breakdown (Fix 3)
-- [ ] Verify `config/rate_limits.json` exists (Fix 1: §5 ApiGatekeeper)
-- [ ] Verify `src/drone_rl/shared/gatekeeper.py` exists and `ApiGatekeeper` class defined (Fix 1)
-- [ ] Verify `src/drone_rl/rl/base.py` exists with `RewardMixin`, `BaseEnvironment`, `GridEnvironment` (Fix 2)
-- [ ] Verify `GridEnvironment` inherits from both `RewardMixin` AND `BaseEnvironment` (Fix 2: OOP)
-- [ ] Verify `_validate_config()` method exists in `DroneRLSDK`, `ApiGatekeeper`, and `GridEnvironment` (Fix 5: §16)
-- [ ] Verify `queue.Queue` used for training thread → main thread communication (Fix 4: §15 thread safety)
+- [x] Verify `docs/PRD.md` exists (or symlink to PRD_2D_Drone_Pathfinding_RL.md)
+- [x] Verify `docs/PLAN.md` exists (or symlink to CODE_PLAN.md)
+- [x] Verify `docs/TODO.md` exists (or symlink to this file)
+- [x] Verify `docs/PRD_rl_algorithm.md` exists with RL algorithm deep dive
+- [x] Verify `docs/ARCHITECTURE.md` exists with SDK design details
+- [x] Verify `docs/EXTENSIONS.md` exists with extension points
+- [x] Verify `docs/TESTING.md` exists with test strategy
+- [x] Verify `docs/USABILITY.md` exists with Nielsen heuristics
+- [x] Verify `docs/prompts.md` exists with prompt engineering log
+- [x] Verify `docs/COST_ANALYSIS.md` exists with §11 cost breakdown (Fix 3)
+- [x] Verify `config/rate_limits.json` exists (Fix 1: §5 ApiGatekeeper)
+- [x] Verify `src/drone_rl/shared/gatekeeper.py` exists and `ApiGatekeeper` class defined (Fix 1)
+- [x] Verify `src/drone_rl/rl/base.py` exists with `RewardMixin`, `BaseEnvironment`, `GridEnvironment` (Fix 2)
+- [x] Verify `GridEnvironment` inherits from both `RewardMixin` AND `BaseEnvironment` (Fix 2: OOP)
+- [x] Verify `_validate_config()` method exists in `DroneRLSDK`, `ApiGatekeeper`, and `GridEnvironment` (Fix 5: §16)
+- [x] Verify `queue.Queue` used for training thread → main thread communication (Fix 4: §15 thread safety)
 
 ### C9. uv Commands (MANDATORY)
 
-- [ ] NEVER use `pip install` — always use `uv add`
-- [ ] NEVER use `python -m pip` — always use `uv`
-- [ ] NEVER use bare `python` — always use `uv run python`
-- [ ] Example commands:
-  - [ ] `uv sync` to sync dependencies
-  - [ ] `uv add matplotlib` to add package
-  - [ ] `uv add --dev pytest` to add dev dependency
-  - [ ] `uv run python -m drone_rl.main` to run app
-  - [ ] `uv run pytest` to run tests
-  - [ ] `uv run ruff check .` to lint
-  - [ ] `uv tree` to view dependency tree
+- [x] NEVER use `pip install` — always use `uv add`
+- [x] NEVER use `python -m pip` — always use `uv`
+- [x] NEVER use bare `python` — always use `uv run python`
+- [x] Example commands:
+  - [x] `uv sync` to sync dependencies
+  - [x] `uv add matplotlib` to add package
+  - [x] `uv add --dev pytest` to add dev dependency
+  - [x] `uv run python -m drone_rl.main` to run app
+  - [x] `uv run pytest` to run tests
+  - [x] `uv run ruff check .` to lint
+  - [x] `uv tree` to view dependency tree
 
 ### C10. Git Commits & Workflow (Fix 15: §8.2 & §20.7 Feature Branches & PRs)
 
-- [ ] For each phase, create a dedicated feature branch (Fix 15: §8.2 & §20.7 — MANDATORY)
-- [ ] Example: `git checkout -b feature/phase-0-scaffold`, `feature/phase-1-types`, `feature/phase-2-rl-engine`, etc.
-- [ ] Push the feature branch: `git push origin feature/phase-X`
-- [ ] Open a Pull Request (PR) on GitHub/GitLab for each phase (Fix 15: §20.7 — MANDATORY)
-- [ ] Perform a self-review on the PR before merging (add comments, verify code quality)
-- [ ] Merge PR to main after review: `git merge feature/phase-X`
-- [ ] Make atomic commits per phase (Phase 0, Phase 1, etc.)
-- [ ] Use descriptive commit messages
-- [ ] Example: `git commit -am "Phase 3: SDK layer (§4) - DroneRLSDK class and tests"`
-- [ ] Push to origin after each phase (if using remote)
-- [ ] Keep `.gitignore` up to date
-- [ ] Document PR checklist in repository: review coverage, ruff, tests, file sizes
+- [x] For each phase, create a dedicated feature branch (Fix 15: §8.2 & §20.7 — MANDATORY)
+- [x] Example: `git checkout -b feature/phase-0-scaffold`, `feature/phase-1-types`, `feature/phase-2-rl-engine`, etc.
+- [x] Push the feature branch: `git push origin feature/phase-X`
+- [x] Open a Pull Request (PR) on GitHub/GitLab for each phase (Fix 15: §20.7 — MANDATORY)
+- [x] Perform a self-review on the PR before merging (add comments, verify code quality)
+- [x] Merge PR to main after review: `git merge feature/phase-X`
+- [x] Make atomic commits per phase (Phase 0, Phase 1, etc.)
+- [x] Use descriptive commit messages
+- [x] Example: `git commit -am "Phase 3: SDK layer (§4) - DroneRLSDK class and tests"`
+- [x] Push to origin after each phase (if using remote)
+- [x] Keep `.gitignore` up to date
+- [x] Document PR checklist in repository: review coverage, ruff, tests, file sizes
 
 ### C11. Final Build & Release Checklist (NEW: v1.00 release)
 
-- [ ] Run `uv sync --locked` to ensure lockfile is consistent
-- [ ] Run `uv run pytest --cov --cov-fail-under=85` — must pass
-- [ ] Run `uv run ruff check .` — must be zero violations
-- [ ] Run `uv run black --check .` — must be zero formatting issues
-- [ ] Run `uv run python -m drone_rl.main` — must launch without errors
-- [ ] Manually test all three scenarios
-- [ ] Update `CHANGELOG.md` with v1.00 release notes
-- [ ] Set version to `1.00` in:
-  - [ ] `src/drone_rl/shared/version.py`
-  - [ ] `pyproject.toml`
-  - [ ] `config/setup.json`
-  - [ ] `config/rewards.json`
-  - [ ] `config/hyperparameters.json`
-  - [ ] `config/logging_config.json`
-- [ ] Tag release: `git tag -a v1.00 -m "Release v1.00: initial production release"`
-- [ ] Push tag: `git push origin v1.00`
+- [x] Run `uv sync --locked` to ensure lockfile is consistent
+- [x] Run `uv run pytest --cov --cov-fail-under=85` — must pass
+- [x] Run `uv run ruff check .` — must be zero violations
+- [x] Run `uv run black --check .` — must be zero formatting issues
+- [x] Run `uv run python -m drone_rl.main` — must launch without errors
+- [x] Manually test all three scenarios
+- [x] Update `CHANGELOG.md` with v1.00 release notes
+- [x] Set version to `1.00` in:
+  - [x] `src/drone_rl/shared/version.py`
+  - [x] `pyproject.toml`
+  - [x] `config/setup.json`
+  - [x] `config/rewards.json`
+  - [x] `config/hyperparameters.json`
+  - [x] `config/logging_config.json`
+- [x] Tag release: `git tag -a v1.00 -m "Release v1.00: initial production release"`
+- [x] Push tag: `git push origin v1.00`
 
 ---
 
