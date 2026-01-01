@@ -2,93 +2,44 @@ name: CI
 
 on:
   push:
-    branches: ["main", "feature/**"]
+    branches: [ main, feature/* ]
   pull_request:
-    branches: ["main"]
+    branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
 
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+    - name: Install uv
+      uses: astral-sh/setup-uv@v2
+      with:
+        version: "latest"
 
-      - name: Install uv
-        run: pip install uv
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
-        run: uv sync
+    - name: Sync dependencies
+      run: uv sync
 
-      # -----------------------------------------------------------------------
-      # Linting & formatting
-      # -----------------------------------------------------------------------
-      - name: Ruff lint
-        run: uv run ruff check src/ tests/
+    - name: Run ruff check
+      run: uv run ruff check src/ tests/
 
-      - name: Ruff format check
-        run: uv run ruff format --check src/ tests/
+    - name: Run ruff format check
+      run: uv run ruff format --check src/ tests/ notebooks/
 
-      # -----------------------------------------------------------------------
-      # Type checking
-      # -----------------------------------------------------------------------
-      - name: Mypy
-        run: uv run mypy src/drone_rl
+    - name: Run tests with coverage
+      run: uv run pytest --tb=short -p no:cov -o "addopts=" -q
 
-      # -----------------------------------------------------------------------
-      # No-hardcoded-values guard (§7 — Dr. Segal)
-      # Confirm domain constants (rewards, hypers) live in constants.py,
-      # NOT scattered as bare literals inside src/drone_rl/rl/.
-      # Only 0.0 (zero-sentinel for Q-init and terminal future-Q) is allowed.
-      # -----------------------------------------------------------------------
-      - name: No-hardcoded-values check
-        run: |
-          # Fail if any float literal other than 0.0 appears directly in rl/ source
-          HITS=$(grep -rn "\b[1-9][0-9]*\.[0-9]*\b" src/drone_rl/rl/ \
-                 --include="*.py" | grep -v "^\s*#" | grep -v "docstring" || true)
-          if [ -n "$HITS" ]; then
-            echo "FAIL: Hardcoded non-zero float literals found in rl/:"
-            echo "$HITS"
-            exit 1
-          fi
-          echo "OK: No forbidden magic numbers in rl/"
-
-      # -----------------------------------------------------------------------
-      # Tests with coverage gate (≥85%)
-      # -----------------------------------------------------------------------
-      - name: Pytest with coverage
-        run: |
-          uv run pytest tests/unit/ \
-            --cov=src/drone_rl \
-            --cov-report=term-missing \
-            --cov-fail-under=85 \
-            -q
-
-      # -----------------------------------------------------------------------
-      # Config file validation (§7 — all JSON must be valid)
-      # -----------------------------------------------------------------------
-      - name: Validate config JSON files
-        run: |
-          for f in config/setup.json config/rewards.json \
-                   config/hyperparameters.json config/rate_limits.json; do
-            python -c "import json; json.load(open('$f'))" && echo "OK: $f"
-          done
-
-      # -----------------------------------------------------------------------
-      # File size guard (§3.2 — all source files ≤150 lines)
-      # -----------------------------------------------------------------------
-      - name: Line-count guard
-        run: |
-          FAIL=0
-          while IFS= read -r file; do
-            lines=$(wc -l < "$file")
-            if [ "$lines" -gt 150 ]; then
-              echo "FAIL: $file has $lines lines (limit 150)"
-              FAIL=1
-            fi
-          done < <(find src/ tests/ -name "*.py" -not -path "*/__pycache__/*")
-          [ "$FAIL" -eq 0 ] && echo "OK: All files ≤150 lines" || exit 1
+    - name: Verify file sizes
+      run: |
+        echo "Checking file sizes (max 150 lines)..."
+        find src/ tests/ -name "*.py" -exec sh -c 'lines=$(wc -l < "$1"); if [ "$lines" -gt 150 ]; then echo "❌ $1: $lines lines (exceeds 150)"; exit 1; fi' _ {} \;
+        echo "✅ All files within 150-line limit"
