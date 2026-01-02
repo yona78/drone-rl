@@ -11,7 +11,12 @@ from ..types.rl import EpisodeRecord
 
 
 class ExecutionMixin:
-    """Execution logic for running episodes and steps."""
+    """Execution logic for running episodes and steps.
+
+    Input Data: grid, Q-table, hyperparameters, rewards, RNG from host SDK.
+    Output Data: list[EpisodeRecord] from train(); AgentState from step().
+    Setup Data: _pause_event, _state_lock, _records inherited from SDK host.
+    """
 
     def train(
         self, num_episodes: int | None = None, update_queue: queue.Queue | None = None

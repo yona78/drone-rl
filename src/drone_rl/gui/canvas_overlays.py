@@ -23,7 +23,12 @@ LEGEND_ITEMS = [
 
 
 class CanvasOverlayMixin:
-    """Provides methods for drawing paths, policies, and overlays on a Canvas."""
+    """Provides methods for drawing paths, policies, and overlays on a Canvas.
+
+    Input Data: path lists, Q-table dicts, grid dimensions from host canvas.
+    Output Data: drawn tk.Canvas items (lines, polygons, text).
+    Setup Data: _cs (cell size), _PATH_TAG, _POLICY_TAG from host GridCanvas.
+    """
 
     def draw_path(self, path: list[tuple[int, int]]) -> None:
         """Draw a polyline tracing the agent's trajectory."""

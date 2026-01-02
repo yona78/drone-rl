@@ -6,7 +6,12 @@ import tkinter as tk
 
 
 class AppMenuMixin:
-    """Provides menu bar building functionality for DroneRLApp."""
+    """Provides menu bar building functionality for DroneRLApp.
+
+    Input Data: host DroneRLApp (self) providing sdk, _grid, _set_status.
+    Output Data: tkinter Menu bar with File/Edit/Help cascades.
+    Setup Data: none — menu is built once during _build_menu().
+    """
 
     def _build_menu(self) -> None:
         """Create File / Edit / Help menu bar."""

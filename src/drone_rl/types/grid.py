@@ -35,7 +35,12 @@ class CellType(Enum):
 
 @dataclass(frozen=True)
 class Coordinate:
-    """Immutable 2D grid coordinate."""
+    """Immutable 2D grid coordinate.
+
+    Input Data: row (int), col (int).
+    Output Data: string representation "(row, col)".
+    Setup Data: none — frozen dataclass, no configuration.
+    """
 
     row: int
     col: int

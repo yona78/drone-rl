@@ -10,7 +10,12 @@ if TYPE_CHECKING:
 
 
 class AppUIMixin:
-    """Mixin for building the tkinter UI."""
+    """Mixin for building the tkinter UI layout.
+
+    Input Data: DroneRLApp host (self) providing sdk, _grid references.
+    Output Data: populated tk.Frame hierarchy, widget references on host.
+    Setup Data: none — layout is built once during create_ui().
+    """
 
     def create_ui(self: DroneRLApp) -> None:
         """Build and layout all sub-frames."""
