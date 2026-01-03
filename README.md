@@ -41,7 +41,14 @@ uv sync
 ## Running the App
 
 ```bash
-uv run python -m drone_rl.main
+uv run
+```
+
+or equivalently:
+
+```bash
+uv run drone-rl
+python -m drone_rl
 ```
 
 ## Running Tests
