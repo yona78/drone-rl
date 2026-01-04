@@ -41,14 +41,14 @@ uv sync
 ## Running the App
 
 ```bash
-uv run
+uv run drone-rl
 ```
 
 or equivalently:
 
 ```bash
-uv run drone-rl
 python -m drone_rl
+uv run -m drone_rl
 ```
 
 ## Running Tests
