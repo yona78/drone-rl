@@ -1,0 +1,13 @@
+{
+  "version": "1.00",
+  "grid": {
+    "default_width": 10,
+    "default_height": 10,
+    "max_width": 20,
+    "max_height": 20
+  },
+  "ui": {
+    "window_width": 1400,
+    "window_height": 900
+  }
+}

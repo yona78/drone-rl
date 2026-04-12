@@ -1,0 +1,54 @@
+[project]
+name = "drone-rl"
+version = "0.1.0"
+description = "2D Drone Pathfinding Reinforcement Learning Simulation — tabular Q-Learning with tkinter GUI"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "famliy", email = "o546315180@gmail.com" }]
+dependencies = [
+    "matplotlib>=3.8",
+    "numpy",
+]
+
+[project.scripts]
+drone-rl = "drone_rl.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/drone_rl"]
+
+# --- Code Quality (§7.1 Dr. Segal) ---
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src/drone_rl --cov-fail-under=85 --junitxml=reports/test_results.xml"
+
+[tool.mypy]
+strict = true
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.coverage.run]
+source = ["src/drone_rl"]
+omit = ["*/gui/*", "*/main.py"]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true

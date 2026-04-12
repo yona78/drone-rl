@@ -1,0 +1,8 @@
+{
+  "version": "1.00",
+  "note": "This app performs no external API calls. Token cost is $0.00 (see docs/COST_ANALYSIS.md). Gatekeeper enforces internal GUI event throttle to prevent runaway UI updates.",
+  "max_gui_updates_per_second": 30,
+  "max_episode_callbacks_queued": 100,
+  "retry_attempts": 0,
+  "retry_backoff_seconds": 0
+}

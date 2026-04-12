@@ -1,0 +1,8 @@
+{
+  "version": "1.00",
+  "goal_reached": 100.0,
+  "empty_step": -1.0,
+  "building_collision": -10.0,
+  "trap_hit": -100.0,
+  "crosswind_penalty": -10.0
+}
