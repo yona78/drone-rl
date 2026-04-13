@@ -1,3 +1,5 @@
 """SDK layer — single entry point for all business logic."""
 
-__all__: list[str] = []
+from .sdk import DroneRLSDK
+
+__all__ = ["DroneRLSDK"]
