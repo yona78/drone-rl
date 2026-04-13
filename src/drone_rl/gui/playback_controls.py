@@ -1,14 +1,14 @@
 """
-PlaybackControls — Train / Pause / Reset / Step buttons (Phase 5).
+PlaybackControls — Train / Pause / Reset / Step buttons (Phase 6).
 
-All button callbacks delegate to the DroneRLSDK. The panel never calls
-into drone_rl.rl directly (§4 boundary).
-
-Reference: CODE_PLAN Phase 5, Dr. Segal §4.
+Training runs in a daemon thread. EpisodeRecords are passed to the main
+thread via queue.Queue polled with root.after(100, ...) — §15 thread safety.
+All button callbacks delegate to the DroneRLSDK (§4 boundary).
 """
 
 from __future__ import annotations
 
+import queue
 import threading
 import tkinter as tk
 from collections.abc import Callable
@@ -21,9 +21,9 @@ class PlaybackControls(tk.LabelFrame):
     """
     Control panel with Train, Pause, Reset, Step buttons and speed slider.
 
-    **Input Data:** SDK reference; status and refresh callbacks.
-    **Output Data:** Triggers SDK methods; calls refresh_cb after training.
-    **Setup Data:** Training thread managed internally to keep UI responsive.
+    **Input Data:** SDK reference; status, refresh, and get-hp callbacks.
+    **Output Data:** Triggers SDK methods; polls update_queue for live charts.
+    **Setup Data:** Daemon training thread + queue.Queue for thread safety.
     """
 
     def __init__(
@@ -32,12 +32,15 @@ class PlaybackControls(tk.LabelFrame):
         sdk: DroneRLSDK,
         status_cb: Callable[[str], None] | None = None,
         refresh_cb: Callable[[], None] | None = None,
+        get_hp_cb: Callable[[], object] | None = None,
     ) -> None:
         super().__init__(parent, text="Controls", padx=4, pady=2)
         self._sdk = sdk
         self._status_cb = status_cb
         self._refresh_cb = refresh_cb
+        self._get_hp_cb = get_hp_cb
         self._training_thread: threading.Thread | None = None
+        self._update_queue: queue.Queue = queue.Queue(maxsize=500)
         self._speed_var = tk.IntVar(value=30)
         self._build()
 
@@ -62,24 +65,50 @@ class PlaybackControls(tk.LabelFrame):
             row=1, column=2, columnspan=2, sticky=tk.W)
 
     def _on_train(self) -> None:
-        """Launch training in a background thread."""
+        """Apply hyperparameters, then launch training in a background thread."""
         if self._training_thread and self._training_thread.is_alive():
             self._set_status("Already training.")
             return
+        if self._get_hp_cb:
+            self._sdk.update_hyperparameters(self._get_hp_cb())  # type: ignore[arg-type]
         self._sdk.resume()
+        # Drain any stale items from a previous run
+        while not self._update_queue.empty():
+            try:
+                self._update_queue.get_nowait()
+            except queue.Empty:
+                break
         self._set_status("Training…")
         self._training_thread = threading.Thread(
             target=self._train_worker, daemon=True)
         self._training_thread.start()
+        self.after(100, self._poll_queue)
 
     def _train_worker(self) -> None:
-        """Background thread: run training, then schedule a UI refresh."""
+        """Background thread: run training, enqueue each EpisodeRecord."""
         try:
-            self._sdk.train()
+            self._sdk.train(update_queue=self._update_queue)
         except Exception as exc:  # noqa: BLE001
             self._set_status(f"Training error: {exc}")
             return
         self.after(0, self._on_training_done)
+
+    def _poll_queue(self) -> None:
+        """Drain the update queue on the main thread; reschedule if needed."""
+        got_items = False
+        while True:
+            try:
+                self._update_queue.get_nowait()
+                got_items = True
+            except queue.Empty:
+                break
+        if got_items and self._refresh_cb:
+            self._refresh_cb()
+        still_running = bool(
+            self._training_thread and self._training_thread.is_alive()
+        )
+        if still_running or not self._update_queue.empty():
+            self.after(100, self._poll_queue)
 
     def _on_training_done(self) -> None:
         stats = self._sdk.get_episode_stats()

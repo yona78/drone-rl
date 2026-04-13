@@ -58,12 +58,18 @@ class AccessorMixin:
     # --- Queries ---
 
     def get_qtable(self) -> dict:
-        """Return serialised Q-table for GUI visualisation."""
+        """Return serialised Q-table for GUI visualisation (thread-safe)."""
         from ..rl.qtable import qtable_to_dict
+        lock = getattr(self, "_state_lock", None)
+        if lock is not None:
+            with lock:
+                return qtable_to_dict(dict(self._qtable))
         return qtable_to_dict(self._qtable)
 
     def get_episode_stats(self) -> list[dict]:
-        """Return list of episode stat dicts."""
+        """Return list of episode stat dicts (thread-safe)."""
+        lock = getattr(self, "_state_lock", None)
+        records = list(self._records) if lock is None else self._locked_records(lock)
         return [
             {
                 "episode": r.episode,
@@ -72,8 +78,13 @@ class AccessorMixin:
                 "terminal_reason": r.terminal_reason.value,
                 "epsilon": r.epsilon,
             }
-            for r in self._records
+            for r in records
         ]
+
+    def _locked_records(self, lock: object) -> list:
+        """Return a snapshot of _records under the state lock."""
+        with lock:  # type: ignore[attr-defined]
+            return list(self._records)
 
     # --- File I/O (thin wrappers over sdk/io.py) ---
 

@@ -82,7 +82,7 @@ class DroneRLApp(tk.Tk):
         self._hp_panel = HyperparameterPanel(parent, self.sdk, self._set_status)
         self._hp_panel.pack(side=tk.LEFT, padx=4)
         self._pb_controls = PlaybackControls(parent, self.sdk, self._set_status,
-                                             self._refresh_all)
+                                             self._refresh_all, self._hp_panel.get_hyperparameters)
         self._pb_controls.pack(side=tk.LEFT, padx=4)
         self._io_panel = IOPanel(parent, self.sdk, self._set_status)
         self._io_panel.pack(side=tk.LEFT, padx=4)

@@ -1,16 +1,14 @@
-"""
-DroneRLSDK — single entry point for all RL business logic (§4).
+"""DroneRLSDK — single entry point for all RL business logic (§4).
 
-The GUI NEVER imports from drone_rl.rl directly. All operations go
-through this class. Middleware dispatch delegated to MiddlewareHost;
-queries and file I/O to AccessorMixin.
-
-Reference: CODE_PLAN section 14, Dr. Segal §4.
+The GUI never imports from drone_rl.rl directly (§4 SDK boundary).
 """
 
 from __future__ import annotations
 
 import math
+import queue
+import threading
+from dataclasses import replace as dc_replace
 
 from ..rl.episode import run_step
 from ..rl.qtable import init_qtable
@@ -48,13 +46,13 @@ class DroneRLSDK(MiddlewareHost, AccessorMixin):
         self._qtable: QTable = {}
         self._records: list[EpisodeRecord] = []
         self._middleware: list = []
-        self._paused = False
+        self._pause_event = threading.Event()
+        self._state_lock = threading.Lock()
         for d in (POLICIES_DIR, LOGS_DIR, LAYOUTS_DIR):
             d.mkdir(parents=True, exist_ok=True)
         self._validate_config()
 
     def _validate_config(self) -> None:
-        """Raise ValueError on invalid hyperparameters or rewards."""
         hp = self._hp
         if not (0 < hp.alpha <= 1):
             raise ValueError(f"alpha must be in (0,1], got {hp.alpha}")
@@ -73,16 +71,24 @@ class DroneRLSDK(MiddlewareHost, AccessorMixin):
         self._grid = grid
         self._qtable = init_qtable(grid)
 
-    # --- Training ---
+    def update_hyperparameters(self, hp: Hyperparameters) -> None:
+        """Apply new hyperparameters and re-seed RNG (§6.2)."""
+        self._hp = hp
+        self._rng = create_rng(hp.random_seed)
+        self._validate_config()
 
-    def train(self, num_episodes: int | None = None) -> list[EpisodeRecord]:
-        """Run training loop; call lifecycle hooks at each episode/step."""
+    def train(
+        self,
+        num_episodes: int | None = None,
+        update_queue: queue.Queue | None = None,
+    ) -> list[EpisodeRecord]:
+        """Run training loop; emit EpisodeRecords to update_queue if given."""
         if self._grid is None:
             raise RuntimeError("Call create_environment() before train()")
         n = num_episodes or self._hp.total_episodes
         new_records: list[EpisodeRecord] = []
         for ep in range(n):
-            if self._paused:
+            if self._pause_event.is_set():
                 break
             self._call_hook_before_episode_start(ep)
             agent = AgentState(
@@ -101,38 +107,34 @@ class DroneRLSDK(MiddlewareHost, AccessorMixin):
                 steps=agent.step_count, terminal_reason=reason,
                 epsilon=self._hp.epsilon,
             )
-            new_records.append(record)
-            self._records.append(record)
+            with self._state_lock:
+                new_records.append(record)
+                self._records.append(record)
+                new_eps = max(self._hp.epsilon_min,
+                              self._hp.epsilon * self._hp.epsilon_decay)
+                self._hp = dc_replace(self._hp, epsilon=new_eps)
+            if update_queue is not None:
+                update_queue.put_nowait(record)
             self._call_hook_on_episode_complete(record)
-            decayed = self._hp.epsilon * self._hp.epsilon_decay
-            new_eps = max(self._hp.epsilon_min, decayed)
-            self._hp = Hyperparameters(
-                alpha=self._hp.alpha, gamma=self._hp.gamma,
-                epsilon=new_eps, epsilon_decay=self._hp.epsilon_decay,
-                epsilon_min=self._hp.epsilon_min,
-                max_steps_per_episode=self._hp.max_steps_per_episode,
-                total_episodes=self._hp.total_episodes,
-                random_seed=self._hp.random_seed,
-            )
         return new_records
 
     def pause(self) -> None:
         """Signal training to pause after the current episode."""
-        self._paused = True
+        self._pause_event.set()
         self._call_hook_on_training_pause()
 
     def resume(self) -> None:
         """Clear pause flag; training can continue."""
-        self._paused = False
+        self._pause_event.clear()
         self._call_hook_on_training_resume()
 
     def reset(self) -> None:
         """Reset Q-table, records, and RNG to initial state."""
+        self._pause_event.clear()
         if self._grid:
             self._qtable = init_qtable(self._grid)
         self._records.clear()
         self._rng = create_rng(self._hp.random_seed)
-        self._paused = False
 
     def step(self, action: Action) -> tuple[AgentState, float, bool]:
         """Execute a single step in the current environment."""
