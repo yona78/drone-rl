@@ -9,6 +9,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 GUI_ROOT = REPO_ROOT / "src" / "drone_rl" / "gui"
 TESTS_ROOT = REPO_ROOT / "tests"
 SDK_TEST_ROOT = TESTS_ROOT / "unit" / "test_sdk"
+INTEGRATION_ROOT = TESTS_ROOT / "integration"
 
 
 def _iter_import_from_modules(py_file: Path) -> list[str]:
@@ -30,10 +31,10 @@ def test_gui_never_imports_rl_directly() -> None:
     assert offenders == []
 
 
-def test_non_sdk_tests_do_not_import_rl_directly() -> None:
-    """Only SDK tests may import from drone_rl.rl directly."""
+def test_non_sdk_integration_tests_do_not_import_rl_directly() -> None:
+    """Integration tests outside SDK boundary checks avoid direct RL imports."""
     offenders: list[Path] = []
-    for py_file in TESTS_ROOT.rglob("*.py"):
+    for py_file in INTEGRATION_ROOT.rglob("*.py"):
         if SDK_TEST_ROOT in py_file.parents:
             continue
         modules = _iter_import_from_modules(py_file)

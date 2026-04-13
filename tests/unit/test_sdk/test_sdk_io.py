@@ -115,6 +115,12 @@ def test_sdk_get_episode_stats(sdk: DroneRLSDK) -> None:
     sdk.train(num_episodes=4)
     stats = sdk.get_episode_stats()
     assert len(stats) == 4
-    required = {"episode", "total_reward", "steps", "terminal_reason", "epsilon"}
+    required = {
+        "episode",
+        "total_reward",
+        "steps",
+        "terminal_reason",
+        "epsilon",
+    }
     for stat in stats:
         assert required.issubset(stat.keys())

@@ -9,7 +9,6 @@ Reference: CODE_PLAN section 14, Phase 3.
 
 from __future__ import annotations
 
-import csv
 import json
 from pathlib import Path
 
@@ -17,6 +16,7 @@ from ..rl.qtable import qtable_from_dict, qtable_to_dict
 from ..types.agent import Action
 from ..types.grid import CellType, Coordinate, GridState
 from ..types.rl import EpisodeRecord, QTable
+from ..utils import export_episodes_to_csv
 
 # --- Policy (Q-table) ---
 
@@ -109,22 +109,15 @@ def save_experiment_results(
 
 
 def export_logs(records: list[EpisodeRecord], filepath: Path) -> None:
-    """Export episode records as CSV."""
-    filepath = Path(filepath)
-    filepath.parent.mkdir(parents=True, exist_ok=True)
-    with filepath.open("w", newline="") as fh:
-        writer = csv.DictWriter(
-            fh,
-            fieldnames=["episode", "total_reward", "steps", "terminal_reason", "epsilon"],
-        )
-        writer.writeheader()
-        for r in records:
-            writer.writerow(
-                {
-                    "episode": r.episode,
-                    "total_reward": r.total_reward,
-                    "steps": r.steps,
-                    "terminal_reason": r.terminal_reason.value,
-                    "epsilon": r.epsilon,
-                }
-            )
+    """Export episode records as CSV with cumulative success-rate column."""
+    rows = [
+        {
+            "episode": r.episode,
+            "total_reward": r.total_reward,
+            "steps": r.steps,
+            "terminal_reason": r.terminal_reason.value,
+            "epsilon": r.epsilon,
+        }
+        for r in records
+    ]
+    export_episodes_to_csv(rows, str(Path(filepath)))

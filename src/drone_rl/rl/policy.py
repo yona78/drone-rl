@@ -15,8 +15,7 @@ from pathlib import Path
 
 from ..types.agent import ALL_ACTIONS, Action
 from ..types.rl import QTable
-from .qtable import best_action
-from .qtable import qtable_from_json, qtable_to_json
+from .qtable import best_action, qtable_from_json, qtable_to_json
 
 
 def select_action(
