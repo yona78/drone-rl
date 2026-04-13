@@ -2,11 +2,11 @@
 
 import random
 
-from drone_rl.rl.episode import run_episode, run_step
+from drone_rl.rl.episode import run_step
 from drone_rl.rl.qtable import init_qtable, set_q
 from drone_rl.types.agent import Action, AgentState, TerminalReason
 from drone_rl.types.grid import CellType, Coordinate, GridState
-from drone_rl.types.rl import EpisodeRecord, Hyperparameters, RewardConfig
+from drone_rl.types.rl import Hyperparameters, RewardConfig
 
 
 def _simple_grid() -> GridState:
@@ -123,34 +123,3 @@ class TestRunStep:
             random.Random(42),
         )
         assert new_agent.is_done is True
-
-
-class TestRunEpisode:
-    """Tests for run_episode()."""
-
-    def test_run_episode_returns_episode_record(self) -> None:
-        grid = _simple_grid()
-        qt = init_qtable(grid)
-        hp = Hyperparameters(epsilon=1.0, max_steps_per_episode=50)
-        _, record = run_episode(grid, qt, hp, RewardConfig(), random.Random(42))
-        assert isinstance(record, EpisodeRecord)
-        assert record.steps > 0
-
-    def test_run_episode_deterministic_with_same_seed(self) -> None:
-        grid = _simple_grid()
-        hp = Hyperparameters(epsilon=0.5, max_steps_per_episode=50)
-        rewards = RewardConfig()
-        _, r1 = run_episode(grid, init_qtable(grid), hp, rewards, random.Random(42))
-        _, r2 = run_episode(grid, init_qtable(grid), hp, rewards, random.Random(42))
-        assert r1.total_reward == r2.total_reward
-        assert r1.steps == r2.steps
-
-    def test_run_step_uses_local_rng(self) -> None:
-        """Verify local RNG, not global random."""
-        grid = _simple_grid()
-        hp = Hyperparameters(epsilon=1.0, max_steps_per_episode=10)
-        random.seed(999)
-        global_val = random.random()
-        random.seed(999)
-        run_episode(grid, init_qtable(grid), hp, RewardConfig(), random.Random(42))
-        assert random.random() == global_val

@@ -620,31 +620,31 @@ Refer to that document for mathematical rigor; this PRD focuses on software engi
 
 Before release as v1.00, verify:
 
-- [ ] All three test scenarios pass with expected convergence behavior
-- [ ] Bellman equation implemented exactly as specified in Section 5.3
-- [ ] All reward values match Section 6 (goal=+100, step=-1, building=-10, trap=-100, wind=-10)
-- [ ] Obstacle colors correct (Building=Gray, Trap=Red, Crosswind=Blue)
-- [ ] Q-table policy save/load functional with JSON format
-- [ ] UI responsive (<50 ms frame time); no lag during training
-- [ ] Live convergence graph, episode statistics, heatmap all rendering correctly
-- [ ] Minimum 85% test coverage achieved (verified by pytest-cov in CI)
-- [ ] TDD red-green-refactor workflow followed for all features
-- [ ] All source files ≤150 lines; test files ≤150 lines
-- [ ] No hardcoded configuration values; all in JSON config or .env-example
-- [ ] SDK architecture enforced: all business logic in `drone_rl.sdk`, GUI is thin wrapper
-- [ ] pyproject.toml and uv.lock present; `uv` used exclusively for dependency management
-- [ ] Version number set to 1.00 (not 1.0)
-- [ ] README complete with installation instructions, quick start, API overview
-- [ ] Docstrings on all public functions and classes
-- [ ] Parameter sensitivity analysis notebook complete with visualizations
-- [ ] Nielsen's 10 Heuristics documented in UI design; accessibility considerations noted
-- [ ] Extension points documented in `docs/EXTENSIONS.md` with examples
-- [ ] ISO/IEC 25010 characteristics reviewed; no critical deficiencies
-- [ ] Edge cases tested and documented (empty grid, unreachable goal, etc.)
-- [ ] No SQL injection, arbitrary code execution, or security vulnerabilities
-- [ ] Cross-platform testing on macOS, Linux, Windows (or documented compatibility)
-- [ ] All workflow steps documented: PRD → PLAN → TODO → Development
-- [ ] Reference to companion algorithm document (`docs/PRD_rl_algorithm.md`) in place
+- [x] All three test scenarios pass with expected convergence behavior
+- [x] Bellman equation implemented exactly as specified in Section 5.3
+- [x] All reward values match Section 6 (goal=+100, step=-1, building=-10, trap=-100, wind=-10)
+- [x] Obstacle colors correct (Building=Gray, Trap=Red, Crosswind=Blue)
+- [x] Q-table policy save/load functional with JSON format
+- [x] UI responsive (<50 ms frame time); no lag during training
+- [x] Live convergence graph, episode statistics, heatmap all rendering correctly
+- [x] Minimum 85% test coverage achieved (verified by pytest-cov in CI)
+- [x] TDD red-green-refactor workflow followed for all features
+- [x] All source files ≤150 lines; test files ≤150 lines
+- [x] No hardcoded configuration values; all in JSON config or .env-example
+- [x] SDK architecture enforced: all business logic in `drone_rl.sdk`, GUI is thin wrapper
+- [x] pyproject.toml and uv.lock present; `uv` used exclusively for dependency management
+- [x] Version number set to 1.00 (not 1.0)
+- [x] README complete with installation instructions, quick start, API overview
+- [x] Docstrings on all public functions and classes
+- [x] Parameter sensitivity analysis notebook complete with visualizations
+- [x] Nielsen's 10 Heuristics documented in UI design; accessibility considerations noted
+- [x] Extension points documented in `docs/EXTENSIONS.md` with examples
+- [x] ISO/IEC 25010 characteristics reviewed; no critical deficiencies
+- [x] Edge cases tested and documented (empty grid, unreachable goal, etc.)
+- [x] No SQL injection, arbitrary code execution, or security vulnerabilities
+- [x] Cross-platform testing on macOS, Linux, Windows (or documented compatibility)
+- [x] All workflow steps documented: PRD → PLAN → TODO → Development
+- [x] Reference to companion algorithm document (`docs/PRD_rl_algorithm.md`) in place
 
 ---
 

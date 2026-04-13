@@ -37,10 +37,10 @@ jobs:
       run: uv run ruff format --check src/ tests/ notebooks/
 
     - name: Run tests with coverage
-      run: uv run pytest --tb=short -p no:cov -o "addopts=" -q
+      run: uv run pytest --cov=src/drone_rl
 
     - name: Verify file sizes
       run: |
-        echo "Checking file sizes (max 170 lines)..."
-        find src/ tests/ -name "*.py" -exec sh -c 'lines=$(wc -l < "$1"); if [ "$lines" -gt 170 ]; then echo "❌ $1: $lines lines (exceeds 170)"; exit 1; fi' _ {} \;
-        echo "✅ All files within 170-line limit"
+        echo "Checking file sizes (max 150 lines)..."
+        find src/ tests/ -name "*.py" -exec sh -c 'lines=$(wc -l < "$1"); if [ "$lines" -gt 150 ]; then echo "❌ $1: $lines lines (exceeds 150)"; exit 1; fi' _ {} \;
+        echo "✅ All files within 150-line limit"

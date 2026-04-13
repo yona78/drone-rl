@@ -1,6 +1,6 @@
 [project]
 name = "drone-rl"
-version = "1.0.0"
+version = "1.00"
 description = "2D Drone Pathfinding Reinforcement Learning Simulation — tabular Q-Learning with tkinter GUI"
 readme = "README.md"
 requires-python = ">=3.10"
