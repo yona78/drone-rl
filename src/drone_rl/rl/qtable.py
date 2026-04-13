@@ -40,7 +40,11 @@ def get_q(table: QTable, row: int, col: int, action: Action) -> float:
 
 
 def set_q(
-    table: QTable, row: int, col: int, action: Action, value: float,
+    table: QTable,
+    row: int,
+    col: int,
+    action: Action,
+    value: float,
 ) -> QTable:
     """Set Q-value, creating state entry if needed. Mutates in place."""
     sk = state_key(row, col)
@@ -68,10 +72,7 @@ def max_q(table: QTable, row: int, col: int) -> float:
 
 def qtable_to_dict(table: QTable) -> dict[str, dict[str, float]]:
     """Serialize QTable to JSON-compatible dict (Action enum → string)."""
-    return {
-        sk: {a.value: v for a, v in actions.items()}
-        for sk, actions in table.items()
-    }
+    return {sk: {a.value: v for a, v in actions.items()} for sk, actions in table.items()}
 
 
 def qtable_from_dict(data: dict[str, Any]) -> QTable:

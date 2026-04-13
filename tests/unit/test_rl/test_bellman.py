@@ -23,9 +23,15 @@ class TestBellmanUpdate:
         hp = Hyperparameters(alpha=0.1, gamma=0.99)
 
         qt = bellman_update(
-            qt, row=0, col=0, action=Action.UP,
-            reward=-1.0, next_row=1, next_col=1,
-            is_done=False, hp=hp,
+            qt,
+            row=0,
+            col=0,
+            action=Action.UP,
+            reward=-1.0,
+            next_row=1,
+            next_col=1,
+            is_done=False,
+            hp=hp,
         )
         result = get_q(qt, 0, 0, Action.UP)
         assert abs(result - 0.395) < 1e-6
@@ -38,10 +44,26 @@ class TestBellmanUpdate:
         hp_hi = Hyperparameters(alpha=0.5, gamma=0.99)
 
         qt_lo = bellman_update(
-            qt_lo, 0, 0, Action.UP, 10.0, 0, 1, False, hp_lo,
+            qt_lo,
+            0,
+            0,
+            Action.UP,
+            10.0,
+            0,
+            1,
+            False,
+            hp_lo,
         )
         qt_hi = bellman_update(
-            qt_hi, 0, 0, Action.UP, 10.0, 0, 1, False, hp_hi,
+            qt_hi,
+            0,
+            0,
+            Action.UP,
+            10.0,
+            0,
+            1,
+            False,
+            hp_hi,
         )
         assert get_q(qt_hi, 0, 0, Action.UP) > get_q(qt_lo, 0, 0, Action.UP)
 
@@ -56,13 +78,32 @@ class TestBellmanUpdate:
         hp_hi = Hyperparameters(alpha=0.1, gamma=0.99)
 
         qt_lo = bellman_update(
-            qt_lo, 0, 0, Action.RIGHT, -1.0, 0, 1, False, hp_lo,
+            qt_lo,
+            0,
+            0,
+            Action.RIGHT,
+            -1.0,
+            0,
+            1,
+            False,
+            hp_lo,
         )
         qt_hi = bellman_update(
-            qt_hi, 0, 0, Action.RIGHT, -1.0, 0, 1, False, hp_hi,
+            qt_hi,
+            0,
+            0,
+            Action.RIGHT,
+            -1.0,
+            0,
+            1,
+            False,
+            hp_hi,
         )
         assert get_q(qt_hi, 0, 0, Action.RIGHT) > get_q(
-            qt_lo, 0, 0, Action.RIGHT,
+            qt_lo,
+            0,
+            0,
+            Action.RIGHT,
         )
 
     def test_bellman_update_zero_learning_rate(self) -> None:
@@ -91,7 +132,15 @@ class TestBellmanUpdate:
         hp = Hyperparameters(alpha=1.0, gamma=0.99)
 
         qt = bellman_update(
-            qt, 0, 0, Action.RIGHT, 100.0, 0, 1, True, hp,
+            qt,
+            0,
+            0,
+            Action.RIGHT,
+            100.0,
+            0,
+            1,
+            True,
+            hp,
         )
         # is_done=True -> future_q=0 -> new_q = 0 + 1.0*(100 + 0 - 0) = 100
         assert abs(get_q(qt, 0, 0, Action.RIGHT) - 100.0) < 1e-6

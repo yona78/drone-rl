@@ -55,20 +55,24 @@ class HyperparameterPanel(tk.LabelFrame):
         self._seed_var = tk.IntVar(value=RANDOM_SEED_DEFAULT)
         self._build()
 
-    def _slider_row(self, label: str, var: tk.DoubleVar,
-                    lo: float, hi: float, row: int) -> None:
-        tk.Label(self, text=label, width=14, anchor=tk.E).grid(
-            row=row, column=0, sticky=tk.E)
-        tk.Scale(self, variable=var, from_=lo, to=hi, orient=tk.HORIZONTAL,
-                 resolution=0.001, length=130,
-                 showvalue=True).grid(row=row, column=1, sticky=tk.W)
+    def _slider_row(self, label: str, var: tk.DoubleVar, lo: float, hi: float, row: int) -> None:
+        tk.Label(self, text=label, width=14, anchor=tk.E).grid(row=row, column=0, sticky=tk.E)
+        tk.Scale(
+            self,
+            variable=var,
+            from_=lo,
+            to=hi,
+            orient=tk.HORIZONTAL,
+            resolution=0.001,
+            length=130,
+            showvalue=True,
+        ).grid(row=row, column=1, sticky=tk.W)
 
-    def _spin_row(self, label: str, var: tk.IntVar,
-                  lo: int, hi: int, row: int) -> None:
-        tk.Label(self, text=label, width=14, anchor=tk.E).grid(
-            row=row, column=0, sticky=tk.E)
-        ttk.Spinbox(self, textvariable=var, from_=lo, to=hi,
-                    width=8).grid(row=row, column=1, sticky=tk.W)
+    def _spin_row(self, label: str, var: tk.IntVar, lo: int, hi: int, row: int) -> None:
+        tk.Label(self, text=label, width=14, anchor=tk.E).grid(row=row, column=0, sticky=tk.E)
+        ttk.Spinbox(self, textvariable=var, from_=lo, to=hi, width=8).grid(
+            row=row, column=1, sticky=tk.W
+        )
 
     def _build(self) -> None:
         self._slider_row("α (learn rate)", self._alpha_var, 0.01, 1.0, 0)

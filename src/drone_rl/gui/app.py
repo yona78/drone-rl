@@ -30,7 +30,9 @@ class DroneRLApp(tk.Tk):
     def _build_default_grid(self) -> None:
         """Initialise SDK with a default 10×10 empty grid."""
         grid = GridState(
-            rows=10, cols=10, cells={},
+            rows=10,
+            cols=10,
+            cells={},
             start_pos=Coordinate(0, 0),
             goal_pos=Coordinate(9, 9),
         )
@@ -55,9 +57,9 @@ class DroneRLApp(tk.Tk):
         self._build_charts(self._chart_frame)
         # Bottom: status bar
         self._status_var = tk.StringVar(value="Ready.")
-        tk.Label(self, textvariable=self._status_var,
-                 anchor=tk.W, relief=tk.SUNKEN).pack(
-            side=tk.BOTTOM, fill=tk.X)
+        tk.Label(self, textvariable=self._status_var, anchor=tk.W, relief=tk.SUNKEN).pack(
+            side=tk.BOTTOM, fill=tk.X
+        )
 
     def _build_menu(self) -> None:
         """Create File / Edit / Help menu bar."""
@@ -80,22 +82,30 @@ class DroneRLApp(tk.Tk):
         from .hyperparameter_panel import HyperparameterPanel
         from .io_panel import IOPanel
         from .playback_controls import PlaybackControls
+
         self._hp_panel = HyperparameterPanel(parent, self.sdk, self._set_status)
         self._hp_panel.pack(side=tk.LEFT, padx=4)
-        self._pb_controls = PlaybackControls(parent, self.sdk, self._set_status,
-                                             self._refresh_all, self._hp_panel.get_hyperparameters)
+        self._pb_controls = PlaybackControls(
+            parent,
+            self.sdk,
+            self._set_status,
+            self._refresh_all,
+            self._hp_panel.get_hyperparameters,
+        )
         self._pb_controls.pack(side=tk.LEFT, padx=4)
         self._io_panel = IOPanel(parent, self.sdk, self._set_status)
         self._io_panel.pack(side=tk.LEFT, padx=4)
 
     def _build_canvas(self, parent: tk.Frame) -> None:
         from .canvas import GridCanvas
+
         self._grid_canvas = GridCanvas(parent, self._grid, cell_size=50)
         self._grid_canvas.pack(fill=tk.BOTH, expand=True)
 
     def _build_charts(self, parent: tk.Frame) -> None:
         from .charts import ConvergenceChart, QValueHeatmap
         from .panels import EpisodeStatsPanel, QTableInspectorPanel
+
         self._conv_chart = ConvergenceChart(parent)
         self._conv_chart.get_widget().pack(fill=tk.BOTH, expand=True)
         self._heatmap = QValueHeatmap(parent, self._grid.rows, self._grid.cols)
@@ -114,15 +124,20 @@ class DroneRLApp(tk.Tk):
         last = stats[-1]
         self._conv_chart.update(stats)
         self._heatmap.update(self.sdk.get_qtable())
-        self._stats_panel.update(last["episode"], last["total_reward"],
-                                  last["steps"], last["terminal_reason"],
-                                  last["epsilon"])
+        self._stats_panel.update(
+            last["episode"],
+            last["total_reward"],
+            last["steps"],
+            last["terminal_reason"],
+            last["epsilon"],
+        )
 
     def _set_status(self, msg: str) -> None:
         self._status_var.set(msg)
 
     def _save_policy(self) -> None:
         from tkinter.filedialog import asksaveasfilename
+
         p = asksaveasfilename(defaultextension=".json", filetypes=[("JSON", "*.json")])
         if p:
             self.sdk.save_policy(p)
@@ -130,6 +145,7 @@ class DroneRLApp(tk.Tk):
 
     def _load_policy(self) -> None:
         from tkinter.filedialog import askopenfilename
+
         p = askopenfilename(filetypes=[("JSON", "*.json")])
         if p:
             self.sdk.load_policy(p)
@@ -144,6 +160,7 @@ class DroneRLApp(tk.Tk):
         from tkinter.messagebox import showinfo
 
         from ..shared.version import __version__
+
         showinfo("About", f"2D Drone Pathfinding RL Simulation\nv{__version__}")
 
     def run(self) -> None:

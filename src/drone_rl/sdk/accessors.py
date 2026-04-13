@@ -47,6 +47,7 @@ class AccessorMixin:
             raise RuntimeError("Call create_environment() first")
         from ..rl.environment import apply_action
         from ..rl.qtable import best_action
+
         pos = self._grid.start_pos
         path = [(pos.row, pos.col)]
         visited: set[str] = {state_key(pos.row, pos.col)}
@@ -67,6 +68,7 @@ class AccessorMixin:
     def get_qtable(self) -> dict:
         """Return serialised Q-table for GUI visualisation (thread-safe)."""
         from ..rl.qtable import qtable_to_dict
+
         lock = getattr(self, "_state_lock", None)
         if lock is not None:
             with lock:
@@ -121,6 +123,4 @@ class AccessorMixin:
 
     def save_results(self, filepath: Path | str, metadata: dict | None = None) -> None:
         """Save experiment summary + metadata to JSON (§7.4)."""
-        save_experiment_results(
-            self._records, metadata or {}, Path(filepath)
-        )
+        save_experiment_results(self._records, metadata or {}, Path(filepath))

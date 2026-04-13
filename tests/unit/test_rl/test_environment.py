@@ -12,7 +12,8 @@ def _grid(
     wind: dict | None = None,
 ) -> GridState:
     return GridState(
-        rows=rows, cols=cols,
+        rows=rows,
+        cols=cols,
         cells=cells or {},
         start_pos=Coordinate(0, 0),
         goal_pos=Coordinate(rows - 1, cols - 1),

@@ -22,7 +22,8 @@ from drone_rl.types.rl import Hyperparameters
 def grid_with_obstacle() -> GridState:
     """4×4 grid with one BUILDING cell; start (0,0) goal (3,3)."""
     return GridState(
-        rows=4, cols=4,
+        rows=4,
+        cols=4,
         cells={(1, 1): CellType.BUILDING},
         start_pos=Coordinate(0, 0),
         goal_pos=Coordinate(3, 3),
@@ -33,9 +34,14 @@ def grid_with_obstacle() -> GridState:
 def trained_sdk(grid_with_obstacle: GridState) -> DroneRLSDK:
     """SDK trained for 20 fast episodes."""
     hp = Hyperparameters(
-        alpha=0.5, gamma=0.9, epsilon=1.0, epsilon_decay=0.9,
-        epsilon_min=0.01, max_steps_per_episode=30,
-        total_episodes=20, random_seed=7,
+        alpha=0.5,
+        gamma=0.9,
+        epsilon=1.0,
+        epsilon_decay=0.9,
+        epsilon_min=0.01,
+        max_steps_per_episode=30,
+        total_episodes=20,
+        random_seed=7,
     )
     sdk = DroneRLSDK(hp=hp)
     sdk.create_environment(grid_with_obstacle)
@@ -44,6 +50,7 @@ def trained_sdk(grid_with_obstacle: GridState) -> DroneRLSDK:
 
 
 # --- §7.1 Policy JSON ---
+
 
 def test_policy_json_is_human_readable(trained_sdk: DroneRLSDK) -> None:
     """Saved policy file is valid JSON with string keys."""
@@ -71,8 +78,10 @@ def test_policy_round_trip_preserves_values(trained_sdk: DroneRLSDK) -> None:
 
 # --- §7.2 Layout JSON ---
 
+
 def test_layout_json_has_required_fields(
-        trained_sdk: DroneRLSDK, grid_with_obstacle: GridState) -> None:
+    trained_sdk: DroneRLSDK, grid_with_obstacle: GridState
+) -> None:
     """Layout JSON includes rows, cols, cells, start_pos, goal_pos."""
     with tempfile.TemporaryDirectory() as d:
         p = Path(d) / "layout.json"
@@ -95,6 +104,7 @@ def test_layout_round_trip_preserves_obstacle(trained_sdk: DroneRLSDK) -> None:
 
 
 # --- §7.3 CSV export ---
+
 
 def test_csv_export_has_all_columns(trained_sdk: DroneRLSDK) -> None:
     """CSV contains all expected header columns."""
@@ -120,6 +130,7 @@ def test_csv_row_count_matches_episodes(trained_sdk: DroneRLSDK) -> None:
 
 
 # --- §7.4 Results storage ---
+
 
 def test_results_json_has_summary_keys(trained_sdk: DroneRLSDK) -> None:
     """Results JSON contains total_episodes, success_rate, mean_reward."""

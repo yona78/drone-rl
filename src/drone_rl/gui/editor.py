@@ -18,7 +18,10 @@ from ..constants import CELL_COLORS
 from ..types.grid import CellType, Coordinate, GridState
 
 _CYCLE_ORDER = [
-    CellType.EMPTY, CellType.BUILDING, CellType.TRAP, CellType.CROSSWIND,
+    CellType.EMPTY,
+    CellType.BUILDING,
+    CellType.TRAP,
+    CellType.CROSSWIND,
 ]
 
 
@@ -43,8 +46,7 @@ class EnvironmentEditor(tk.Canvas):
         self._on_change = on_change
         w = grid.cols * cell_size + 2
         h = grid.rows * cell_size + 2
-        super().__init__(parent, width=w, height=h, bg="white",
-                         cursor="crosshair")
+        super().__init__(parent, width=w, height=h, bg="white", cursor="crosshair")
         self._draw_all()
         self.bind("<Button-1>", self._on_left_click)
         self.bind("<Button-3>", self.on_right_click)
@@ -66,13 +68,13 @@ class EnvironmentEditor(tk.Canvas):
         cell = self._grid.get_cell_type(row, col)
         color = CELL_COLORS.get(cell, "white")
         x0, y0 = col * cs, row * cs
-        self.create_rectangle(x0, y0, x0 + cs, y0 + cs,
-                               fill=color, outline="lightgray")
+        self.create_rectangle(x0, y0, x0 + cs, y0 + cs, fill=color, outline="lightgray")
 
     def _label(self, row: int, col: int, text: str, fg: str) -> None:
         cs = self._cs
-        self.create_text(col * cs + cs // 2, row * cs + cs // 2,
-                          text=text, fill=fg, font=("Arial", 10, "bold"))
+        self.create_text(
+            col * cs + cs // 2, row * cs + cs // 2, text=text, fill=fg, font=("Arial", 10, "bold")
+        )
 
     def _cell_at(self, event: tk.Event) -> tuple[int, int]:
         return event.y // self._cs, event.x // self._cs
@@ -82,8 +84,7 @@ class EnvironmentEditor(tk.Canvas):
         if not self._in_bounds(r, c):
             return
         current = self._grid.get_cell_type(r, c)
-        idx = (_CYCLE_ORDER.index(current)
-               if current in _CYCLE_ORDER else 0)
+        idx = _CYCLE_ORDER.index(current) if current in _CYCLE_ORDER else 0
         next_type = _CYCLE_ORDER[(idx + 1) % len(_CYCLE_ORDER)]
         self.set_cell_type(r, c, next_type)
 
@@ -99,10 +100,8 @@ class EnvironmentEditor(tk.Canvas):
                 command=lambda t=ct, row=r, col=c: self.set_cell_type(row, col, t),
             )
         menu.add_separator()
-        menu.add_command(label="Set Start",
-                         command=lambda: self.set_start_position(r, c))
-        menu.add_command(label="Set Goal",
-                         command=lambda: self.set_goal_position(r, c))
+        menu.add_command(label="Set Start", command=lambda: self.set_start_position(r, c))
+        menu.add_command(label="Set Goal", command=lambda: self.set_goal_position(r, c))
         menu.tk_popup(event.x_root, event.y_root)
 
     def _on_shift_click(self, event: tk.Event) -> None:

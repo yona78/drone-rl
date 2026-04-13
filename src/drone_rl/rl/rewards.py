@@ -26,11 +26,11 @@ def compute_reward(cell_type: CellType, config: RewardConfig) -> float:
     Output Data: float reward value.
     """
     reward_map: dict[CellType, float] = {
-        CellType.EMPTY: config.empty_step,           # -1.0
-        CellType.START: config.empty_step,            # -1.0 (start = normal step)
-        CellType.GOAL: config.goal_reached,           # +100.0 (fallback)
+        CellType.EMPTY: config.empty_step,  # -1.0
+        CellType.START: config.empty_step,  # -1.0 (start = normal step)
+        CellType.GOAL: config.goal_reached,  # +100.0 (fallback)
         CellType.BUILDING: config.building_collision,  # -10.0
-        CellType.TRAP: config.trap_hit,               # -100.0
+        CellType.TRAP: config.trap_hit,  # -100.0
         CellType.CROSSWIND: config.crosswind_penalty,  # -10.0
     }
     return reward_map.get(cell_type, 0.0)

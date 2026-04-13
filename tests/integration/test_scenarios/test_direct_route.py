@@ -15,6 +15,7 @@ from drone_rl.types.rl import EpisodeRecord, Hyperparameters
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _empty_10x10() -> GridState:
     return GridState(
         rows=10,
@@ -49,6 +50,7 @@ def _success_rate(records: list[EpisodeRecord], last_n: int = 100) -> float:
 # Scenario tests
 # ---------------------------------------------------------------------------
 
+
 def test_direct_route_success_rate_ge_90pct() -> None:
     """Agent reaches goal >= 90% of the time in the final 100 episodes."""
     sdk = DroneRLSDK(hp=_scenario_hp(seed=42))
@@ -56,9 +58,7 @@ def test_direct_route_success_rate_ge_90pct() -> None:
     records = sdk.train(num_episodes=500)
 
     rate = _success_rate(records, last_n=100)
-    assert rate >= 0.90, (
-        f"Expected >= 90% success rate on empty grid, got {rate:.1%}"
-    )
+    assert rate >= 0.90, f"Expected >= 90% success rate on empty grid, got {rate:.1%}"
 
 
 def test_direct_route_qtable_not_empty_after_training() -> None:
@@ -68,11 +68,7 @@ def test_direct_route_qtable_not_empty_after_training() -> None:
     sdk.train(num_episodes=50)
 
     qt = sdk.get_qtable()
-    nonzero = sum(
-        1 for action_vals in qt.values()
-        for v in action_vals.values()
-        if v != 0.0
-    )
+    nonzero = sum(1 for action_vals in qt.values() for v in action_vals.values() if v != 0.0)
     assert nonzero > 0, "Q-table has no non-zero entries after 50 episodes"
 
 
@@ -109,6 +105,4 @@ def test_direct_route_play_best_policy_reaches_goal() -> None:
     assert isinstance(path, list)
     assert len(path) >= 2
     goal = (9, 9)
-    assert path[-1] == goal, (
-        f"play_best_policy did not reach goal {goal}; ended at {path[-1]}"
-    )
+    assert path[-1] == goal, f"play_best_policy did not reach goal {goal}; ended at {path[-1]}"
