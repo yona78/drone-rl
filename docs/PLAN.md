@@ -1285,31 +1285,31 @@ All GUI files ≤150 lines. GUI MUST NOT import from `rl/` package directly — 
 **Goal:** Verify all acceptance criteria. Release v1.00.
 
 41. **Release Checklist (PRD §15):**
-    - [ ] All three test scenarios pass with expected convergence
-    - [ ] Bellman equation matches PRD §5.3 exactly
-    - [ ] All reward values match PRD §6.1 (goal=+100, step=-1, building=-10, trap=-100, wind=-10)
-    - [ ] Obstacle colors correct (Building=Gray, Trap=Red, Crosswind=Blue)
-    - [ ] Q-table policy save/load functional in JSON format
-    - [ ] UI responsive (<50 ms frame time); no lag during training
-    - [ ] Live convergence graph, episode statistics, heatmap all rendering correctly
-    - [ ] ≥85% test coverage (pytest-cov in CI)
-    - [ ] TDD red-green-refactor followed for all features
-    - [ ] All source files ≤150 lines; test files ≤150 lines
-    - [ ] No hardcoded config values; all in JSON files or constants.py
-    - [ ] SDK architecture enforced; all business logic in sdk/, GUI is thin wrapper
-    - [ ] pyproject.toml and uv.lock present; only uv used for dependencies
-    - [ ] Version number 1.00 (not 1.0)
-    - [ ] README complete with installation, quick start, API overview
-    - [ ] All public functions have docstrings
-    - [ ] Parameter sensitivity analysis notebook complete
-    - [ ] Nielsen's 10 Heuristics documented
-    - [ ] Extension points documented in docs/EXTENSIONS.md
-    - [ ] ISO/IEC 25010 characteristics reviewed
-    - [ ] Edge cases tested and documented
-    - [ ] No security vulnerabilities (no code injection, strict JSON parsing)
-    - [ ] Cross-platform testing (macOS, Linux, Windows)
-    - [ ] All workflow steps documented: PRD → PLAN → TODO → Development
-    - [ ] Reference to companion algorithm doc (PRD_rl_algorithm.md)
+    - [x] All three test scenarios pass with expected convergence
+    - [x] Bellman equation matches PRD §5.3 exactly
+    - [x] All reward values match PRD §6.1 (goal=+100, step=-1, building=-10, trap=-100, wind=-10)
+    - [x] Obstacle colors correct (Building=Gray, Trap=Red, Crosswind=Blue)
+    - [x] Q-table policy save/load functional in JSON format
+    - [x] UI responsive (<50 ms frame time); no lag during training
+    - [x] Live convergence graph, episode statistics, heatmap all rendering correctly
+    - [x] ≥85% test coverage (pytest-cov in CI)
+    - [x] TDD red-green-refactor followed for all features
+    - [x] All source files ≤150 lines; test files ≤150 lines
+    - [x] No hardcoded config values; all in JSON files or constants.py
+    - [x] SDK architecture enforced; all business logic in sdk/, GUI is thin wrapper
+    - [x] pyproject.toml and uv.lock present; only uv used for dependencies
+    - [x] Version number 1.00 (not 1.0)
+    - [x] README complete with installation, quick start, API overview
+    - [x] All public functions have docstrings
+    - [x] Parameter sensitivity analysis notebook complete
+    - [x] Nielsen's 10 Heuristics documented
+    - [x] Extension points documented in docs/EXTENSIONS.md
+    - [x] ISO/IEC 25010 characteristics reviewed
+    - [x] Edge cases tested and documented
+    - [x] No security vulnerabilities (no code injection, strict JSON parsing)
+    - [x] Cross-platform testing (macOS, Linux, Windows)
+    - [x] All workflow steps documented: PRD → PLAN → TODO → Development
+    - [x] Reference to companion algorithm doc (PRD_rl_algorithm.md)
 
 ---
 

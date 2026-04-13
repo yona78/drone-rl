@@ -245,9 +245,19 @@ Controls the internal event gatekeeper. `max_gui_updates_per_second` caps UI ref
 { "max_gui_updates_per_second": 30, "max_episode_callbacks_queued": 100 }
 ```
 
-## License
+## Contribution Guidelines
+
+1. Ensure your code passes all linting (`uv run ruff check .`).
+2. Run the test suite (`uv run pytest --cov=src/drone_rl`) and maintain >=85% coverage.
+3. Keep all source files under 150 lines.
+4. Follow the strict SDK architecture (no business logic in GUI).
+5. Update `TODO.md` as you make progress.
+
+## License & Credits
 
 MIT License. See [LICENSE](LICENSE) for details.
+
+Developed in compliance with the Professional Software Guidelines v1.00 by Dr. Yoram Segal.
 
 ---
 

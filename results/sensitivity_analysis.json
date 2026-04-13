@@ -1,0 +1,1134 @@
+{
+  "metadata": {
+    "n_episodes": 200,
+    "n_seeds": 5,
+    "grid": "5x5-obstacle-22"
+  },
+  "results": [
+    {
+      "alpha": 0.01,
+      "gamma": 0.0,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 11.447999999999999
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.0,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 9.596
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.0,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 11.864
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.0,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 7.128
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.0,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 7.148000000000001
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.5,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 79.12800000000001
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.5,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 79.2
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.5,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 77.34
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.5,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 78.828
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.5,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 75.91999999999999
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.9,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 85.98799999999999
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.9,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 85.68400000000001
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.9,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 85.78399999999999
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.9,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 85.64399999999999
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.9,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 84.736
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.95,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 86.58
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.95,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 86.42800000000001
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.95,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 86.292
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.95,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 86.03200000000001
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.95,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 85.312
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.99,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 86.876
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.99,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 86.796
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.99,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 86.9
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.99,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 86.352
+    },
+    {
+      "alpha": 0.01,
+      "gamma": 0.99,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 85.172
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.0,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 11.447999999999999
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.0,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 9.596
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.0,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 11.864
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.0,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 7.128
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.0,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 7.148000000000001
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.5,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.76400000000001
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.5,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.636
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.5,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.348
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.5,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.028
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.5,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 90.88
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.9,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.91600000000001
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.9,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.904
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.9,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.76
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.9,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.112
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.9,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 90.97999999999999
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.95,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.936
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.95,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.932
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.95,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.772
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.95,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.16
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.95,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 90.99600000000001
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.99,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.952
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.99,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.904
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.99,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.756
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.99,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.124
+    },
+    {
+      "alpha": 0.05,
+      "gamma": 0.99,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 90.91600000000001
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.0,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 11.447999999999999
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.0,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 9.596
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.0,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 11.864
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.0,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 7.128
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.0,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 7.148000000000001
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.5,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.95599999999999
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.5,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.9
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.5,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.768
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.5,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.124
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.5,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 91.1
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.9,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.948
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.9,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.86000000000001
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.9,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.7
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.9,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.208
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.9,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 90.98
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.95,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.96000000000001
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.95,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.848
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.95,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.688
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.95,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.224
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.95,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 90.92
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.99,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.94
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.99,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.876
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.99,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.704
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.99,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.23599999999999
+    },
+    {
+      "alpha": 0.1,
+      "gamma": 0.99,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 90.89200000000001
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.0,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": -45.76
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.0,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": -49.088
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.0,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": -47.336
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.0,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": -47.364000000000004
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.0,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": -46.184
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.5,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.924
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.5,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.84400000000001
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.5,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.728
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.5,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.212
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.5,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 91.068
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.9,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.908
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.9,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.828
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.9,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.76
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.9,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.19999999999999
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.9,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 90.95599999999999
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.95,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.90400000000001
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.95,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.84400000000001
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.95,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.792
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.95,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.19200000000001
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.95,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 90.94
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.99,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.916
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.99,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.876
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.99,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.78399999999999
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.99,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.232
+    },
+    {
+      "alpha": 0.5,
+      "gamma": 0.99,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 90.876
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.0,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": -50.0
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.0,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": -50.0
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.0,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": -50.0
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.0,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": -50.0
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.0,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": -50.0
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.5,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.928
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.5,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.864
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.5,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.784
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.5,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.216
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.5,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 91.01199999999999
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.9,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.928
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.9,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.864
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.9,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.784
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.9,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.216
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.9,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 91.01199999999999
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.95,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.928
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.95,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.864
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.95,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.784
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.95,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.216
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.95,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 91.01199999999999
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.99,
+      "epsilon": 0.0,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.928
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.99,
+      "epsilon": 0.05,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.864
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.99,
+      "epsilon": 0.1,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.784
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.99,
+      "epsilon": 0.2,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 92.216
+    },
+    {
+      "alpha": 1.0,
+      "gamma": 0.99,
+      "epsilon": 0.5,
+      "success_rate_mean": 0.0,
+      "success_rate_std": 0.0,
+      "conv_ep_mean": 200.0,
+      "mean_reward_mean": 91.01199999999999
+    }
+  ]
+}
