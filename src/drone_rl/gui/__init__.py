@@ -1,3 +1,5 @@
-"""Thin tkinter presentation layer — delegates to SDK only."""
+"""Thin tkinter presentation layer — delegates to SDK only (§4 boundary)."""
 
-__all__: list[str] = []
+from .app import DroneRLApp
+
+__all__ = ["DroneRLApp"]
