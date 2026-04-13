@@ -18,6 +18,7 @@ from drone_rl.types.rl import Hyperparameters
 # Fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def tiny_grid() -> GridState:
     """2×2 grid: start (0,0) goal (1,1), no obstacles."""
@@ -34,9 +35,14 @@ def tiny_grid() -> GridState:
 def fast_hp() -> Hyperparameters:
     """Hyperparameters configured for quick 10-episode training."""
     return Hyperparameters(
-        alpha=0.5, gamma=0.9, epsilon=1.0, epsilon_decay=0.9,
-        epsilon_min=0.01, max_steps_per_episode=20,
-        total_episodes=10, random_seed=42,
+        alpha=0.5,
+        gamma=0.9,
+        epsilon=1.0,
+        epsilon_decay=0.9,
+        epsilon_min=0.01,
+        max_steps_per_episode=20,
+        total_episodes=10,
+        random_seed=42,
     )
 
 
@@ -51,6 +57,7 @@ def sdk(tiny_grid: GridState, fast_hp: Hyperparameters) -> DroneRLSDK:
 # ---------------------------------------------------------------------------
 # Tests
 # ---------------------------------------------------------------------------
+
 
 def test_sdk_create_environment(tiny_grid: GridState) -> None:
     """create_environment sets grid and initialises a non-empty Q-table."""
@@ -79,6 +86,7 @@ def test_sdk_train_updates_qtable(sdk: DroneRLSDK) -> None:
 
 def test_sdk_pause(sdk: DroneRLSDK) -> None:
     """pause() stops training before all episodes complete."""
+
     class PauseMiddleware:
         def before_episode_start(self, ep: int) -> None:
             if ep == 2:

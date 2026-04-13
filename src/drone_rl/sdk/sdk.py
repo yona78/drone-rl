@@ -60,8 +60,13 @@ class DroneRLSDK(MiddlewareHost, AccessorMixin):
             raise ValueError(f"gamma must be in [0,1), got {hp.gamma}")
         if not (0 <= hp.epsilon <= 1):
             raise ValueError(f"epsilon must be in [0,1], got {hp.epsilon}")
-        for field_name in ("goal_reached", "empty_step", "building_collision",
-                           "trap_hit", "crosswind_penalty"):
+        for field_name in (
+            "goal_reached",
+            "empty_step",
+            "building_collision",
+            "trap_hit",
+            "crosswind_penalty",
+        ):
             v = getattr(self._rewards, field_name)
             if not math.isfinite(v):
                 raise ValueError(f"reward.{field_name} must be finite")
@@ -93,25 +98,32 @@ class DroneRLSDK(MiddlewareHost, AccessorMixin):
             self._call_hook_before_episode_start(ep)
             agent = AgentState(
                 position=self._grid.start_pos,
-                accumulated_reward=0.0, step_count=0, is_done=False,
+                accumulated_reward=0.0,
+                step_count=0,
+                is_done=False,
             )
             while not agent.is_done:
                 agent, self._qtable = run_step(
-                    agent, self._grid, self._qtable, self._hp,
-                    self._rewards, self._rng,
+                    agent,
+                    self._grid,
+                    self._qtable,
+                    self._hp,
+                    self._rewards,
+                    self._rng,
                 )
                 self._call_hook_after_step_update(agent)
             reason = agent.terminal_reason or TerminalReason.MAX_STEPS
             record = EpisodeRecord(
-                episode=ep, total_reward=agent.accumulated_reward,
-                steps=agent.step_count, terminal_reason=reason,
+                episode=ep,
+                total_reward=agent.accumulated_reward,
+                steps=agent.step_count,
+                terminal_reason=reason,
                 epsilon=self._hp.epsilon,
             )
             with self._state_lock:
                 new_records.append(record)
                 self._records.append(record)
-                new_eps = max(self._hp.epsilon_min,
-                              self._hp.epsilon * self._hp.epsilon_decay)
+                new_eps = max(self._hp.epsilon_min, self._hp.epsilon * self._hp.epsilon_decay)
                 self._hp = dc_replace(self._hp, epsilon=new_eps)
             if update_queue is not None:
                 update_queue.put_nowait(record)
@@ -142,9 +154,16 @@ class DroneRLSDK(MiddlewareHost, AccessorMixin):
             raise RuntimeError("Call create_environment() first")
         agent = AgentState(
             position=self._grid.start_pos,
-            accumulated_reward=0.0, step_count=0, is_done=False,
+            accumulated_reward=0.0,
+            step_count=0,
+            is_done=False,
         )
         new_agent, self._qtable = run_step(
-            agent, self._grid, self._qtable, self._hp, self._rewards, self._rng,
+            agent,
+            self._grid,
+            self._qtable,
+            self._hp,
+            self._rewards,
+            self._rng,
         )
         return new_agent, new_agent.accumulated_reward, new_agent.is_done

@@ -57,9 +57,15 @@ def run_step(
 
     # 5. Bellman Q-table update
     table = bellman_update(
-        table, row, col, action,
-        immediate_reward, next_pos.row, next_pos.col,
-        is_done, hp,
+        table,
+        row,
+        col,
+        action,
+        immediate_reward,
+        next_pos.row,
+        next_pos.col,
+        is_done,
+        hp,
     )
 
     # 6. Build new agent state

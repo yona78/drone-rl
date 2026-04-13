@@ -32,6 +32,7 @@ from drone_rl.types.rl import EpisodeRecord, Hyperparameters
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _trap_grid() -> GridState:
     """10x10 grid with a row of 4 trap tiles blocking the direct route."""
     traps = [(3, c) for c in range(3, 7)]
@@ -74,6 +75,7 @@ def _tail_stats(records: list[EpisodeRecord], last_n: int = 100) -> dict:
 # ---------------------------------------------------------------------------
 # Scenario tests
 # ---------------------------------------------------------------------------
+
 
 def test_risk_aversion_success_rate_ge_65pct() -> None:
     """Agent reaches goal >= 65% of the time in final 100 of 1000 episodes."""
@@ -126,6 +128,4 @@ def test_risk_aversion_qtable_reflects_trap_penalty() -> None:
     state_above_trap = (2, 3)
     if state_above_trap in qt:
         vals = list(qt[state_above_trap].values())
-        assert any(v < 0 for v in vals), (
-            "Expected negative Q-values near trap tiles after training"
-        )
+        assert any(v < 0 for v in vals), "Expected negative Q-values near trap tiles after training"

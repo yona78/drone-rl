@@ -28,7 +28,10 @@ class TestAction:
     def test_all_actions_list(self) -> None:
         assert len(ALL_ACTIONS) == 4
         assert ALL_ACTIONS == [
-            Action.UP, Action.DOWN, Action.LEFT, Action.RIGHT,
+            Action.UP,
+            Action.DOWN,
+            Action.LEFT,
+            Action.RIGHT,
         ]
 
 

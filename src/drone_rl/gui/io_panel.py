@@ -41,58 +41,56 @@ class IOPanel(tk.LabelFrame):
     def _build(self) -> None:
         btn_cfg = {"width": 14, "pady": 2}
         row = 0
-        tk.Button(self, text="Save Policy",
-                  command=self._save_policy, **btn_cfg).grid(
-            row=row, column=0, padx=2)
-        tk.Button(self, text="Load Policy",
-                  command=self._load_policy, **btn_cfg).grid(
-            row=row, column=1, padx=2)
+        tk.Button(self, text="Save Policy", command=self._save_policy, **btn_cfg).grid(
+            row=row, column=0, padx=2
+        )
+        tk.Button(self, text="Load Policy", command=self._load_policy, **btn_cfg).grid(
+            row=row, column=1, padx=2
+        )
         row += 1
-        tk.Button(self, text="Save Layout",
-                  command=self._save_layout, **btn_cfg).grid(
-            row=row, column=0, padx=2)
-        tk.Button(self, text="Load Layout",
-                  command=self._load_layout, **btn_cfg).grid(
-            row=row, column=1, padx=2)
+        tk.Button(self, text="Save Layout", command=self._save_layout, **btn_cfg).grid(
+            row=row, column=0, padx=2
+        )
+        tk.Button(self, text="Load Layout", command=self._load_layout, **btn_cfg).grid(
+            row=row, column=1, padx=2
+        )
         row += 1
-        tk.Button(self, text="Export Episode Log",
-                  command=self._export_logs, **btn_cfg).grid(
-            row=row, column=0, columnspan=2, padx=2)
+        tk.Button(self, text="Export Episode Log", command=self._export_logs, **btn_cfg).grid(
+            row=row, column=0, columnspan=2, padx=2
+        )
 
     def _save_policy(self) -> None:
         path = filedialog.asksaveasfilename(
-            defaultextension=".json", filetypes=_JSON_TYPE,
-            title="Save Policy")
+            defaultextension=".json", filetypes=_JSON_TYPE, title="Save Policy"
+        )
         if path:
             self._sdk.save_policy(path)
             self._set_status(f"Policy saved → {path}")
 
     def _load_policy(self) -> None:
-        path = filedialog.askopenfilename(
-            filetypes=_JSON_TYPE, title="Load Policy")
+        path = filedialog.askopenfilename(filetypes=_JSON_TYPE, title="Load Policy")
         if path:
             self._sdk.load_policy(path)
             self._set_status(f"Policy loaded ← {path}")
 
     def _save_layout(self) -> None:
         path = filedialog.asksaveasfilename(
-            defaultextension=".json", filetypes=_JSON_TYPE,
-            title="Save Layout")
+            defaultextension=".json", filetypes=_JSON_TYPE, title="Save Layout"
+        )
         if path:
             self._sdk.save_layout(path)
             self._set_status(f"Layout saved → {path}")
 
     def _load_layout(self) -> None:
-        path = filedialog.askopenfilename(
-            filetypes=_JSON_TYPE, title="Load Layout")
+        path = filedialog.askopenfilename(filetypes=_JSON_TYPE, title="Load Layout")
         if path:
             self._sdk.load_layout(path)
             self._set_status(f"Layout loaded ← {path}")
 
     def _export_logs(self) -> None:
         path = filedialog.asksaveasfilename(
-            defaultextension=".csv", filetypes=_CSV_TYPE,
-            title="Export Episode Log")
+            defaultextension=".csv", filetypes=_CSV_TYPE, title="Export Episode Log"
+        )
         if path:
             self._sdk.export_logs(path)
             self._set_status(f"Logs exported → {path}")

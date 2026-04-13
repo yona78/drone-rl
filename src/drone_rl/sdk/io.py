@@ -20,6 +20,7 @@ from ..types.rl import EpisodeRecord, QTable
 
 # --- Policy (Q-table) ---
 
+
 def save_policy(qtable: QTable, filepath: Path) -> None:
     """Serialize Q-table to JSON at filepath."""
     filepath = Path(filepath)
@@ -34,20 +35,16 @@ def load_policy(filepath: Path) -> QTable:
 
 # --- Layout (GridState) ---
 
+
 def _grid_to_dict(grid: GridState) -> dict:
     """Convert GridState to JSON-serializable dict."""
     return {
         "rows": grid.rows,
         "cols": grid.cols,
-        "cells": {
-            f"{r},{c}": ct.value for (r, c), ct in grid.cells.items()
-        },
+        "cells": {f"{r},{c}": ct.value for (r, c), ct in grid.cells.items()},
         "start_pos": [grid.start_pos.row, grid.start_pos.col],
         "goal_pos": [grid.goal_pos.row, grid.goal_pos.col],
-        "wind_directions": {
-            f"{r},{c}": a.value
-            for (r, c), a in grid.wind_directions.items()
-        },
+        "wind_directions": {f"{r},{c}": a.value for (r, c), a in grid.wind_directions.items()},
     }
 
 
@@ -87,6 +84,7 @@ def load_layout(filepath: Path) -> GridState:
 
 # --- Results Storage (§7.4) ---
 
+
 def save_experiment_results(
     records: list[EpisodeRecord],
     metadata: dict,
@@ -101,17 +99,14 @@ def save_experiment_results(
         "metadata": metadata,
         "total_episodes": total,
         "success_rate": round(successes / total, 4) if total else 0.0,
-        "mean_reward": round(
-            sum(r.total_reward for r in records) / total, 4
-        ) if total else 0.0,
-        "mean_steps": round(
-            sum(r.steps for r in records) / total, 2
-        ) if total else 0.0,
+        "mean_reward": round(sum(r.total_reward for r in records) / total, 4) if total else 0.0,
+        "mean_steps": round(sum(r.steps for r in records) / total, 2) if total else 0.0,
     }
     filepath.write_text(json.dumps(payload, indent=2))
 
 
 # --- Episode Logs ---
+
 
 def export_logs(records: list[EpisodeRecord], filepath: Path) -> None:
     """Export episode records as CSV."""
@@ -120,15 +115,16 @@ def export_logs(records: list[EpisodeRecord], filepath: Path) -> None:
     with filepath.open("w", newline="") as fh:
         writer = csv.DictWriter(
             fh,
-            fieldnames=["episode", "total_reward", "steps",
-                        "terminal_reason", "epsilon"],
+            fieldnames=["episode", "total_reward", "steps", "terminal_reason", "epsilon"],
         )
         writer.writeheader()
         for r in records:
-            writer.writerow({
-                "episode": r.episode,
-                "total_reward": r.total_reward,
-                "steps": r.steps,
-                "terminal_reason": r.terminal_reason.value,
-                "epsilon": r.epsilon,
-            })
+            writer.writerow(
+                {
+                    "episode": r.episode,
+                    "total_reward": r.total_reward,
+                    "steps": r.steps,
+                    "terminal_reason": r.terminal_reason.value,
+                    "epsilon": r.epsilon,
+                }
+            )

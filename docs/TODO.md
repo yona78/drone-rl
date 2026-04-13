@@ -24,182 +24,182 @@
 
 - [ ] Create project directory `drone-rl/` at `~/code/RL/Drones/drone-rl`
 - [ ] Run `uv init drone-rl` from parent directory
-- [ ] Verify `pyproject.toml` was created
-- [ ] Verify `.python-version` was created
+- [x] Verify `pyproject.toml` was created
+- [x] Verify `.python-version` was created
 - [ ] Open `pyproject.toml` in editor and review defaults
-- [ ] Set project name to `drone-rl` in `pyproject.toml`
+- [x] Set project name to `drone-rl` in `pyproject.toml`
 - [ ] Set project version to `0.1.0` in `pyproject.toml`
-- [ ] Set project description in `pyproject.toml`
-- [ ] Set `requires-python = ">=3.10"` in `pyproject.toml`
-- [ ] Set author name and email in `pyproject.toml`
-- [ ] Add `license = { text = "MIT" }` in `pyproject.toml`
-- [ ] Create LICENSE file with MIT license text
+- [x] Set project description in `pyproject.toml`
+- [x] Set `requires-python = ">=3.10"` in `pyproject.toml`
+- [x] Set author name and email in `pyproject.toml`
+- [x] Add `license = { text = "MIT" }` in `pyproject.toml`
+- [x] Create LICENSE file with MIT license text
 
 ### 0.3 Dependencies (via `uv add`)
 
 - [ ] Run `uv add matplotlib` to install matplotlib
 - [ ] Run `uv add numpy` to install numpy
-- [ ] Run `uv add --dev pytest` to install pytest as dev dependency
-- [ ] Run `uv add --dev pytest-cov` for coverage reporting
-- [ ] Run `uv add --dev ruff` for linting
-- [ ] Run `uv add --dev black` for formatting
-- [ ] Run `uv add --dev mypy` for type checking
-- [ ] Verify `uv.lock` was created/updated after each install
+- [x] Run `uv add --dev pytest` to install pytest as dev dependency
+- [x] Run `uv add --dev pytest-cov` for coverage reporting
+- [x] Run `uv add --dev ruff` for linting
+- [x] Run `uv add --dev black` for formatting
+- [x] Run `uv add --dev mypy` for type checking
+- [x] Verify `uv.lock` was created/updated after each install
 - [ ] Verify `.venv/` directory was created
 - [ ] Run `uv sync` to ensure all dependencies install cleanly
 - [ ] Run `uv tree` to inspect dependency tree
 
 ### 0.4 Project Folder Structure
 
-- [ ] Create `src/drone_rl/` directory
-- [ ] Create `src/drone_rl/__init__.py` with `__version__ = "1.00"`
-- [ ] Create `src/drone_rl/types/` directory
-- [ ] Create `src/drone_rl/types/__init__.py`
-- [ ] Create `src/drone_rl/rl/` directory
-- [ ] Create `src/drone_rl/rl/__init__.py`
-- [ ] Create `src/drone_rl/gui/` directory
-- [ ] Create `src/drone_rl/gui/__init__.py`
-- [ ] Create `src/drone_rl/sdk/` directory (NEW: SDK layer per §4)
-- [ ] Create `src/drone_rl/sdk/__init__.py` (NEW)
-- [ ] Create `src/drone_rl/shared/` directory (NEW: shared utilities per §7)
-- [ ] Create `src/drone_rl/shared/__init__.py` (NEW)
-- [ ] Create `tests/` directory
-- [ ] Create `tests/__init__.py`
-- [ ] Create `tests/conftest.py` (NEW: shared pytest fixtures per §6)
-- [ ] Create `tests/unit/` directory (NEW: restructured tests)
-- [ ] Create `tests/unit/__init__.py` (NEW)
-- [ ] Create `tests/unit/test_rl/` directory (NEW)
-- [ ] Create `tests/unit/test_rl/__init__.py` (NEW)
-- [ ] Create `tests/unit/test_sdk/` directory (NEW)
-- [ ] Create `tests/unit/test_sdk/__init__.py` (NEW)
-- [ ] Create `tests/unit/test_utils/` directory (NEW)
-- [ ] Create `tests/unit/test_utils/__init__.py` (NEW)
-- [ ] Create `tests/integration/` directory (NEW)
-- [ ] Create `tests/integration/__init__.py` (NEW)
-- [ ] Create `tests/integration/test_scenarios/` directory (NEW)
-- [ ] Create `tests/integration/test_scenarios/__init__.py` (NEW)
-- [ ] Create `tests/integration/test_file_io/` directory (NEW)
-- [ ] Create `tests/integration/test_file_io/__init__.py` (NEW)
-- [ ] Create `config/` directory (NEW: configuration files per §7)
-- [ ] Create `docs/` directory
-- [ ] Create `results/` directory (NEW: experiment results per §9)
-- [ ] Create `assets/` directory (NEW: screenshots/diagrams per §9)
-- [ ] Create `notebooks/` directory (NEW: Jupyter analysis per §9)
-- [ ] Create `policies/` directory for saved Q-tables
-- [ ] Create `policies/.gitkeep`
-- [ ] Create `layouts/` directory for saved grid layouts
-- [ ] Create `layouts/.gitkeep`
-- [ ] Create `logs/` directory for episode CSV logs
-- [ ] Create `logs/.gitkeep`
+- [x] Create `src/drone_rl/` directory
+- [x] Create `src/drone_rl/__init__.py` with `__version__ = "1.00"`
+- [x] Create `src/drone_rl/types/` directory
+- [x] Create `src/drone_rl/types/__init__.py`
+- [x] Create `src/drone_rl/rl/` directory
+- [x] Create `src/drone_rl/rl/__init__.py`
+- [x] Create `src/drone_rl/gui/` directory
+- [x] Create `src/drone_rl/gui/__init__.py`
+- [x] Create `src/drone_rl/sdk/` directory (NEW: SDK layer per §4)
+- [x] Create `src/drone_rl/sdk/__init__.py` (NEW)
+- [x] Create `src/drone_rl/shared/` directory (NEW: shared utilities per §7)
+- [x] Create `src/drone_rl/shared/__init__.py` (NEW)
+- [x] Create `tests/` directory
+- [x] Create `tests/__init__.py`
+- [x] Create `tests/conftest.py` (NEW: shared pytest fixtures per §6)
+- [x] Create `tests/unit/` directory (NEW: restructured tests)
+- [x] Create `tests/unit/__init__.py` (NEW)
+- [x] Create `tests/unit/test_rl/` directory (NEW)
+- [x] Create `tests/unit/test_rl/__init__.py` (NEW)
+- [x] Create `tests/unit/test_sdk/` directory (NEW)
+- [x] Create `tests/unit/test_sdk/__init__.py` (NEW)
+- [x] Create `tests/unit/test_utils/` directory (NEW)
+- [x] Create `tests/unit/test_utils/__init__.py` (NEW)
+- [x] Create `tests/integration/` directory (NEW)
+- [x] Create `tests/integration/__init__.py` (NEW)
+- [x] Create `tests/integration/test_scenarios/` directory (NEW)
+- [x] Create `tests/integration/test_scenarios/__init__.py` (NEW)
+- [x] Create `tests/integration/test_file_io/` directory (NEW)
+- [x] Create `tests/integration/test_file_io/__init__.py` (NEW)
+- [x] Create `config/` directory (NEW: configuration files per §7)
+- [x] Create `docs/` directory
+- [x] Create `results/` directory (NEW: experiment results per §9)
+- [x] Create `assets/` directory (NEW: screenshots/diagrams per §9)
+- [x] Create `notebooks/` directory (NEW: Jupyter analysis per §9)
+- [x] Create `policies/` directory for saved Q-tables
+- [x] Create `policies/.gitkeep`
+- [x] Create `layouts/` directory for saved grid layouts
+- [x] Create `layouts/.gitkeep`
+- [x] Create `logs/` directory for episode CSV logs
+- [x] Create `logs/.gitkeep`
 - [ ] Verify folder structure matches Code Plan §3
 
 ### 0.5 Package Configuration in `pyproject.toml`
 
-- [ ] Configure `[build-system]` with `requires = ["hatchling"]`
-- [ ] Set `build-backend = "hatchling.build"`
-- [ ] Add `[tool.hatch.build.targets.wheel]` with `packages = ["src/drone_rl"]`
-- [ ] Add `[project.scripts]` with `drone-rl = "drone_rl.main:main"`
-- [ ] Add `[tool.ruff]` config section per §7.1 (NEW: exact Ruff config)
-- [ ] Set `line-length = 100` in ruff config
-- [ ] Set `target-version = "py310"` in ruff config
-- [ ] Add `[tool.ruff.lint]` section (NEW)
-- [ ] Set `select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]` in ruff (NEW: exact categories)
-- [ ] Set `ignore = ["E501"]` in ruff (NEW: allow long lines if needed)
-- [ ] Add `[tool.black]` config with `line-length = 100`
-- [ ] Add `[tool.pytest.ini_options]` with `testpaths = ["tests"]`
-- [ ] Add coverage minimum to pytest config: `addopts = "--cov=src/drone_rl --cov-fail-under=85"` (NEW: enforce 85% coverage)
-- [ ] Add `[tool.mypy]` config with `strict = true`
-- [ ] Add `[tool.coverage.run]` section (NEW: coverage enforcement)
+- [x] Configure `[build-system]` with `requires = ["hatchling"]`
+- [x] Set `build-backend = "hatchling.build"`
+- [x] Add `[tool.hatch.build.targets.wheel]` with `packages = ["src/drone_rl"]`
+- [x] Add `[project.scripts]` with `drone-rl = "drone_rl.main:main"`
+- [x] Add `[tool.ruff]` config section per §7.1 (NEW: exact Ruff config)
+- [x] Set `line-length = 100` in ruff config
+- [x] Set `target-version = "py310"` in ruff config
+- [x] Add `[tool.ruff.lint]` section (NEW)
+- [x] Set `select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]` in ruff (NEW: exact categories)
+- [x] Set `ignore = ["E501"]` in ruff (NEW: allow long lines if needed)
+- [x] Add `[tool.black]` config with `line-length = 100`
+- [x] Add `[tool.pytest.ini_options]` with `testpaths = ["tests"]`
+- [x] Add coverage minimum to pytest config: `addopts = "--cov=src/drone_rl --cov-fail-under=85"` (NEW: enforce 85% coverage)
+- [x] Add `[tool.mypy]` config with `strict = true`
+- [x] Add `[tool.coverage.run]` section (NEW: coverage enforcement)
 - [ ] Run `uv sync` to apply config
 
 ### 0.6 Version Tracking (NEW: §8.1)
 
-- [ ] Create `src/drone_rl/shared/version.py` with `__version__ = "1.00"` (NEW)
-- [ ] Import version in `src/drone_rl/__init__.py` (NEW)
-- [ ] Add version check at startup in main.py (NEW)
-- [ ] Verify version appears in app title bar (NEW)
+- [x] Create `src/drone_rl/shared/version.py` with `__version__ = "1.00"` (NEW)
+- [x] Import version in `src/drone_rl/__init__.py` (NEW)
+- [x] Add version check at startup in main.py (NEW)
+- [x] Verify version appears in app title bar (NEW)
 
 ### 0.7 Environment Variables & .env-example (NEW: §7.4)
 
-- [ ] Create `.env-example` file in project root (NEW)
-- [ ] Add placeholder: `DEBUG=false` (NEW)
-- [ ] Add placeholder: `LOG_LEVEL=INFO` (NEW)
-- [ ] Add placeholder: `DEFAULT_GRID_WIDTH=10` (NEW)
-- [ ] Add placeholder: `DEFAULT_GRID_HEIGHT=10` (NEW)
-- [ ] Add `.env` to `.gitignore` (NEW)
-- [ ] Add `.env.local` to `.gitignore` (NEW)
-- [ ] Add comment in `.env-example` explaining each variable (NEW)
+- [x] Create `.env-example` file in project root (NEW)
+- [x] Add placeholder: `DEBUG=false` (NEW)
+- [x] Add placeholder: `LOG_LEVEL=INFO` (NEW)
+- [x] Add placeholder: `DEFAULT_GRID_WIDTH=10` (NEW)
+- [x] Add placeholder: `DEFAULT_GRID_HEIGHT=10` (NEW)
+- [x] Add `.env` to `.gitignore` (NEW)
+- [x] Add `.env.local` to `.gitignore` (NEW)
+- [x] Add comment in `.env-example` explaining each variable (NEW)
 
 ### 0.8 Git Setup
 
 - [ ] Run `git init` in project root
-- [ ] Create `.gitignore` file
-- [ ] Add `.venv/` to `.gitignore`
-- [ ] Add `__pycache__/` to `.gitignore`
-- [ ] Add `*.pyc` to `.gitignore`
-- [ ] Add `.pytest_cache/` to `.gitignore`
-- [ ] Add `.mypy_cache/` to `.gitignore`
-- [ ] Add `.ruff_cache/` to `.gitignore`
-- [ ] Add `htmlcov/` to `.gitignore`
-- [ ] Add `*.egg-info/` to `.gitignore`
-- [ ] Add `dist/` to `.gitignore`
-- [ ] Add `build/` to `.gitignore`
-- [ ] Add `logs/*.csv` to `.gitignore`
-- [ ] Add `.env` to `.gitignore` (NEW)
-- [ ] Keep `logs/.gitkeep` tracked
-- [ ] Keep `policies/.gitkeep` tracked
-- [ ] Keep `layouts/.gitkeep` tracked
-- [ ] Keep `.gitkeep` in results, assets, notebooks (NEW)
+- [x] Create `.gitignore` file
+- [x] Add `.venv/` to `.gitignore`
+- [x] Add `__pycache__/` to `.gitignore`
+- [x] Add `*.pyc` to `.gitignore`
+- [x] Add `.pytest_cache/` to `.gitignore`
+- [x] Add `.mypy_cache/` to `.gitignore`
+- [x] Add `.ruff_cache/` to `.gitignore`
+- [x] Add `htmlcov/` to `.gitignore`
+- [x] Add `*.egg-info/` to `.gitignore`
+- [x] Add `dist/` to `.gitignore`
+- [x] Add `build/` to `.gitignore`
+- [x] Add `logs/*.csv` to `.gitignore`
+- [x] Add `.env` to `.gitignore` (NEW)
+- [x] Keep `logs/.gitkeep` tracked
+- [x] Keep `policies/.gitkeep` tracked
+- [x] Keep `layouts/.gitkeep` tracked
+- [x] Keep `.gitkeep` in results, assets, notebooks (NEW)
 - [ ] Make initial commit `git commit -m "Initial project scaffold"`
 
 ### 0.9 Documentation Structure (NEW: §2.2)
 
-- [ ] Create `docs/PRD.md` as symlink/copy of PRD_2D_Drone_Pathfinding_RL.md (NEW)
-- [ ] Create `docs/PLAN.md` as symlink/copy of CODE_PLAN.md (NEW)
-- [ ] Create `docs/TODO.md` as symlink/copy of TODO.md (NEW)
-- [ ] Create `docs/PRD_rl_algorithm.md` (NEW: dedicated RL algorithm PRD per §2.2)
-- [ ] Create `docs/ARCHITECTURE.md` (NEW: SDK design details)
-- [ ] In `docs/ARCHITECTURE.md`, include C4 Model and UML Diagrams (Fix 12: §2.2 & §20.1 — MANDATORY)
-- [ ] Add a text-based C4 Context Diagram showing the high-level system (GUI → SDK → RL Engine)
-- [ ] Add a UML Sequence Diagram (Mermaid.js syntax) detailing data flow between Tkinter GUI, SDK Gatekeeper, and RL Engine
-- [ ] Diagram must show: request from GUI → queue entry via Gatekeeper → processing in background thread → response queue → UI update
-- [ ] Document the middleware architecture in the sequence diagram (hook invocation points)
-- [ ] Create `docs/EXTENSIONS.md` (NEW: extension points & plugin development)
-- [ ] Create `docs/TESTING.md` (NEW: test strategy & edge cases)
-- [ ] Create `docs/USABILITY.md` (NEW: Nielsen heuristics & UI/UX decisions)
-- [ ] Create `docs/prompts.md` (NEW: prompt engineering log per §8.3)
-- [ ] Create `docs/COST_ANALYSIS.md` (Fix 3: §11 cost analysis — MANDATORY even for $0 cost)
+- [x] Create `docs/PRD.md` as symlink/copy of PRD_2D_Drone_Pathfinding_RL.md (NEW)
+- [x] Create `docs/PLAN.md` as symlink/copy of CODE_PLAN.md (NEW)
+- [x] Create `docs/TODO.md` as symlink/copy of TODO.md (NEW)
+- [x] Create `docs/PRD_rl_algorithm.md` (NEW: dedicated RL algorithm PRD per §2.2)
+- [x] Create `docs/ARCHITECTURE.md` (NEW: SDK design details)
+- [x] In `docs/ARCHITECTURE.md`, include C4 Model and UML Diagrams (Fix 12: §2.2 & §20.1 — MANDATORY)
+- [x] Add a text-based C4 Context Diagram showing the high-level system (GUI → SDK → RL Engine)
+- [x] Add a UML Sequence Diagram (Mermaid.js syntax) detailing data flow between Tkinter GUI, SDK Gatekeeper, and RL Engine
+- [x] Diagram must show: request from GUI → queue entry via Gatekeeper → processing in background thread → response queue → UI update
+- [x] Document the middleware architecture in the sequence diagram (hook invocation points)
+- [x] Create `docs/EXTENSIONS.md` (NEW: extension points & plugin development)
+- [x] Create `docs/TESTING.md` (NEW: test strategy & edge cases)
+- [x] Create `docs/USABILITY.md` (NEW: Nielsen heuristics & UI/UX decisions)
+- [x] Create `docs/prompts.md` (NEW: prompt engineering log per §8.3)
+- [x] Create `docs/COST_ANALYSIS.md` (Fix 3: §11 cost analysis — MANDATORY even for $0 cost)
 
 ### 0.10 README Documentation
 
-- [ ] Create `README.md` file in project root
-- [ ] Add project title: "# 2D Drone Pathfinding RL Simulation"
-- [ ] Add one-line project description
-- [ ] Add badge placeholders (Python, uv, license)
-- [ ] Write "## Overview" section describing the simulation
-- [ ] Write "## Features" section listing Q-learning, tkinter GUI, obstacles, etc.
-- [ ] Write "## Requirements" section listing Python 3.10+, uv, tkinter
-- [ ] Note that tkinter is typically bundled with Python but may need separate install on Linux
-- [ ] Write "## Installation" section with `uv sync` instructions
-- [ ] Write "## Running the App" section with `uv run python -m drone_rl.main`
-- [ ] Write "## Running Tests" section with `uv run pytest`
-- [ ] Write "## Project Structure" section with directory tree
-- [ ] Write "## Obstacle Types" section documenting Gray/Red/Blue
-- [ ] Write "## Reward Values" section documenting +100/-1/-10/-100/-10
-- [ ] Write "## Keyboard Shortcuts" section placeholder
-- [ ] Write "## Saving & Loading Policies" section
-- [ ] Write "## Saving & Loading Layouts" section
-- [ ] Write "## Configuration Files" section (Fix 10: §2.1 configuration explanations — MANDATORY)
-- [ ] In "Configuration Files" section: explain `config/setup.json` (grid defaults, UI window size)
-- [ ] In "Configuration Files" section: explain `config/hyperparameters.json` (α, γ, ε, episode count)
-- [ ] In "Configuration Files" section: explain `config/rewards.json` (reward values: goal=+100, step=-1, etc.)
-- [ ] In "Configuration Files" section: explain `config/rate_limits.json` (GUI update throttle, queue depth)
+- [x] Create `README.md` file in project root
+- [x] Add project title: "# 2D Drone Pathfinding RL Simulation"
+- [x] Add one-line project description
+- [x] Add badge placeholders (Python, uv, license)
+- [x] Write "## Overview" section describing the simulation
+- [x] Write "## Features" section listing Q-learning, tkinter GUI, obstacles, etc.
+- [x] Write "## Requirements" section listing Python 3.10+, uv, tkinter
+- [x] Note that tkinter is typically bundled with Python but may need separate install on Linux
+- [x] Write "## Installation" section with `uv sync` instructions
+- [x] Write "## Running the App" section with `uv run python -m drone_rl.main`
+- [x] Write "## Running Tests" section with `uv run pytest`
+- [x] Write "## Project Structure" section with directory tree
+- [x] Write "## Obstacle Types" section documenting Gray/Red/Blue
+- [x] Write "## Reward Values" section documenting +100/-1/-10/-100/-10
+- [x] Write "## Keyboard Shortcuts" section placeholder
+- [x] Write "## Saving & Loading Policies" section
+- [x] Write "## Saving & Loading Layouts" section
+- [x] Write "## Configuration Files" section (Fix 10: §2.1 configuration explanations — MANDATORY)
+- [x] In "Configuration Files" section: explain `config/setup.json` (grid defaults, UI window size)
+- [x] In "Configuration Files" section: explain `config/hyperparameters.json` (α, γ, ε, episode count)
+- [x] In "Configuration Files" section: explain `config/rewards.json` (reward values: goal=+100, step=-1, etc.)
+- [x] In "Configuration Files" section: explain `config/rate_limits.json` (GUI update throttle, queue depth)
 - [ ] In "Configuration Files" section: for each file, describe:
   - [ ] File purpose and location
   - [ ] JSON structure with example
   - [ ] Impact on behavior (e.g., "Increasing alpha=0.5 makes the agent learn faster but less stably")
   - [ ] How to edit and reload without restarting app
-- [ ] Write "## License" section
+- [x] Write "## License" section
 - [ ] Proofread README for typos
 - [ ] Verify all code blocks in README have correct language tags
 

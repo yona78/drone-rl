@@ -25,12 +25,12 @@ class CellType(Enum):
     and config/rewards.json respectively.
     """
 
-    EMPTY = "empty"           # White  — default walkable tile
-    START = "start"           # Green  — drone starting position
-    GOAL = "goal"             # Gold   — target destination, +100 reward
-    BUILDING = "building"     # Gray   — blocks movement, -10 penalty
-    TRAP = "trap"             # Red    — ends episode, -100 penalty
-    CROSSWIND = "crosswind"   # Blue   — alters movement, -10 penalty
+    EMPTY = "empty"  # White  — default walkable tile
+    START = "start"  # Green  — drone starting position
+    GOAL = "goal"  # Gold   — target destination, +100 reward
+    BUILDING = "building"  # Gray   — blocks movement, -10 penalty
+    TRAP = "trap"  # Red    — ends episode, -100 penalty
+    CROSSWIND = "crosswind"  # Blue   — alters movement, -10 penalty
 
 
 @dataclass(frozen=True)

@@ -54,7 +54,10 @@ def clamp(value: float, min_val: float, max_val: float) -> float:
 
 
 def is_valid_coordinate(
-    row: int, col: int, grid_rows: int, grid_cols: int,
+    row: int,
+    col: int,
+    grid_rows: int,
+    grid_cols: int,
 ) -> bool:
     """
     Check if (row, col) is within grid bounds.

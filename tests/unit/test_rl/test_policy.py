@@ -26,9 +26,7 @@ class TestSelectAction:
         set_q(qt, 0, 0, Action.RIGHT, 10.0)
         rng = random.Random(42)
 
-        actions = {
-            select_action(qt, 0, 0, epsilon=1.0, rng=rng) for _ in range(100)
-        }
+        actions = {select_action(qt, 0, 0, epsilon=1.0, rng=rng) for _ in range(100)}
         assert len(actions) > 1  # should explore multiple
 
     def test_select_action_uses_local_rng_not_global(self) -> None:

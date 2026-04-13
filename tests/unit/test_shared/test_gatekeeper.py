@@ -21,6 +21,7 @@ from drone_rl.shared.gatekeeper import ApiGatekeeper
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _write_config(
     tmpdir: Path,
     max_ups: int = 60,
@@ -39,6 +40,7 @@ def _write_config(
 # ---------------------------------------------------------------------------
 # Tests
 # ---------------------------------------------------------------------------
+
 
 def test_gatekeeper_enqueue_and_drain() -> None:
     """Items enqueued are returned by drain() once rate limit elapses."""

@@ -13,7 +13,8 @@ from drone_rl.types.rl import RewardConfig
 
 def _grid() -> GridState:
     return GridState(
-        rows=5, cols=5,
+        rows=5,
+        cols=5,
         cells={(2, 2): CellType.TRAP},
         start_pos=Coordinate(0, 0),
         goal_pos=Coordinate(4, 4),
@@ -54,7 +55,9 @@ class TestGridEnvironment:
         self,
     ) -> None:
         bad_grid = GridState(
-            rows=0, cols=5, cells={},
+            rows=0,
+            cols=5,
+            cells={},
             start_pos=Coordinate(0, 0),
             goal_pos=Coordinate(4, 4),
         )
@@ -65,7 +68,9 @@ class TestGridEnvironment:
         self,
     ) -> None:
         bad_grid = GridState(
-            rows=5, cols=5, cells={},
+            rows=5,
+            cols=5,
+            cells={},
             start_pos=Coordinate(0, 0),
             goal_pos=Coordinate(0, 0),
         )
