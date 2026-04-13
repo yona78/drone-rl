@@ -9,6 +9,10 @@ authors = [{ name = "famliy", email = "o546315180@gmail.com" }]
 dependencies = [
     "matplotlib>=3.8",
     "numpy",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+    "jupyter>=1.0",
+    "nbconvert>=7.0",
 ]
 
 [project.scripts]
