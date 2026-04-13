@@ -21,6 +21,7 @@ from drone_rl.types.rl import Hyperparameters
 # Fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def tiny_grid() -> GridState:
     """2×2 grid: start (0,0) goal (1,1), no obstacles."""
@@ -37,9 +38,14 @@ def tiny_grid() -> GridState:
 def fast_hp() -> Hyperparameters:
     """Hyperparameters configured for quick 10-episode training."""
     return Hyperparameters(
-        alpha=0.5, gamma=0.9, epsilon=1.0, epsilon_decay=0.9,
-        epsilon_min=0.01, max_steps_per_episode=20,
-        total_episodes=10, random_seed=42,
+        alpha=0.5,
+        gamma=0.9,
+        epsilon=1.0,
+        epsilon_decay=0.9,
+        epsilon_min=0.01,
+        max_steps_per_episode=20,
+        total_episodes=10,
+        random_seed=42,
     )
 
 
@@ -55,6 +61,7 @@ def sdk(tiny_grid: GridState, fast_hp: Hyperparameters) -> DroneRLSDK:
 # Tests
 # ---------------------------------------------------------------------------
 
+
 def test_sdk_save_and_load_policy(sdk: DroneRLSDK) -> None:
     """Saved Q-table round-trips back to an equivalent structure."""
     sdk.train(num_episodes=5)
@@ -68,9 +75,7 @@ def test_sdk_save_and_load_policy(sdk: DroneRLSDK) -> None:
     assert qt_before == qt_after
 
 
-def test_sdk_save_and_load_layout(
-    sdk: DroneRLSDK, tiny_grid: GridState
-) -> None:
+def test_sdk_save_and_load_layout(sdk: DroneRLSDK, tiny_grid: GridState) -> None:
     """Saved layout round-trips: rows/cols/start/goal preserved."""
     with tempfile.TemporaryDirectory() as tmpdir:
         path = Path(tmpdir) / "layout.json"

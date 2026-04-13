@@ -15,7 +15,8 @@ from drone_rl.types.grid import CellType, Coordinate, GridState
 
 def _make_grid() -> GridState:
     return GridState(
-        rows=3, cols=3,
+        rows=3,
+        cols=3,
         cells={(1, 1): CellType.BUILDING},
         start_pos=Coordinate(0, 0),
         goal_pos=Coordinate(2, 2),

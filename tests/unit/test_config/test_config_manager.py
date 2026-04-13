@@ -18,39 +18,43 @@ from drone_rl.shared.config import ConfigManager
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _write_valid_configs(cfg_dir: Path) -> None:
     """Write all three valid config files into cfg_dir."""
-    (cfg_dir / "setup.json").write_text(
-        json.dumps({"version": "1.00", "grid": {}, "ui": {}})
-    )
+    (cfg_dir / "setup.json").write_text(json.dumps({"version": "1.00", "grid": {}, "ui": {}}))
     (cfg_dir / "rewards.json").write_text(
-        json.dumps({
-            "version": "1.00",
-            "goal_reached": 100.0,
-            "empty_step": -1.0,
-            "building_collision": -10.0,
-            "trap_hit": -100.0,
-            "crosswind_penalty": -10.0,
-        })
+        json.dumps(
+            {
+                "version": "1.00",
+                "goal_reached": 100.0,
+                "empty_step": -1.0,
+                "building_collision": -10.0,
+                "trap_hit": -100.0,
+                "crosswind_penalty": -10.0,
+            }
+        )
     )
     (cfg_dir / "hyperparameters.json").write_text(
-        json.dumps({
-            "version": "1.00",
-            "alpha": 0.1,
-            "gamma": 0.99,
-            "epsilon": 1.0,
-            "epsilon_decay": 0.995,
-            "epsilon_min": 0.01,
-            "max_steps_per_episode": 500,
-            "total_episodes": 1000,
-            "random_seed": 42,
-        })
+        json.dumps(
+            {
+                "version": "1.00",
+                "alpha": 0.1,
+                "gamma": 0.99,
+                "epsilon": 1.0,
+                "epsilon_decay": 0.995,
+                "epsilon_min": 0.01,
+                "max_steps_per_episode": 500,
+                "total_episodes": 1000,
+                "random_seed": 42,
+            }
+        )
     )
 
 
 # ---------------------------------------------------------------------------
 # Tests
 # ---------------------------------------------------------------------------
+
 
 def test_config_manager_load_setup() -> None:
     """load_setup() returns dict with 'version' key from file."""

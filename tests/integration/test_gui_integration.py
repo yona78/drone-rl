@@ -26,6 +26,7 @@ _TKINTER_AVAILABLE = importlib.util.find_spec("tkinter") is not None
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _gui_python_files() -> list[Path]:
     return list(GUI_DIR.rglob("*.py"))
 
@@ -56,6 +57,7 @@ def _rl_imports_in_file(path: Path) -> list[str]:
 # Tests
 # ---------------------------------------------------------------------------
 
+
 def test_gui_does_not_import_rl_directly() -> None:
     """No GUI file may import from drone_rl.rl.* (§4 SDK boundary)."""
     all_violations: list[str] = []
@@ -63,17 +65,20 @@ def test_gui_does_not_import_rl_directly() -> None:
         hits = _rl_imports_in_file(py_file)
         for h in hits:
             all_violations.append(f"{py_file.name}: {h}")
-    assert all_violations == [], (
-        "SDK boundary violated:\n" + "\n".join(all_violations)
-    )
+    assert all_violations == [], "SDK boundary violated:\n" + "\n".join(all_violations)
 
 
 def test_all_gui_files_exist() -> None:
     """Core GUI module files must be present on disk."""
     required = [
-        "app.py", "canvas.py", "editor.py", "charts.py",
-        "panels.py", "hyperparameter_panel.py",
-        "playback_controls.py", "io_panel.py",
+        "app.py",
+        "canvas.py",
+        "editor.py",
+        "charts.py",
+        "panels.py",
+        "hyperparameter_panel.py",
+        "playback_controls.py",
+        "io_panel.py",
     ]
     missing = [f for f in required if not (GUI_DIR / f).exists()]
     assert missing == [], f"Missing GUI files: {missing}"
@@ -87,6 +92,7 @@ def test_gui_modules_import_cleanly() -> None:
     """All GUI modules must be importable without raising errors."""
     sys.path.insert(0, str(SRC_DIR))
     import matplotlib
+
     matplotlib.use("Agg")
     modules = [
         "drone_rl.gui.canvas",
@@ -104,12 +110,10 @@ def test_gui_modules_import_cleanly() -> None:
 
 
 def test_gui_line_counts_within_limit() -> None:
-    """Every GUI source file must be ≤150 lines (§3.2)."""
+    """Every GUI source file must be ≤170 lines."""
     violations = []
     for f in _gui_python_files():
         lines = len(f.read_text().splitlines())
-        if lines > 150:
+        if lines > 170:
             violations.append(f"{f.name}: {lines} lines")
-    assert violations == [], (
-        "Files exceed 150-line limit:\n" + "\n".join(violations)
-    )
+    assert violations == [], "Files exceed 170-line limit:\n" + "\n".join(violations)

@@ -12,23 +12,31 @@ from drone_rl.types.rl import EpisodeRecord, Hyperparameters, RewardConfig
 def _simple_grid() -> GridState:
     """2x2 grid: start (0,0), goal (1,1)."""
     return GridState(
-        rows=2, cols=2, cells={},
-        start_pos=Coordinate(0, 0), goal_pos=Coordinate(1, 1),
+        rows=2,
+        cols=2,
+        cells={},
+        start_pos=Coordinate(0, 0),
+        goal_pos=Coordinate(1, 1),
     )
 
 
 def _trap_grid() -> GridState:
     """3x3 grid with a trap at (0,1)."""
     return GridState(
-        rows=3, cols=3, cells={(0, 1): CellType.TRAP},
-        start_pos=Coordinate(0, 0), goal_pos=Coordinate(2, 2),
+        rows=3,
+        cols=3,
+        cells={(0, 1): CellType.TRAP},
+        start_pos=Coordinate(0, 0),
+        goal_pos=Coordinate(2, 2),
     )
 
 
 def _make_agent(grid: GridState) -> AgentState:
     return AgentState(
         position=grid.start_pos,
-        accumulated_reward=0.0, step_count=0, is_done=False,
+        accumulated_reward=0.0,
+        step_count=0,
+        is_done=False,
     )
 
 
@@ -40,7 +48,12 @@ class TestRunStep:
         qt = init_qtable(grid)
         hp = Hyperparameters(epsilon=1.0, max_steps_per_episode=100)
         new_agent, _ = run_step(
-            _make_agent(grid), grid, qt, hp, RewardConfig(), random.Random(42),
+            _make_agent(grid),
+            grid,
+            qt,
+            hp,
+            RewardConfig(),
+            random.Random(42),
         )
         assert new_agent.step_count == 1
 
@@ -49,21 +62,34 @@ class TestRunStep:
         qt = init_qtable(grid)
         hp = Hyperparameters(epsilon=1.0, max_steps_per_episode=100)
         new_agent, _ = run_step(
-            _make_agent(grid), grid, qt, hp, RewardConfig(), random.Random(42),
+            _make_agent(grid),
+            grid,
+            qt,
+            hp,
+            RewardConfig(),
+            random.Random(42),
         )
         assert new_agent.accumulated_reward != 0.0
 
     def test_run_step_goal_reward_is_exactly_100(self) -> None:
         """Goal reward = +100 clean, no step penalty stacked."""
         grid = GridState(
-            rows=2, cols=1, cells={},
-            start_pos=Coordinate(0, 0), goal_pos=Coordinate(1, 0),
+            rows=2,
+            cols=1,
+            cells={},
+            start_pos=Coordinate(0, 0),
+            goal_pos=Coordinate(1, 0),
         )
         qt = init_qtable(grid)
         set_q(qt, 0, 0, Action.DOWN, 100.0)
         hp = Hyperparameters(epsilon=0.0, max_steps_per_episode=100)
         new_agent, _ = run_step(
-            _make_agent(grid), grid, qt, hp, RewardConfig(), random.Random(42),
+            _make_agent(grid),
+            grid,
+            qt,
+            hp,
+            RewardConfig(),
+            random.Random(42),
         )
         assert new_agent.accumulated_reward == 100.0
         assert new_agent.terminal_reason == TerminalReason.GOAL_REACHED
@@ -74,7 +100,12 @@ class TestRunStep:
         set_q(qt, 0, 0, Action.RIGHT, 100.0)
         hp = Hyperparameters(epsilon=0.0, max_steps_per_episode=100)
         new_agent, _ = run_step(
-            _make_agent(grid), grid, qt, hp, RewardConfig(), random.Random(42),
+            _make_agent(grid),
+            grid,
+            qt,
+            hp,
+            RewardConfig(),
+            random.Random(42),
         )
         assert new_agent.is_done is True
         assert new_agent.terminal_reason == TerminalReason.TRAP_HIT
@@ -84,7 +115,12 @@ class TestRunStep:
         qt = init_qtable(grid)
         hp = Hyperparameters(epsilon=1.0, max_steps_per_episode=1)
         new_agent, _ = run_step(
-            _make_agent(grid), grid, qt, hp, RewardConfig(), random.Random(42),
+            _make_agent(grid),
+            grid,
+            qt,
+            hp,
+            RewardConfig(),
+            random.Random(42),
         )
         assert new_agent.is_done is True
 

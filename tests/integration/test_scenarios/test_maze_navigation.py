@@ -29,6 +29,7 @@ from drone_rl.types.rl import EpisodeRecord, Hyperparameters
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _maze_grid() -> GridState:
     """10x10 grid with a U-shaped building corridor."""
     buildings = (
@@ -73,6 +74,7 @@ def _success_rate(records: list[EpisodeRecord], last_n: int = 100) -> float:
 # Scenario tests
 # ---------------------------------------------------------------------------
 
+
 def test_maze_navigation_success_rate_ge_70pct() -> None:
     """Agent reaches goal >= 70% of the time in final 100 of 1000 episodes."""
     sdk = DroneRLSDK(hp=_maze_hp(seed=42))
@@ -80,9 +82,7 @@ def test_maze_navigation_success_rate_ge_70pct() -> None:
     records = sdk.train(num_episodes=1000)
 
     rate = _success_rate(records, last_n=100)
-    assert rate >= 0.70, (
-        f"Expected >= 70% success rate in maze, got {rate:.1%}"
-    )
+    assert rate >= 0.70, f"Expected >= 70% success rate in maze, got {rate:.1%}"
 
 
 def test_maze_buildings_are_not_goal_cells() -> None:
@@ -107,11 +107,7 @@ def test_maze_training_produces_nonzero_qtable() -> None:
     sdk.train(num_episodes=200)
 
     qt = sdk.get_qtable()
-    nonzero = sum(
-        1 for action_vals in qt.values()
-        for v in action_vals.values()
-        if v != 0.0
-    )
+    nonzero = sum(1 for action_vals in qt.values() for v in action_vals.values() if v != 0.0)
     assert nonzero > 0, "Q-table still all zeros after 200 episodes"
 
 

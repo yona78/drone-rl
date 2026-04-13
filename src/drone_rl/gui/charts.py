@@ -51,16 +51,14 @@ class ConvergenceChart:
         self._ax.set_xlabel("Episode", fontsize=8)
         self._ax.set_ylabel("Total Reward", fontsize=8)
         self._ax.tick_params(labelsize=7)
-        self._ax.plot(eps, rewards, color="#1976d2", alpha=0.5,
-                      linewidth=0.8, label="Raw")
+        self._ax.plot(eps, rewards, color="#1976d2", alpha=0.5, linewidth=0.8, label="Raw")
         window = 50
         if len(rewards) >= window:
             ma = [
-                sum(rewards[max(0, i - window): i]) / min(window, i)
+                sum(rewards[max(0, i - window) : i]) / min(window, i)
                 for i in range(1, len(rewards) + 1)
             ]
-            self._ax.plot(eps, ma, color="#e53935", linewidth=1.5,
-                          label=f"{window}-ep avg")
+            self._ax.plot(eps, ma, color="#e53935", linewidth=1.5, label=f"{window}-ep avg")
             self._ax.legend(fontsize=7)
         self._canvas.draw()
 
@@ -90,6 +88,7 @@ class QValueHeatmap:
     def update(self, qtable: dict) -> None:
         """Rebuild the heatmap from the latest Q-table snapshot."""
         import numpy as np
+
         grid = np.zeros((self._rows, self._cols))
         for key, actions in qtable.items():
             parts = key.split(",")
@@ -102,7 +101,9 @@ class QValueHeatmap:
         self._ax.set_title("Max Q-Value Heatmap", fontsize=9)
         self._ax.tick_params(labelsize=7)
         self._im = self._ax.imshow(
-            grid, cmap="coolwarm", aspect="auto",
+            grid,
+            cmap="coolwarm",
+            aspect="auto",
             origin="upper",
         )
         self._canvas.draw()

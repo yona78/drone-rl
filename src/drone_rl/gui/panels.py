@@ -39,10 +39,10 @@ class EpisodeStatsPanel(tk.LabelFrame):
             ("Epsilon:", self._eps_var),
         ]
         for row, (lbl, var) in enumerate(labels):
-            tk.Label(self, text=lbl, width=10, anchor=tk.E).grid(
-                row=row, column=0, sticky=tk.E)
+            tk.Label(self, text=lbl, width=10, anchor=tk.E).grid(row=row, column=0, sticky=tk.E)
             tk.Label(self, textvariable=var, width=14, anchor=tk.W).grid(
-                row=row, column=1, sticky=tk.W)
+                row=row, column=1, sticky=tk.W
+            )
 
     def update(
         self,
@@ -81,11 +81,9 @@ class QTableInspectorPanel(tk.LabelFrame):
         tk.Label(top, text="State:").pack(side=tk.LEFT)
         self._state_entry = ttk.Entry(top, textvariable=self._state_var, width=8)
         self._state_entry.pack(side=tk.LEFT, padx=2)
-        ttk.Button(top, text="Inspect",
-                   command=self._refresh).pack(side=tk.LEFT, padx=2)
+        ttk.Button(top, text="Inspect", command=self._refresh).pack(side=tk.LEFT, padx=2)
         cols = ("Action", "Q-Value")
-        self._tree = ttk.Treeview(self, columns=cols,
-                                   show="headings", height=4)
+        self._tree = ttk.Treeview(self, columns=cols, show="headings", height=4)
         for col in cols:
             self._tree.heading(col, text=col)
             self._tree.column(col, width=90)

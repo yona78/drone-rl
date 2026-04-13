@@ -32,6 +32,7 @@ def main() -> None:
     log = logging.getLogger(__name__)
     log.info("drone-rl v%s — launching GUI…", __version__)
     from .gui import DroneRLApp
+
     app = DroneRLApp()
     app.run()
 

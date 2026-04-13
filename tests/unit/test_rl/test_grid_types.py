@@ -67,13 +67,15 @@ class TestGridState:
         assert small_grid.cols == 5
 
     def test_gridstate_get_cell_type_empty_default(
-        self, small_grid: GridState,
+        self,
+        small_grid: GridState,
     ) -> None:
         assert small_grid.get_cell_type(2, 2) == CellType.EMPTY
 
     def test_gridstate_get_cell_type_explicit(self) -> None:
         grid = GridState(
-            rows=3, cols=3,
+            rows=3,
+            cols=3,
             cells={(1, 1): CellType.BUILDING},
             start_pos=Coordinate(0, 0),
             goal_pos=Coordinate(2, 2),
@@ -85,22 +87,26 @@ class TestGridState:
         assert small_grid.get_cell_type(0, 1) == CellType.TRAP
 
     def test_gridstate_start_and_goal_positions(
-        self, small_grid: GridState,
+        self,
+        small_grid: GridState,
     ) -> None:
         assert small_grid.start_pos == Coordinate(row=0, col=0)
         assert small_grid.goal_pos == Coordinate(row=4, col=4)
 
     def test_gridstate_wind_directions_default_empty(
-        self, small_grid: GridState,
+        self,
+        small_grid: GridState,
     ) -> None:
         assert small_grid.wind_directions == {}
 
     def test_gridstate_get_wind_direction_returns_configured(
-        self, grid_with_obstacles: GridState,
+        self,
+        grid_with_obstacles: GridState,
     ) -> None:
         assert grid_with_obstacles.get_wind_direction(3, 3) == Action.RIGHT
 
     def test_gridstate_get_wind_direction_defaults_to_up(
-        self, small_grid: GridState,
+        self,
+        small_grid: GridState,
     ) -> None:
         assert small_grid.get_wind_direction(0, 0) == Action.UP

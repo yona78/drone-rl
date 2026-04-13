@@ -16,12 +16,19 @@ from ..types.grid import GridState
 
 # Arrow direction deltas for policy overlay (row_delta, col_delta)
 _ARROW_DELTAS: dict[str, tuple[int, int]] = {
-    "up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1),
+    "up": (-1, 0),
+    "down": (1, 0),
+    "left": (0, -1),
+    "right": (0, 1),
 }
 
 LEGEND_ITEMS = [
-    ("White", "Empty"), ("green", "Start"), ("gold", "Goal"),
-    ("gray", "Building"), ("red", "Trap"), ("dodger blue", "Crosswind"),
+    ("White", "Empty"),
+    ("green", "Start"),
+    ("gold", "Goal"),
+    ("gray", "Building"),
+    ("red", "Trap"),
+    ("dodger blue", "Crosswind"),
     ("blue", "Drone"),
 ]
 
@@ -47,7 +54,7 @@ class GridCanvas(tk.Canvas):
     ) -> None:
         self._grid = grid
         self._cs = cell_size
-        w = grid.cols * cell_size + 120   # +120 for legend
+        w = grid.cols * cell_size + 120  # +120 for legend
         h = grid.rows * cell_size + 2
         super().__init__(parent, width=w, height=h, bg="white")
         self.draw_grid()
@@ -70,8 +77,13 @@ class GridCanvas(tk.Canvas):
                 color = CELL_COLORS.get(cell, "white")
                 x0, y0 = c * cs, r * cs
                 self.create_rectangle(
-                    x0, y0, x0 + cs, y0 + cs,
-                    fill=color, outline="lightgray", tags="cell",
+                    x0,
+                    y0,
+                    x0 + cs,
+                    y0 + cs,
+                    fill=color,
+                    outline="lightgray",
+                    tags="cell",
                 )
         sp = self._grid.start_pos
         gp = self._grid.goal_pos
@@ -85,8 +97,13 @@ class GridCanvas(tk.Canvas):
         pad = cs // 5
         x0, y0 = col * cs + pad, row * cs + pad
         self.create_oval(
-            x0, y0, x0 + cs - 2 * pad, y0 + cs - 2 * pad,
-            fill=color, outline="navy", tags=self._AGENT_TAG,
+            x0,
+            y0,
+            x0 + cs - 2 * pad,
+            y0 + cs - 2 * pad,
+            fill=color,
+            outline="navy",
+            tags=self._AGENT_TAG,
         )
 
     def update_agent_position(self, row: int, col: int) -> None:
@@ -101,8 +118,7 @@ class GridCanvas(tk.Canvas):
         cs = self._cs
         half = cs // 2
         pts = [c * cs + half for rc in path for c in (rc[1], rc[0])]
-        self.create_line(*pts, fill="navy", width=2,
-                         arrow=tk.LAST, tags=self._PATH_TAG)
+        self.create_line(*pts, fill="navy", width=2, arrow=tk.LAST, tags=self._PATH_TAG)
 
     def clear(self) -> None:
         """Remove agent, path, and arrow overlays; keep cell background."""
@@ -127,22 +143,25 @@ class GridCanvas(tk.Canvas):
             r, c = int(parts[0]), int(parts[1])
             cx, cy = c * cs + half, r * cs + half
             ex, ey = cx + dc * (half - 4), cy + dr * (half - 4)
-            self.create_line(cx, cy, ex, ey, arrow=tk.LAST,
-                             fill="black", width=1, tags=self._ARROW_TAG)
+            self.create_line(
+                cx, cy, ex, ey, arrow=tk.LAST, fill="black", width=1, tags=self._ARROW_TAG
+            )
 
     def draw_legend(self) -> None:
         """Draw a persistent color legend to the right of the grid."""
         x_off = self._grid.cols * self._cs + 10
         for i, (color, label) in enumerate(LEGEND_ITEMS):
             y = 20 + i * 22
-            self.create_rectangle(x_off, y, x_off + 16, y + 16,
-                                  fill=color, outline="black")
-            self.create_text(x_off + 22, y + 8, text=label,
-                             anchor=tk.W, font=("Arial", 9))
+            self.create_rectangle(x_off, y, x_off + 16, y + 16, fill=color, outline="black")
+            self.create_text(x_off + 22, y + 8, text=label, anchor=tk.W, font=("Arial", 9))
 
     def _label_cell(self, row: int, col: int, text: str, fg: str) -> None:
         cs = self._cs
         self.create_text(
-            col * cs + cs // 2, row * cs + cs // 2,
-            text=text, fill=fg, font=("Arial", 10, "bold"), tags="cell",
+            col * cs + cs // 2,
+            row * cs + cs // 2,
+            text=text,
+            fill=fg,
+            font=("Arial", 10, "bold"),
+            tags="cell",
         )
