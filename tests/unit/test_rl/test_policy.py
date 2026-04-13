@@ -1,8 +1,10 @@
 """Unit tests for drone_rl.rl.policy module — epsilon-greedy selection."""
 
 import random
+import tempfile
+from pathlib import Path
 
-from drone_rl.rl.policy import select_action
+from drone_rl.rl.policy import load_from_file, save_to_file, select_action
 from drone_rl.rl.qtable import set_q
 from drone_rl.types.agent import ALL_ACTIONS, Action
 
@@ -66,3 +68,14 @@ class TestSelectAction:
         result = select_action(qt, 0, 0, 0.5, rng)
         assert isinstance(result, Action)
         assert result in ALL_ACTIONS
+
+    def test_save_and_load_policy_file_round_trip(self) -> None:
+        """save_to_file/load_from_file preserves Q-table values."""
+        qt = {}
+        set_q(qt, 0, 0, Action.RIGHT, 3.14)
+        set_q(qt, 1, 1, Action.DOWN, -2.5)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "policy.json"
+            save_to_file(qt, path)
+            loaded = load_from_file(path)
+        assert loaded == qt

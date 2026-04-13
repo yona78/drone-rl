@@ -114,7 +114,14 @@ def test_csv_export_has_all_columns(trained_sdk: DroneRLSDK) -> None:
         with p.open() as fh:
             reader = csv.DictReader(fh)
             headers = reader.fieldnames or []
-    required = {"episode", "total_reward", "steps", "terminal_reason", "epsilon"}
+    required = {
+        "episode",
+        "total_reward",
+        "steps",
+        "terminal_reason",
+        "epsilon_used",
+        "success_rate",
+    }
     assert required.issubset(set(headers))
 
 
