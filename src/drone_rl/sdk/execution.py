@@ -13,7 +13,9 @@ from ..types.rl import EpisodeRecord
 class ExecutionMixin:
     """Execution logic for running episodes and steps."""
 
-    def train(self, num_episodes: int | None = None, update_queue: queue.Queue | None = None) -> list[EpisodeRecord]:
+    def train(
+        self, num_episodes: int | None = None, update_queue: queue.Queue | None = None
+    ) -> list[EpisodeRecord]:
         """Run training for a number of episodes."""
         if self._grid is None:
             raise RuntimeError("Call create_environment() before train()")
@@ -25,10 +27,18 @@ class ExecutionMixin:
             self._call_hook_before_episode_start(ep)
             agent = AgentState(self._grid.start_pos, 0.0, 0, False)
             while not agent.is_done:
-                agent, self._qtable = run_step(agent, self._grid, self._qtable, self._hp, self._rewards, self._rng)
+                agent, self._qtable = run_step(
+                    agent, self._grid, self._qtable, self._hp, self._rewards, self._rng
+                )
                 self._call_hook_after_step_update(agent)
             reason = agent.terminal_reason or TerminalReason.MAX_STEPS
-            record = EpisodeRecord(episode=ep, total_reward=agent.accumulated_reward, steps=agent.step_count, terminal_reason=reason, epsilon=self._hp.epsilon)
+            record = EpisodeRecord(
+                episode=ep,
+                total_reward=agent.accumulated_reward,
+                steps=agent.step_count,
+                terminal_reason=reason,
+                epsilon=self._hp.epsilon,
+            )
             with self._state_lock:
                 new_records.append(record)
                 self._records.append(record)
@@ -54,5 +64,7 @@ class ExecutionMixin:
         if self._grid is None:
             raise RuntimeError("Call create_environment() first")
         agent = AgentState(self._grid.start_pos, 0.0, 0, False)
-        new_agent, self._qtable = run_step(agent, self._grid, self._qtable, self._hp, self._rewards, self._rng)
+        new_agent, self._qtable = run_step(
+            agent, self._grid, self._qtable, self._hp, self._rewards, self._rng
+        )
         return new_agent, new_agent.accumulated_reward, new_agent.is_done

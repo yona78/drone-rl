@@ -27,6 +27,7 @@ class AppMenuMixin:
 
     def _save_policy(self) -> None:
         from tkinter.filedialog import asksaveasfilename
+
         p = asksaveasfilename(defaultextension=".json", filetypes=[("JSON", "*.json")])
         if p:
             self.sdk.save_policy(p)
@@ -34,6 +35,7 @@ class AppMenuMixin:
 
     def _load_policy(self) -> None:
         from tkinter.filedialog import askopenfilename
+
         p = askopenfilename(filetypes=[("JSON", "*.json")])
         if p:
             self.sdk.load_policy(p)
@@ -48,4 +50,5 @@ class AppMenuMixin:
         from tkinter.messagebox import showinfo
 
         from ..shared.version import __version__
+
         showinfo("About", f"2D Drone Pathfinding RL Simulation\nv{__version__}")
