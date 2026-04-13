@@ -39,11 +39,11 @@
 
 - [ ] Run `uv add matplotlib` to install matplotlib
 - [ ] Run `uv add numpy` to install numpy
-- [ ] Run `uv add --dev pytest` to install pytest as dev dependency
-- [ ] Run `uv add --dev pytest-cov` for coverage reporting
-- [ ] Run `uv add --dev ruff` for linting
-- [ ] Run `uv add --dev black` for formatting
-- [ ] Run `uv add --dev mypy` for type checking
+- [x] Run `uv add --dev pytest` to install pytest as dev dependency
+- [x] Run `uv add --dev pytest-cov` for coverage reporting
+- [x] Run `uv add --dev ruff` for linting
+- [x] Run `uv add --dev black` for formatting
+- [x] Run `uv add --dev mypy` for type checking
 - [ ] Verify `uv.lock` was created/updated after each install
 - [ ] Verify `.venv/` directory was created
 - [ ] Run `uv sync` to ensure all dependencies install cleanly
@@ -117,7 +117,7 @@
 - [ ] Create `src/drone_rl/shared/version.py` with `__version__ = "1.00"` (NEW)
 - [ ] Import version in `src/drone_rl/__init__.py` (NEW)
 - [ ] Add version check at startup in main.py (NEW)
-- [ ] Verify version appears in app title bar (NEW)
+- [x] Verify version appears in app title bar (NEW)
 
 ### 0.7 Environment Variables & .env-example (NEW: §7.4)
 

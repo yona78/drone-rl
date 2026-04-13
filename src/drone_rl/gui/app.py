@@ -5,6 +5,7 @@ from __future__ import annotations
 import tkinter as tk
 
 from ..sdk import DroneRLSDK
+from ..shared.version import __version__
 from ..types.grid import Coordinate, GridState
 
 
@@ -20,7 +21,7 @@ class DroneRLApp(tk.Tk):
     def __init__(self, sdk: DroneRLSDK | None = None) -> None:
         super().__init__()
         self.sdk = sdk or DroneRLSDK()
-        self.title("2D Drone Pathfinding RL Simulation")
+        self.title(f"2D Drone Pathfinding RL Simulation v{__version__}")
         self.geometry("1400x900")
         self.resizable(True, True)
         self._build_default_grid()
