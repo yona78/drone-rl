@@ -11,10 +11,12 @@ Reference: CODE_PLAN section 10.
 from __future__ import annotations
 
 import random as _random_module
+from pathlib import Path
 
 from ..types.agent import ALL_ACTIONS, Action
 from ..types.rl import QTable
 from .qtable import best_action
+from .qtable import qtable_from_json, qtable_to_json
 
 
 def select_action(
@@ -39,3 +41,15 @@ def select_action(
     if rng.random() < epsilon:
         return rng.choice(ALL_ACTIONS)
     return best_action(table, row, col)
+
+
+def save_to_file(table: QTable, filepath: Path | str) -> None:
+    """Save Q-table to a human-readable JSON file."""
+    path = Path(filepath)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(qtable_to_json(table))
+
+
+def load_from_file(filepath: Path | str) -> QTable:
+    """Load Q-table from JSON file."""
+    return qtable_from_json(Path(filepath).read_text())

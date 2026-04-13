@@ -9,6 +9,7 @@ Reference: CODE_PLAN section 3.5, Phase 1 spec.
 
 from __future__ import annotations
 
+import csv
 import random
 from pathlib import Path
 
@@ -86,3 +87,44 @@ def epsilon_decay(epsilon: float, decay_rate: float) -> float:
     Output Data: decayed epsilon (always >= 0).
     """
     return max(0.0, epsilon * decay_rate)
+
+
+def export_episodes_to_csv(episode_stats: list[dict], filepath: str) -> None:
+    """
+    Export episode statistics to CSV.
+
+    Columns: episode, total_reward, steps, terminal_reason, epsilon_used,
+    success_rate (cumulative success ratio up to each row).
+    """
+    path = Path(filepath)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    total = 0
+    successes = 0
+    with path.open("w", newline="") as fh:
+        writer = csv.DictWriter(
+            fh,
+            fieldnames=[
+                "episode",
+                "total_reward",
+                "steps",
+                "terminal_reason",
+                "epsilon_used",
+                "success_rate",
+            ],
+        )
+        writer.writeheader()
+        for row in episode_stats:
+            total += 1
+            reason = str(row.get("terminal_reason", ""))
+            if reason == "GOAL":
+                successes += 1
+            writer.writerow(
+                {
+                    "episode": row.get("episode"),
+                    "total_reward": row.get("total_reward"),
+                    "steps": row.get("steps"),
+                    "terminal_reason": reason,
+                    "epsilon_used": row.get("epsilon"),
+                    "success_rate": successes / total if total else 0.0,
+                }
+            )
