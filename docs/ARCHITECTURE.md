@@ -157,3 +157,53 @@ Any other bare numeric literal found in `rl/` source will fail the CI
 config load, logs a `logging.warning`, and falls back to the corresponding
 defaults in `constants.py`. The application must never crash due to a missing
 or corrupted JSON file.
+
+## File I/O JSON Formats (§7)
+
+### Policy JSON (`policies/*.json`)
+
+Q-table serialised as a nested object:
+
+```json
+{
+  "0,0": {"UP": -1.2, "DOWN": 3.4, "LEFT": -0.5, "RIGHT": 5.1},
+  "0,1": { ... }
+}
+```
+
+Keys at the outer level are `"row,col"` state strings. Inner keys are Action
+enum names. Values are 64-bit floats. Produced by `sdk/io.save_policy()` and
+consumed by `sdk/io.load_policy()`.
+
+### Layout JSON (`layouts/*.json`)
+
+GridState serialised as:
+
+```json
+{
+  "rows": 10, "cols": 10,
+  "cells": {"1,2": "BUILDING", "3,4": "TRAP"},
+  "start_pos": [0, 0],
+  "goal_pos": [9, 9],
+  "wind_directions": {"5,5": "RIGHT"}
+}
+```
+
+Cell values are `CellType` enum strings. `wind_directions` may be empty `{}`.
+Produced by `sdk/io.save_layout()` and consumed by `sdk/io.load_layout()`.
+
+### Results JSON (`results/*.json`)
+
+Experiment summary written by `sdk/io.save_experiment_results()`:
+
+```json
+{
+  "metadata": {"experiment": "run-1", "seed": 42},
+  "total_episodes": 1000,
+  "success_rate": 0.872,
+  "mean_reward": 87.3,
+  "mean_steps": 24.1
+}
+```
+
+`success_rate` = fraction of episodes terminated with `TerminalReason.GOAL`.

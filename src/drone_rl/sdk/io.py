@@ -85,6 +85,32 @@ def load_layout(filepath: Path) -> GridState:
     return _grid_from_dict(json.loads(Path(filepath).read_text()))
 
 
+# --- Results Storage (§7.4) ---
+
+def save_experiment_results(
+    records: list[EpisodeRecord],
+    metadata: dict,
+    filepath: Path,
+) -> None:
+    """Persist experiment metadata + summary statistics to JSON (§7.4)."""
+    filepath = Path(filepath)
+    filepath.parent.mkdir(parents=True, exist_ok=True)
+    total = len(records)
+    successes = sum(1 for r in records if r.terminal_reason.value == "GOAL")
+    payload = {
+        "metadata": metadata,
+        "total_episodes": total,
+        "success_rate": round(successes / total, 4) if total else 0.0,
+        "mean_reward": round(
+            sum(r.total_reward for r in records) / total, 4
+        ) if total else 0.0,
+        "mean_steps": round(
+            sum(r.steps for r in records) / total, 2
+        ) if total else 0.0,
+    }
+    filepath.write_text(json.dumps(payload, indent=2))
+
+
 # --- Episode Logs ---
 
 def export_logs(records: list[EpisodeRecord], filepath: Path) -> None:

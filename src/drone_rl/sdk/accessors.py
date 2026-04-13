@@ -16,7 +16,14 @@ from typing import Any
 
 from ..types.grid import GridState
 from ..types.rl import QTable, state_key
-from .io import export_logs, load_layout, load_policy, save_layout, save_policy
+from .io import (
+    export_logs,
+    load_layout,
+    load_policy,
+    save_experiment_results,
+    save_layout,
+    save_policy,
+)
 
 
 class AccessorMixin:
@@ -111,3 +118,9 @@ class AccessorMixin:
     def export_logs(self, filepath: Path | str) -> None:
         """Export episode records to CSV."""
         export_logs(self._records, Path(filepath))
+
+    def save_results(self, filepath: Path | str, metadata: dict | None = None) -> None:
+        """Save experiment summary + metadata to JSON (§7.4)."""
+        save_experiment_results(
+            self._records, metadata or {}, Path(filepath)
+        )
