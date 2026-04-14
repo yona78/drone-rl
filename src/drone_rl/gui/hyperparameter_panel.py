@@ -84,6 +84,27 @@ class HyperparameterPanel(tk.LabelFrame):
         self._spin_row("Max steps", self._max_steps_var, 10, 2000, 6)
         self._spin_row("Random seed", self._seed_var, 0, 99999, 7)
 
+        # Rewards Reference
+        ttk.Separator(self, orient=tk.HORIZONTAL).grid(
+            row=8, column=0, columnspan=2, sticky=tk.EW, pady=8
+        )
+        tk.Label(self, text="Rewards Reference", font=("Arial", 9, "bold")).grid(
+            row=9, column=0, columnspan=2, sticky=tk.W
+        )
+        rewards = [
+            ("Goal reached", "+100"),
+            ("Each step", "-1"),
+            ("Building collision", "-10"),
+            ("Trap hit", "-100"),
+            ("Crosswind effect", "-10"),
+        ]
+        for i, (label, val) in enumerate(rewards):
+            row = 10 + i
+            tk.Label(self, text=label, font=("Arial", 8)).grid(row=row, column=0, sticky=tk.E)
+            tk.Label(self, text=val, font=("Arial", 8, "bold"), fg="blue").grid(
+                row=row, column=1, sticky=tk.W
+            )
+
     def get_hyperparameters(self) -> Hyperparameters:
         """Build and return a Hyperparameters dataclass from current widget values."""
         return Hyperparameters(

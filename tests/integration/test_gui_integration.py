@@ -72,7 +72,11 @@ def test_all_gui_files_exist() -> None:
     """Core GUI module files must be present on disk."""
     required = [
         "app.py",
+        "app_ui_mixin.py",
+        "app_menu.py",
         "canvas.py",
+        "canvas_overlays.py",
+        "canvas_editing.py",
         "editor.py",
         "charts.py",
         "panels.py",
@@ -95,7 +99,12 @@ def test_gui_modules_import_cleanly() -> None:
 
     matplotlib.use("Agg")
     modules = [
+        "drone_rl.gui.app",
+        "drone_rl.gui.app_ui_mixin",
+        "drone_rl.gui.app_menu",
         "drone_rl.gui.canvas",
+        "drone_rl.gui.canvas_overlays",
+        "drone_rl.gui.canvas_editing",
         "drone_rl.gui.editor",
         "drone_rl.gui.panels",
         "drone_rl.gui.hyperparameter_panel",
@@ -110,10 +119,10 @@ def test_gui_modules_import_cleanly() -> None:
 
 
 def test_gui_line_counts_within_limit() -> None:
-    """Every GUI source file must be ≤170 lines."""
+    """Every GUI source file must be ≤150 lines."""
     violations = []
     for f in _gui_python_files():
         lines = len(f.read_text().splitlines())
-        if lines > 170:
+        if lines > 150:
             violations.append(f"{f.name}: {lines} lines")
-    assert violations == [], "Files exceed 170-line limit:\n" + "\n".join(violations)
+    assert violations == [], "Files exceed 150-line limit:\n" + "\n".join(violations)

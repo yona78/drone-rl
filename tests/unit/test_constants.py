@@ -53,7 +53,7 @@ class TestColors:
         assert COLOR_GOAL == "gold"
         assert COLOR_BUILDING == "gray"
         assert COLOR_TRAP == "red"
-        assert COLOR_CROSSWIND == "blue"
+        assert COLOR_CROSSWIND == "dodger blue"
 
 
 class TestGridLimits:

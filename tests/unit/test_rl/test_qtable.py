@@ -100,3 +100,10 @@ class TestSerialization:
         restored = qtable_from_dict(serialized)
         assert get_q(restored, 0, 0, Action.UP) == 1.5
         assert get_q(restored, 0, 0, Action.DOWN) == -2.0
+
+    def test_qtable_from_dict_validation(self) -> None:
+        import pytest
+        # Layout-like format (int instead of dict)
+        invalid = {"0,0": 5}
+        with pytest.raises(ValueError, match="Invalid Q-table format"):
+            qtable_from_dict(invalid)

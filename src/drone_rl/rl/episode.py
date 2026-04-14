@@ -27,6 +27,7 @@ def run_step(
     hp: Hyperparameters,
     rewards: RewardConfig,
     rng: _random_module.Random,
+    action: Action | None = None,
 ) -> tuple[AgentState, QTable]:
     """
     Execute a single timestep: select action, move, reward, update Q.
@@ -39,8 +40,9 @@ def run_step(
     """
     row, col = agent.position.row, agent.position.col
 
-    # 1. Select action (epsilon-greedy with local RNG)
-    action = select_action(table, row, col, hp.epsilon, rng)
+    # 1. Select action (if not provided, use epsilon-greedy with local RNG)
+    if action is None:
+        action = select_action(table, row, col, hp.epsilon, rng)
 
     # 2. Apply movement physics
     next_pos = apply_action(agent.position, action, grid)

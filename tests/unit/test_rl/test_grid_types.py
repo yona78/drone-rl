@@ -82,6 +82,10 @@ class TestGridState:
         )
         assert grid.get_cell_type(1, 1) == CellType.BUILDING
 
+    def test_gridstate_get_cell_type_start_goal(self, small_grid: GridState) -> None:
+        assert small_grid.get_cell_type(0, 0) == CellType.START
+        assert small_grid.get_cell_type(4, 4) == CellType.GOAL
+
     def test_gridstate_set_cell_type(self, small_grid: GridState) -> None:
         small_grid.cells[(0, 1)] = CellType.TRAP
         assert small_grid.get_cell_type(0, 1) == CellType.TRAP
