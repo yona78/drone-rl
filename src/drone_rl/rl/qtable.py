@@ -81,12 +81,14 @@ def qtable_from_dict(data: dict[str, Any]) -> QTable:
     table: QTable = {}
     for sk, actions in data.items():
         if not isinstance(actions, dict):
-            raise ValueError(f"Invalid Q-table format: value for state '{sk}' is not a dictionary. "
-                             "Are you sure this is a policy file and not a layout file?")
+            raise ValueError(
+                f"Invalid Q-table format: value for state '{sk}' is not a dictionary. "
+                "Are you sure this is a policy file and not a layout file?"
+            )
         table[sk] = {}
         for k, v in actions.items():
             if k not in action_map:
-                continue # Skip metadata or invalid actions
+                continue  # Skip metadata or invalid actions
             table[sk][action_map[k]] = float(v)
     return table
 

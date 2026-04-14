@@ -73,4 +73,6 @@ class CanvasOverlayMixin:
         for i, (color, label) in enumerate(LEGEND_ITEMS):
             y = 20 + i * 22
             self.create_rectangle(x_off, y, x_off + 16, y + 16, fill=color, outline="black")
-            self.create_text(x_off + 22, y + 8, text=label, anchor=tk.W, font=("Arial", 9), fill="black")
+            self.create_text(
+                x_off + 22, y + 8, text=label, anchor=tk.W, font=("Arial", 9), fill="black"
+            )

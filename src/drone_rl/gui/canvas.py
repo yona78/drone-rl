@@ -85,7 +85,13 @@ class GridCanvas(tk.Canvas, CanvasOverlayMixin, CanvasEditingMixin):
         pad = cs // 5
         x0, y0 = col * cs + pad, row * cs + pad
         self.create_oval(
-            x0, y0, x0 + cs - 2 * pad, y0 + cs - 2 * pad, fill=color, outline="navy", tags=self._AGENT_TAG
+            x0,
+            y0,
+            x0 + cs - 2 * pad,
+            y0 + cs - 2 * pad,
+            fill=color,
+            outline="navy",
+            tags=self._AGENT_TAG,
         )
 
     def update_agent_position(self, row: int, col: int) -> None:
@@ -96,5 +102,10 @@ class GridCanvas(tk.Canvas, CanvasOverlayMixin, CanvasEditingMixin):
         """Draw a text label (e.g. S/G) in a cell."""
         cs = self._cs
         self.create_text(
-            col * cs + cs // 2, row * cs + cs // 2, text=text, fill=fg, font=("Arial", 10, "bold"), tags="cell"
+            col * cs + cs // 2,
+            row * cs + cs // 2,
+            text=text,
+            fill=fg,
+            font=("Arial", 10, "bold"),
+            tags="cell",
         )

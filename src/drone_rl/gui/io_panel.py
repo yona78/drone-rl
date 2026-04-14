@@ -72,7 +72,6 @@ class IOPanel(tk.LabelFrame):
             row=row, column=0, columnspan=2, padx=2, pady=2
         )
 
-
     def _save_policy(self) -> None:
         path = filedialog.asksaveasfilename(
             defaultextension=".json", filetypes=_JSON_TYPE, title="Save Policy"

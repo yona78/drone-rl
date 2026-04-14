@@ -90,9 +90,18 @@ class ExecutionMixin:
 
         if action is None:
             from ..rl.qtable import best_action
-            action = best_action(self._qtable, self._manual_agent.position.row, self._manual_agent.position.col)
+
+            action = best_action(
+                self._qtable, self._manual_agent.position.row, self._manual_agent.position.col
+            )
 
         self._manual_agent, self._qtable = run_step(
-            self._manual_agent, self._grid, self._qtable, self._hp, self._rewards, self._rng, action=action
+            self._manual_agent,
+            self._grid,
+            self._qtable,
+            self._hp,
+            self._rewards,
+            self._rng,
+            action=action,
         )
         return self._manual_agent, self._manual_agent.accumulated_reward, self._manual_agent.is_done

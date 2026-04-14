@@ -48,12 +48,8 @@ class PlaybackControls(tk.LabelFrame):
     def _build(self) -> None:
         self._train_btn = ttk.Button(self, text="Start/Resume", command=self._on_train)
         self._train_btn.grid(row=0, column=0, padx=2, pady=2)
-        ttk.Button(self, text="Pause", command=self._on_pause).grid(
-            row=0, column=1, padx=2, pady=2
-        )
-        ttk.Button(self, text="Reset", command=self._on_reset).grid(
-            row=0, column=2, padx=2, pady=2
-        )
+        ttk.Button(self, text="Pause", command=self._on_pause).grid(row=0, column=1, padx=2, pady=2)
+        ttk.Button(self, text="Reset", command=self._on_reset).grid(row=0, column=2, padx=2, pady=2)
         ttk.Button(self, text="Step", command=self._on_step).grid(row=0, column=3, padx=2, pady=2)
 
         tk.Checkbutton(self, text="Visualise Training", variable=self._visualise_var).grid(

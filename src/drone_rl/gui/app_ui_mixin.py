@@ -76,7 +76,9 @@ class AppUIMixin:
         v_scroll = ttk.Scrollbar(container, orient="vertical", command=canvas_scroll.yview)
         h_scroll = ttk.Scrollbar(container, orient="horizontal", command=canvas_scroll.xview)
 
-        self._grid_canvas = GridCanvas(canvas_scroll, self._grid, cell_size=50, on_change=self._refresh_all)
+        self._grid_canvas = GridCanvas(
+            canvas_scroll, self._grid, cell_size=50, on_change=self._refresh_all
+        )
 
         # Update scrollregion
         def _on_grid_resize(e: tk.Event) -> None:
