@@ -1,9 +1,6 @@
 """Unit tests for DroneRLSDK core — environment, training, control (§4).
-
 Covers create_environment, train, pause, reset, step, and play_best_policy.
-
-Reference: CODE_PLAN Phase 3, §3.4.
-"""
+Reference: CODE_PLAN Phase 3, §3.4."""
 
 from __future__ import annotations
 
@@ -124,7 +121,7 @@ def test_sdk_step(sdk: DroneRLSDK) -> None:
     assert isinstance(reward, float)
     assert isinstance(done, bool)
     assert agent.position.row == 1
-    
+
     # Test without action (best action)
     sdk.reset()
     agent, reward, done = sdk.step()
@@ -135,7 +132,7 @@ def test_sdk_get_agent_state(sdk: DroneRLSDK) -> None:
     """get_agent_state returns the current agent position."""
     state = sdk.get_agent_state()
     assert state == {"row": 0, "col": 0}
-    
+
     sdk.step(Action.DOWN)
     state = sdk.get_agent_state()
     assert state == {"row": 1, "col": 0}
