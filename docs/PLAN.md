@@ -110,7 +110,9 @@ drone-rl/
 │   │   └── test_utils/
 │   └── integration/    # Integration tests
 │       ├── test_scenarios/
-│       │   └── test_three_scenarios.py  # PRD §11.2 scenarios
+│       │   ├── test_direct_route.py
+│       │   ├── test_maze_navigation.py
+│       │   └── test_risk_aversion.py
 │       └── test_file_io/
 │
 ├── config/             # Configuration files (NOT in source)
@@ -498,14 +500,20 @@ tests/
 │   │   ├── test_environment.py  # Movement, boundaries, crosswinds
 │   │   └── test_episode.py      # Full episode integration
 │   ├── test_sdk/
-│   │   └── test_sdk_interface.py  # SDK public API tests
+│   │   ├── test_sdk.py           # SDK public API tests
+│   │   ├── test_sdk_core.py      # SDK execution/core behavior
+│   │   └── test_sdk_io.py        # SDK file I/O behavior
 │   └── test_utils/
-│       └── test_helpers.py        # Utility function tests
+│       ├── test_utils.py          # Utility function tests
+│       └── test_utils_csv.py      # CSV export utility tests
 └── integration/
     ├── test_scenarios/
-    │   └── test_three_scenarios.py  # PRD §11.2 scenarios (Direct Route, Maze, Risk Aversion)
+    │   ├── test_direct_route.py
+    │   ├── test_maze_navigation.py
+    │   └── test_risk_aversion.py
     └── test_file_io/
-        └── test_config_loading.py   # JSON config file loading
+        ├── test_io_layout_results.py
+        └── test_io_roundtrip.py
 ```
 
 **Edge cases documented & tested:**
@@ -823,7 +831,7 @@ All RL files MUST import nothing from `gui`, `shared/config`, or tkinter. Pure f
     **Coverage target: ≥85%** for all RL modules.
 
 13. **Integration tests** in `tests/integration/test_scenarios/`:
-    - `test_three_scenarios.py` (≤150 lines): Direct Route, Maze Navigation, Risk Aversion (PRD §11.2)
+    - `test_direct_route.py`, `test_maze_navigation.py`, `test_risk_aversion.py` (each ≤150 lines): PRD §11.2 scenarios
     
     Verify each scenario produces expected learning curves and final policy success rates.
 
@@ -954,7 +962,7 @@ class GridEnvironment(RewardMixin, BaseEnvironment):
     - `__version__ = "1.00"`
 
 16. **Unit tests** in `tests/unit/test_sdk/`:
-    - `test_sdk_interface.py` (≤150 lines): Verify all SDK public methods work correctly
+    - `test_sdk.py`, `test_sdk_core.py`, `test_sdk_io.py` (each ≤150 lines): Verify SDK public methods and behavior
     
     **Coverage target: ≥85%** for SDK layer.
 
@@ -1061,8 +1069,8 @@ All GUI files ≤150 lines. GUI MUST NOT import from `rl/` package directly — 
 
 **Goal:** Wire the SDK to the GUI; training runs in the main thread but doesn't block redraws.
 
-23. **`src/drone_rl/runner.py` (≤150 lines; split if needed):**
-    Training loop runs in main thread with `update_idletasks()` to allow GUI responsiveness.
+23. **Training loop implementation in SDK/GUI integration (`src/drone_rl/sdk/execution.py` + `src/drone_rl/gui/playback_controls.py`):**
+    Training loop is orchestrated by SDK execution methods and triggered by GUI playback controls.
     
     ```python
     def training_loop(sdk: DroneRLSDK, state: SimulationState, on_episode_callback):
@@ -1104,7 +1112,7 @@ All GUI files ≤150 lines. GUI MUST NOT import from `rl/` package directly — 
     - Redraw canvas with drone at interpolated position
 
 26. **Charts update:**
-    - `on_episode_callback()` in `runner.py` calls `charts.update(record)` to redraw convergence graph
+    - `on_episode_callback()` from SDK middleware updates charts and status panels after each episode
     - Matplotlib figures update asynchronously without blocking training
 
 27. **Episode stats panel:**
