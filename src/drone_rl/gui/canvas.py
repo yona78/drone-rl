@@ -2,7 +2,8 @@
 GridCanvas — tkinter canvas renderer for the RL grid (Phase 5).
 
 Draws cells, agent, path, directional policy arrows, and a persistent
-color legend. Never imports from drone_rl.rl (§4 boundary).
+color legend. Supports interactive cell editing via CanvasEditingMixin.
+Never imports from drone_rl.rl (§4 boundary).
 
 Reference: CODE_PLAN Phase 5, §3.2.
 """
@@ -10,13 +11,15 @@ Reference: CODE_PLAN Phase 5, §3.2.
 from __future__ import annotations
 
 import tkinter as tk
+from collections.abc import Callable
 
 from ..constants import CELL_COLORS
 from ..types.grid import GridState
+from .canvas_editing import CanvasEditingMixin
 from .canvas_overlays import CanvasOverlayMixin
 
 
-class GridCanvas(tk.Canvas, CanvasOverlayMixin):
+class GridCanvas(tk.Canvas, CanvasOverlayMixin, CanvasEditingMixin):
     """
     Canvas that renders the Q-Learning grid and agent overlays.
 
@@ -34,14 +37,22 @@ class GridCanvas(tk.Canvas, CanvasOverlayMixin):
         parent: tk.Widget,
         grid: GridState,
         cell_size: int = 50,
+        on_change: Callable[[], None] | None = None,
     ) -> None:
         self._grid = grid
         self._cs = cell_size
+        self._on_change = on_change
         w = grid.cols * cell_size + 120  # +120 for legend
         h = grid.rows * cell_size + 2
-        super().__init__(parent, width=w, height=h, bg="white")
+        super().__init__(parent, width=w, height=h, bg="white", cursor="crosshair")
         self.draw_grid()
         self.draw_legend()
+
+        self.bind("<Button-1>", self._on_left_click)
+        self.bind("<Button-2>", self._on_right_click)
+        self.bind("<Button-3>", self._on_right_click)
+        self.bind("<Shift-Button-1>", self._on_shift_click)
+        self.bind("<Control-Button-1>", self._on_ctrl_click)
 
     def reset(self, grid: GridState) -> None:
         """Swap in a new grid and redraw from scratch."""
@@ -60,17 +71,11 @@ class GridCanvas(tk.Canvas, CanvasOverlayMixin):
                 color = CELL_COLORS.get(cell, "white")
                 x0, y0 = c * cs, r * cs
                 self.create_rectangle(
-                    x0,
-                    y0,
-                    x0 + cs,
-                    y0 + cs,
-                    fill=color,
-                    outline="lightgray",
-                    tags="cell",
+                    x0, y0, x0 + cs, y0 + cs, fill=color, outline="lightgray", tags="cell"
                 )
         sp = self._grid.start_pos
         gp = self._grid.goal_pos
-        self._label_cell(sp.row, sp.col, "S", "white")
+        self._label_cell(sp.row, sp.col, "S", "black")
         self._label_cell(gp.row, gp.col, "G", "black")
 
     def draw_agent(self, row: int, col: int, color: str = "blue") -> None:
@@ -94,6 +99,7 @@ class GridCanvas(tk.Canvas, CanvasOverlayMixin):
         self.draw_agent(row, col)
 
     def _label_cell(self, row: int, col: int, text: str, fg: str) -> None:
+        """Draw a text label (e.g. S/G) in a cell."""
         cs = self._cs
         self.create_text(
             col * cs + cs // 2,

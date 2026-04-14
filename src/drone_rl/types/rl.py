@@ -54,7 +54,9 @@ class RewardConfig:
     """
     Exact reward values (PRD section 4.1 — MANDATORY).
 
-    These values must match config/rewards.json exactly.
+    Input Data: reward floats from config/rewards.json.
+    Output Data: consumed by RewardMixin.compute_reward().
+    Setup Data: defaults match PRD §4.1; overridden by config.
     """
 
     goal_reached: float = 100.0
@@ -66,7 +68,12 @@ class RewardConfig:
 
 @dataclass
 class EpisodeRecord:
-    """Training history per episode."""
+    """Training history per episode.
+
+    Input Data: episode index, total reward, step count, terminal reason, epsilon.
+    Output Data: consumed by AccessorMixin.get_episode_stats() for GUI display.
+    Setup Data: none — populated during training loop.
+    """
 
     episode: int
     total_reward: float

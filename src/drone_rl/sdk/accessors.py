@@ -95,6 +95,23 @@ class AccessorMixin:
         with lock:  # type: ignore[attr-defined]
             return list(self._records)
 
+    def get_agent_state(self) -> dict:
+        """Return a dict with agent position (row, col) from manual agent or start."""
+        if self._grid is None:
+            return {"row": 0, "col": 0}
+
+        # Check if there is a manual agent in progress (from step() calls)
+        manual = getattr(self, "_manual_agent", None)
+        if manual is not None:
+            return {"row": manual.position.row, "col": manual.position.col}
+
+        # Default to start position
+        return {"row": self._grid.start_pos.row, "col": self._grid.start_pos.col}
+
+    def get_grid(self) -> GridState | None:
+        """Return the current GridState."""
+        return self._grid
+
     # --- File I/O (thin wrappers over sdk/io.py) ---
 
     def save_policy(self, filepath: Path | str) -> None:

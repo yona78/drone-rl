@@ -45,8 +45,9 @@ class AgentState:
     """
     Runtime agent snapshot.
 
-    Tracks the agent's current position, accumulated reward,
-    step count, and whether the episode has terminated.
+    Input Data: position, accumulated_reward, step_count, is_done, terminal_reason.
+    Output Data: consumed by SDK step() and GUI for real-time display.
+    Setup Data: none — constructed fresh each episode by GridEnvironment.
     """
 
     position: Coordinate

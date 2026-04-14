@@ -1,8 +1,9 @@
 """
 Entry point for the 2D Drone Pathfinding RL Simulation.
 
-Usage: uv run python -m drone_rl.main
-       uv run drone-rl
+Usage: uv run drone-rl
+       python -m drone_rl
+       uv run -m drone_rl
 """
 
 from __future__ import annotations

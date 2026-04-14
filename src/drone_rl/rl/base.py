@@ -24,8 +24,9 @@ class RewardMixin:
     """
     Mixin providing reward computation to any environment class.
 
-    Satisfies Dr. Segal OOP requirement (Mixins prevent code duplication).
-    Delegates to pure function compute_reward() for mathematical correctness.
+    Input Data: cell_type (CellType) per call to get_reward().
+    Output Data: float reward value.
+    Setup Data: _reward_config (RewardConfig) set by the host class.
     """
 
     _reward_config: RewardConfig
@@ -37,14 +38,11 @@ class RewardMixin:
 
 class BaseEnvironment(ABC):
     """
-    Abstract base class for all RL environments.
+    Abstract base class for all RL environments (Template Method §4.2).
 
-    Satisfies Dr. Segal OOP requirement (base classes + inheritance).
-
-    IMPLEMENTS THE TEMPLATE METHOD DESIGN PATTERN (section 4.2):
-    The ``step()`` method is the template method that relies on abstract
-    subclass implementations to define specific physics. This allows
-    GridEnvironment to override behavior while maintaining the contract.
+    Input Data: Action enum from the agent's policy.
+    Output Data: AgentState from reset(); (AgentState, reward, done) from step().
+    Setup Data: subclasses must implement _validate_config() for init checks.
     """
 
     @abstractmethod

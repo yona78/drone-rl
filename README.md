@@ -15,9 +15,10 @@ All computation is performed locally using pure tabular math. No neural networks
 ## Features
 
 - Tabular Q-Learning with configurable hyperparameters (alpha, gamma, epsilon)
-- Interactive tkinter GUI with real-time training visualization
-- Three obstacle types: Buildings (gray), Traps (red), Crosswinds (blue)
-- Drag-and-drop grid editor for custom layouts
+- Interactive tkinter GUI with real-time training visualization and drone movement
+- Three obstacle types: Buildings (gray), Traps (red), Crosswinds (dodger blue)
+- Direct grid editing (Click to cycle, Right-click menu, Shift/Ctrl+Click for Start/Goal)
+- Scrollable Grid and Analytics panels with mouse wheel support
 - Q-value heatmap overlay and policy arrow display
 - Real-time convergence chart (matplotlib embedded)
 - Save/load Q-tables (policies) and grid layouts as JSON
@@ -41,7 +42,14 @@ uv sync
 ## Running the App
 
 ```bash
-uv run python -m drone_rl.main
+uv run drone-rl
+```
+
+or equivalently:
+
+```bash
+python -m drone_rl
+uv run -m drone_rl
 ```
 
 ## Running Tests
@@ -58,7 +66,7 @@ uv run pytest tests/unit/test_rl/test_grid_types.py -v
 |------|-------|--------|----------|
 | Building | Gray | -10 | Blocks movement; agent bounces back |
 | Trap | Red | -100 | Ends the episode immediately |
-| Crosswind | Blue | -10 | Drifts agent in configured wind direction |
+| Crosswind | Dodger Blue | -10 | Drifts agent in configured wind direction |
 
 ## Reward Values
 
@@ -77,9 +85,14 @@ uv run pytest tests/unit/test_rl/test_grid_types.py -v
 | `Space` | Toggle Pause / Resume training |
 | `Ctrl+S` | Save current policy to JSON |
 | `Ctrl+L` | Load policy from JSON |
-| `Ctrl+R` | Reset Q-table and episode log |
+| `Ctrl+R` | Reset Q-table and episode log (Reset Grid to default) |
 | `Ctrl+E` | Export episode log to CSV |
 | `Delete` | Clear selected grid cell to Empty |
+| `Mouse Wheel`| Scroll Grid or Analytics panels |
+| `L-Click` | Cycle cell type |
+| `R-Click` | Open cell menu (Set Start/Goal) |
+| `Shift+Click`| Set Start position |
+| `Ctrl+Click` | Set Goal position |
 | Mouse drag | Paint multiple cells in one gesture |
 
 ## Development

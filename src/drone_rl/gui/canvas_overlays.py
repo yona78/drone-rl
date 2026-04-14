@@ -12,7 +12,7 @@ _ARROW_DELTAS: dict[str, tuple[int, int]] = {
 }
 
 LEGEND_ITEMS = [
-    ("White", "Empty"),
+    ("white", "Empty"),
     ("green", "Start"),
     ("gold", "Goal"),
     ("gray", "Building"),
@@ -23,7 +23,12 @@ LEGEND_ITEMS = [
 
 
 class CanvasOverlayMixin:
-    """Provides methods for drawing paths, policies, and overlays on a Canvas."""
+    """Provides methods for drawing paths, policies, and overlays on a Canvas.
+
+    Input Data: path lists, Q-table dicts, grid dimensions from host canvas.
+    Output Data: drawn tk.Canvas items (lines, polygons, text).
+    Setup Data: _cs (cell size), _PATH_TAG, _POLICY_TAG from host GridCanvas.
+    """
 
     def draw_path(self, path: list[tuple[int, int]]) -> None:
         """Draw a polyline tracing the agent's trajectory."""
@@ -68,4 +73,6 @@ class CanvasOverlayMixin:
         for i, (color, label) in enumerate(LEGEND_ITEMS):
             y = 20 + i * 22
             self.create_rectangle(x_off, y, x_off + 16, y + 16, fill=color, outline="black")
-            self.create_text(x_off + 22, y + 8, text=label, anchor=tk.W, font=("Arial", 9))
+            self.create_text(
+                x_off + 22, y + 8, text=label, anchor=tk.W, font=("Arial", 9), fill="black"
+            )

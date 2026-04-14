@@ -58,7 +58,7 @@ COLOR_START = "green"
 COLOR_GOAL = "gold"
 COLOR_BUILDING = "gray"
 COLOR_TRAP = "red"
-COLOR_CROSSWIND = "blue"
+COLOR_CROSSWIND = "dodger blue"
 
 CELL_COLORS: dict[CellType, str] = {
     CellType.EMPTY: COLOR_EMPTY,

@@ -96,6 +96,12 @@ class ConfigManager:
 
     def __init__(self, config_dir: Path) -> None:
         self._dir = Path(config_dir)
+        self._validate_config()
+
+    def _validate_config(self) -> None:
+        """Validate config directory exists; log warning if not (§16.1)."""
+        if not self._dir.is_dir():
+            log.warning("Config dir not found: %s — loads will use defaults", self._dir)
 
     def load_setup(self) -> dict:
         """Load config/setup.json; fall back to defaults on error."""

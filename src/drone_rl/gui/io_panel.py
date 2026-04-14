@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import tkinter as tk
 from collections.abc import Callable
-from tkinter import filedialog
+from tkinter import filedialog, ttk
 
 from ..sdk import DroneRLSDK
 
@@ -32,31 +32,44 @@ class IOPanel(tk.LabelFrame):
         parent: tk.Widget,
         sdk: DroneRLSDK,
         status_cb: Callable[[str], None] | None = None,
+        edit_cb: Callable[[], None] | None = None,
+        refresh_cb: Callable[[dict | None], None] | None = None,
+        clear_cb: Callable[[], None] | None = None,
     ) -> None:
         super().__init__(parent, text="File I/O", padx=4, pady=2)
         self._sdk = sdk
         self._status_cb = status_cb
+        self._edit_cb = edit_cb
+        self._refresh_cb = refresh_cb
+        self._clear_cb = clear_cb
         self._build()
 
     def _build(self) -> None:
-        btn_cfg = {"width": 14, "pady": 2}
+        btn_cfg = {"width": 14}
         row = 0
-        tk.Button(self, text="Save Policy", command=self._save_policy, **btn_cfg).grid(
-            row=row, column=0, padx=2
+        ttk.Button(self, text="Save Policy", command=self._save_policy, **btn_cfg).grid(
+            row=row, column=0, padx=2, pady=2
         )
-        tk.Button(self, text="Load Policy", command=self._load_policy, **btn_cfg).grid(
-            row=row, column=1, padx=2
-        )
-        row += 1
-        tk.Button(self, text="Save Layout", command=self._save_layout, **btn_cfg).grid(
-            row=row, column=0, padx=2
-        )
-        tk.Button(self, text="Load Layout", command=self._load_layout, **btn_cfg).grid(
-            row=row, column=1, padx=2
+        ttk.Button(self, text="Load Policy", command=self._load_policy, **btn_cfg).grid(
+            row=row, column=1, padx=2, pady=2
         )
         row += 1
-        tk.Button(self, text="Export Episode Log", command=self._export_logs, **btn_cfg).grid(
-            row=row, column=0, columnspan=2, padx=2
+        ttk.Button(self, text="Save Layout", command=self._save_layout, **btn_cfg).grid(
+            row=row, column=0, padx=2, pady=2
+        )
+        ttk.Button(self, text="Load Layout", command=self._load_layout, **btn_cfg).grid(
+            row=row, column=1, padx=2, pady=2
+        )
+        row += 1
+        ttk.Button(self, text="Edit Grid", command=self._edit_cb, **btn_cfg).grid(
+            row=row, column=0, padx=2, pady=2
+        )
+        ttk.Button(self, text="Clear Grid", command=self._clear_cb, **btn_cfg).grid(
+            row=row, column=1, padx=2, pady=2
+        )
+        row += 1
+        ttk.Button(self, text="Export Logs", command=self._export_logs, **btn_cfg).grid(
+            row=row, column=0, columnspan=2, padx=2, pady=2
         )
 
     def _save_policy(self) -> None:
@@ -70,8 +83,13 @@ class IOPanel(tk.LabelFrame):
     def _load_policy(self) -> None:
         path = filedialog.askopenfilename(filetypes=_JSON_TYPE, title="Load Policy")
         if path:
-            self._sdk.load_policy(path)
-            self._set_status(f"Policy loaded ← {path}")
+            try:
+                self._sdk.load_policy(path)
+                self._set_status(f"Policy loaded ← {path}")
+                if self._refresh_cb:
+                    self._refresh_cb()
+            except Exception as exc:
+                self._set_status(f"Error loading policy: {exc}")
 
     def _save_layout(self) -> None:
         path = filedialog.asksaveasfilename(
@@ -84,8 +102,13 @@ class IOPanel(tk.LabelFrame):
     def _load_layout(self) -> None:
         path = filedialog.askopenfilename(filetypes=_JSON_TYPE, title="Load Layout")
         if path:
-            self._sdk.load_layout(path)
-            self._set_status(f"Layout loaded ← {path}")
+            try:
+                self._sdk.load_layout(path)
+                self._set_status(f"Layout loaded ← {path}")
+                if self._refresh_cb:
+                    self._refresh_cb()
+            except Exception as exc:
+                self._set_status(f"Error loading layout: {exc}")
 
     def _export_logs(self) -> None:
         path = filedialog.asksaveasfilename(

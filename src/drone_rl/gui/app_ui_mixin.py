@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import tkinter as tk
+from tkinter import ttk
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -10,7 +11,12 @@ if TYPE_CHECKING:
 
 
 class AppUIMixin:
-    """Mixin for building the tkinter UI."""
+    """Mixin for building the tkinter UI layout.
+
+    Input Data: DroneRLApp host (self) providing sdk, _grid references.
+    Output Data: populated tk.Frame hierarchy, widget references on host.
+    Setup Data: none — layout is built once during create_ui().
+    """
 
     def create_ui(self: DroneRLApp) -> None:
         """Build and layout all sub-frames."""
@@ -34,23 +40,6 @@ class AppUIMixin:
             side=tk.BOTTOM, fill=tk.X
         )
 
-    def _build_menu(self: DroneRLApp) -> None:
-        """Create File / Edit / Help menu bar."""
-        menubar = tk.Menu(self)
-        file_menu = tk.Menu(menubar, tearoff=0)
-        file_menu.add_command(label="Save Policy", command=self._save_policy)
-        file_menu.add_command(label="Load Policy", command=self._load_policy)
-        file_menu.add_separator()
-        file_menu.add_command(label="Exit", command=self.destroy)
-        menubar.add_cascade(label="File", menu=file_menu)
-        edit_menu = tk.Menu(menubar, tearoff=0)
-        edit_menu.add_command(label="Reset Grid", command=self._reset_grid)
-        menubar.add_cascade(label="Edit", menu=edit_menu)
-        help_menu = tk.Menu(menubar, tearoff=0)
-        help_menu.add_command(label="About", command=self._show_about)
-        menubar.add_cascade(label="Help", menu=help_menu)
-        self.config(menu=menubar)
-
     def _build_controls(self: DroneRLApp, parent: tk.Frame) -> None:
         from .hyperparameter_panel import HyperparameterPanel
         from .io_panel import IOPanel
@@ -66,24 +55,86 @@ class AppUIMixin:
             self._hp_panel.get_hyperparameters,
         )
         self._pb_controls.pack(side=tk.LEFT, padx=4)
-        self._io_panel = IOPanel(parent, self.sdk, self._set_status)
+        self._io_panel = IOPanel(
+            parent,
+            self.sdk,
+            self._set_status,
+            self._open_editor,
+            self._refresh_all,
+            self._clear_grid,
+        )
         self._io_panel.pack(side=tk.LEFT, padx=4)
 
     def _build_canvas(self: DroneRLApp, parent: tk.Frame) -> None:
         from .canvas import GridCanvas
 
-        self._grid_canvas = GridCanvas(parent, self._grid, cell_size=50)
-        self._grid_canvas.pack(fill=tk.BOTH, expand=True)
+        # Make grid scrollable
+        container = tk.Frame(parent)
+        container.pack(fill=tk.BOTH, expand=True)
+
+        canvas_scroll = tk.Canvas(container, highlightthickness=0)
+        v_scroll = ttk.Scrollbar(container, orient="vertical", command=canvas_scroll.yview)
+        h_scroll = ttk.Scrollbar(container, orient="horizontal", command=canvas_scroll.xview)
+
+        self._grid_canvas = GridCanvas(
+            canvas_scroll, self._grid, cell_size=50, on_change=self._refresh_all
+        )
+
+        # Update scrollregion
+        def _on_grid_resize(e: tk.Event) -> None:
+            canvas_scroll.configure(scrollregion=canvas_scroll.bbox("all"))
+
+        self._grid_canvas.bind("<Configure>", _on_grid_resize)
+
+        canvas_scroll.create_window((0, 0), window=self._grid_canvas, anchor="nw")
+        canvas_scroll.configure(yscrollcommand=v_scroll.set, xscrollcommand=h_scroll.set)
+
+        v_scroll.pack(side="right", fill="y")
+        h_scroll.pack(side="bottom", fill="x")
+        canvas_scroll.pack(side="left", fill="both", expand=True)
+
+        # Mouse wheel support for grid
+        def _on_grid_wheel(event: tk.Event) -> None:
+            canvas_scroll.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
+        canvas_scroll.bind_all("<MouseWheel>", _on_grid_wheel)
 
     def _build_charts(self: DroneRLApp, parent: tk.Frame) -> None:
         from .charts import ConvergenceChart, QValueHeatmap
         from .panels import EpisodeStatsPanel, QTableInspectorPanel
 
-        self._conv_chart = ConvergenceChart(parent)
-        self._conv_chart.get_widget().pack(fill=tk.BOTH, expand=True)
-        self._heatmap = QValueHeatmap(parent, self._grid.rows, self._grid.cols)
-        self._heatmap.get_widget().pack(fill=tk.BOTH, expand=True)
-        self._stats_panel = EpisodeStatsPanel(parent)
-        self._stats_panel.pack(fill=tk.X)
-        self._inspector = QTableInspectorPanel(parent)
-        self._inspector.pack(fill=tk.X)
+        # Make analytics scrollable
+        canvas = tk.Canvas(parent, highlightthickness=0)
+        scrollbar = ttk.Scrollbar(parent, orient="vertical", command=canvas.yview)
+        scrollable_frame = tk.Frame(canvas)
+
+        # Update scrollregion on resize
+        scrollable_frame.bind(
+            "<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+
+        # Create window inside canvas
+        window_id = canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+
+        # Fix frame width to match canvas width
+        canvas.bind("<Configure>", lambda e: canvas.itemconfig(window_id, width=e.width))
+
+        canvas.configure(yscrollcommand=scrollbar.set)
+
+        # Mouse wheel support
+        def _on_mousewheel(event: tk.Event) -> None:
+            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
+        canvas.bind_all("<MouseWheel>", _on_mousewheel)
+
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+
+        self._conv_chart = ConvergenceChart(scrollable_frame)
+        self._conv_chart.get_widget().pack(fill=tk.X)
+        self._heatmap = QValueHeatmap(scrollable_frame, self._grid.rows, self._grid.cols)
+        self._heatmap.get_widget().pack(fill=tk.X)
+        self._stats_panel = EpisodeStatsPanel(scrollable_frame)
+        self._stats_panel.pack(fill=tk.X, pady=5)
+        self._inspector = QTableInspectorPanel(scrollable_frame)
+        self._inspector.pack(fill=tk.X, pady=5)

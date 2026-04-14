@@ -87,6 +87,16 @@ def test_sdk_save_and_load_layout(sdk: DroneRLSDK, tiny_grid: GridState) -> None
     assert loaded.goal_pos == tiny_grid.goal_pos
 
 
+def test_sdk_load_layout_validation(sdk: DroneRLSDK) -> None:
+    """load_layout raises ValueError for invalid file formats."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        path = Path(tmpdir) / "invalid.json"
+        # Policy-like format (state keys map to dicts, not ints)
+        path.write_text('{"0,0": {"up": 0.0}}')
+        with pytest.raises(ValueError, match="Invalid Grid Layout format"):
+            sdk.load_layout(path)
+
+
 def test_sdk_export_logs(sdk: DroneRLSDK) -> None:
     """export_logs writes a CSV with correct column headers."""
     sdk.train(num_episodes=3)

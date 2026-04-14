@@ -21,13 +21,13 @@ from drone_rl.types.rl import Hyperparameters
 
 @pytest.fixture()
 def tiny_grid() -> GridState:
-    """2×2 grid: start (0,0) goal (1,1), no obstacles."""
+    """3×3 grid: start (0,0) goal (2,2), no obstacles."""
     return GridState(
-        rows=2,
-        cols=2,
+        rows=3,
+        cols=3,
         cells={},
         start_pos=Coordinate(0, 0),
-        goal_pos=Coordinate(1, 1),
+        goal_pos=Coordinate(2, 2),
     )
 
 
@@ -52,11 +52,6 @@ def sdk(tiny_grid: GridState, fast_hp: Hyperparameters) -> DroneRLSDK:
     s = DroneRLSDK(hp=fast_hp)
     s.create_environment(tiny_grid)
     return s
-
-
-# ---------------------------------------------------------------------------
-# Tests
-# ---------------------------------------------------------------------------
 
 
 def test_sdk_create_environment(tiny_grid: GridState) -> None:
@@ -118,10 +113,28 @@ def test_sdk_reset(sdk: DroneRLSDK) -> None:
 
 
 def test_sdk_step(sdk: DroneRLSDK) -> None:
-    """step() returns (AgentState, float reward, bool done)."""
+    """step() returns (AgentState, float reward, bool done). Action is optional."""
+    # Test with explicit action
     agent, reward, done = sdk.step(Action.DOWN)
     assert isinstance(reward, float)
     assert isinstance(done, bool)
+    assert agent.position.row == 1
+
+    # Test without action (best action)
+    sdk.reset()
+    agent, reward, done = sdk.step()
+    assert isinstance(reward, float)
+    assert isinstance(done, bool)
+
+
+def test_sdk_get_agent_state(sdk: DroneRLSDK) -> None:
+    """get_agent_state returns the current agent position."""
+    state = sdk.get_agent_state()
+    assert state == {"row": 0, "col": 0}
+
+    sdk.step(Action.DOWN)
+    state = sdk.get_agent_state()
+    assert state == {"row": 1, "col": 0}
 
 
 def test_sdk_play_best_policy(sdk: DroneRLSDK) -> None:

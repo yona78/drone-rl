@@ -35,7 +35,12 @@ class CellType(Enum):
 
 @dataclass(frozen=True)
 class Coordinate:
-    """Immutable 2D grid coordinate."""
+    """Immutable 2D grid coordinate.
+
+    Input Data: row (int), col (int).
+    Output Data: string representation "(row, col)".
+    Setup Data: none — frozen dataclass, no configuration.
+    """
 
     row: int
     col: int
@@ -73,7 +78,11 @@ class GridState:
     )
 
     def get_cell_type(self, row: int, col: int) -> CellType:
-        """Lookup cell type; default to EMPTY if not found."""
+        """Lookup cell type; check for start/goal, then default to EMPTY."""
+        if row == self.start_pos.row and col == self.start_pos.col:
+            return CellType.START
+        if row == self.goal_pos.row and col == self.goal_pos.col:
+            return CellType.GOAL
         return self.cells.get((row, col), CellType.EMPTY)
 
     def get_wind_direction(self, row: int, col: int) -> Action:
