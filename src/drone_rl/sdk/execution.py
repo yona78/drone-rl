@@ -29,11 +29,11 @@ class ExecutionMixin:
 
         if self._grid is None:
             raise RuntimeError("Call create_environment() before train()")
-
+        
         start_ep = len(self._records)
         n = num_episodes or self._hp.total_episodes
         new_records: list[EpisodeRecord] = []
-
+        
         for ep_idx in range(n):
             ep = start_ep + ep_idx
             if self._pause_event.is_set():
@@ -83,11 +83,11 @@ class ExecutionMixin:
         """Perform a single step manually. If action is None, pick best action."""
         if self._grid is None:
             raise RuntimeError("Call create_environment() first")
-
+        
         # Initialise manual agent if not exists or done
         if not hasattr(self, "_manual_agent") or self._manual_agent.is_done:
             self._manual_agent = AgentState(self._grid.start_pos, 0.0, 0, False)
-
+        
         if action is None:
             from ..rl.qtable import best_action
             action = best_action(self._qtable, self._manual_agent.position.row, self._manual_agent.position.col)

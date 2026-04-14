@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import random as _random_module
 
-from ..types.agent import Action, AgentState, TerminalReason
+from ..types.agent import AgentState, TerminalReason
 from ..types.grid import CellType, GridState
 from ..types.rl import EpisodeRecord, Hyperparameters, QTable, RewardConfig
 from .bellman import bellman_update

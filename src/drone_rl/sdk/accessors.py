@@ -99,12 +99,12 @@ class AccessorMixin:
         """Return a dict with agent position (row, col) from manual agent or start."""
         if self._grid is None:
             return {"row": 0, "col": 0}
-
+        
         # Check if there is a manual agent in progress (from step() calls)
         manual = getattr(self, "_manual_agent", None)
         if manual is not None:
             return {"row": manual.position.row, "col": manual.position.col}
-
+            
         # Default to start position
         return {"row": self._grid.start_pos.row, "col": self._grid.start_pos.col}
 

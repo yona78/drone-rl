@@ -9,8 +9,9 @@ Reference: CODE_PLAN Phase 5, Dr. Segal §4.
 from __future__ import annotations
 
 import tkinter as tk
+from tkinter import ttk
 from collections.abc import Callable
-from tkinter import filedialog, ttk
+from tkinter import filedialog
 
 from ..sdk import DroneRLSDK
 
