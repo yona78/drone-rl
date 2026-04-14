@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import tkinter as tk
-from tkinter import ttk
 
 from ..sdk import DroneRLSDK
 from ..shared.version import __version__

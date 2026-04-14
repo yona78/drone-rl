@@ -103,6 +103,7 @@ class TestSerialization:
 
     def test_qtable_from_dict_validation(self) -> None:
         import pytest
+
         # Layout-like format (int instead of dict)
         invalid = {"0,0": 5}
         with pytest.raises(ValueError, match="Invalid Q-table format"):

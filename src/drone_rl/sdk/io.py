@@ -53,9 +53,11 @@ def _grid_from_dict(data: dict) -> GridState:
     required = ["rows", "cols", "cells", "start_pos", "goal_pos"]
     missing = [k for k in required if k not in data]
     if missing:
-        raise ValueError(f"Invalid Grid Layout format: missing keys {missing}. "
-                         "Are you sure this is a layout file and not a policy file?")
-    
+        raise ValueError(
+            f"Invalid Grid Layout format: missing keys {missing}. "
+            "Are you sure this is a layout file and not a policy file?"
+        )
+
     ct_map = {ct.value: ct for ct in CellType}
     a_map = {a.value: a for a in Action}
     cells = {

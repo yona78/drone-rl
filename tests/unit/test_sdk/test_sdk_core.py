@@ -54,11 +54,6 @@ def sdk(tiny_grid: GridState, fast_hp: Hyperparameters) -> DroneRLSDK:
     return s
 
 
-# ---------------------------------------------------------------------------
-# Tests
-# ---------------------------------------------------------------------------
-
-
 def test_sdk_create_environment(tiny_grid: GridState) -> None:
     """create_environment sets grid and initialises a non-empty Q-table."""
     s = DroneRLSDK()
@@ -124,18 +119,19 @@ def test_sdk_step(sdk: DroneRLSDK) -> None:
     assert isinstance(reward, float)
     assert isinstance(done, bool)
     assert agent.position.row == 1
-    
+
     # Test without action (best action)
     sdk.reset()
     agent, reward, done = sdk.step()
     assert isinstance(reward, float)
     assert isinstance(done, bool)
 
+
 def test_sdk_get_agent_state(sdk: DroneRLSDK) -> None:
     """get_agent_state returns the current agent position."""
     state = sdk.get_agent_state()
     assert state == {"row": 0, "col": 0}
-    
+
     sdk.step(Action.DOWN)
     state = sdk.get_agent_state()
     assert state == {"row": 1, "col": 0}

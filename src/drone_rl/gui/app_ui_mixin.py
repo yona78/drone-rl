@@ -75,9 +75,11 @@ class AppUIMixin:
         canvas_scroll = tk.Canvas(container, highlightthickness=0)
         v_scroll = ttk.Scrollbar(container, orient="vertical", command=canvas_scroll.yview)
         h_scroll = ttk.Scrollbar(container, orient="horizontal", command=canvas_scroll.xview)
-        
-        self._grid_canvas = GridCanvas(canvas_scroll, self._grid, cell_size=50, on_change=self._refresh_all)
-        
+
+        self._grid_canvas = GridCanvas(
+            canvas_scroll, self._grid, cell_size=50, on_change=self._refresh_all
+        )
+
         # Update scrollregion
         def _on_grid_resize(e: tk.Event) -> None:
             canvas_scroll.configure(scrollregion=canvas_scroll.bbox("all"))
@@ -94,7 +96,7 @@ class AppUIMixin:
         # Mouse wheel support for grid
         def _on_grid_wheel(event: tk.Event) -> None:
             canvas_scroll.yview_scroll(int(-1 * (event.delta / 120)), "units")
-        
+
         canvas_scroll.bind_all("<MouseWheel>", _on_grid_wheel)
 
     def _build_charts(self: DroneRLApp, parent: tk.Frame) -> None:

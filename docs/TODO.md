@@ -1528,17 +1528,17 @@
 - [x] Test zero exploration rate (ε=0) — should never explore (pure exploitation)
 - [x] Test max grid size (20×20) — should not crash
 - [x] Document edge cases in `docs/TESTING.md` (NEW)
-- [x] Include error screenshots in `docs/TESTING.md` (Fix 9: §6.3 error screenshots — MANDATORY)
-- [x] Document each error condition with descriptive text AND associated screenshot
+- [ ] Include error screenshots in `docs/TESTING.md` (Fix 9: §6.3 error screenshots — MANDATORY)
+- [x] Document each error condition with descriptive text (screenshot paths are currently placeholders)
 - [x] Screenshot captions should explain: error message, cause, expected recovery action
 
 ### 10.5 Coverage & Quality Gates (NEW: §6 & Fix 16: §6.4 Test Logs & JUnit XML)
 
-- [x] Create `reports/` directory for test execution logs (Fix 16: §6.4 — MANDATORY)
-- [x] Run pytest with JUnit XML export (Fix 16: §6.4 — MANDATORY)
-- [x] `uv run pytest --junitxml=reports/test_results.xml --cov=src/drone_rl --cov-report=html`
-- [x] Save test execution output to log file: `uv run pytest > reports/test_run.log 2>&1`
-- [x] Verify JUnit XML file exists: `reports/test_results.xml` (contains pass/fail counts, timing, details)
+- [ ] Create `reports/` directory for test execution logs (Fix 16: §6.4 — MANDATORY)
+- [ ] Run pytest with JUnit XML export (Fix 16: §6.4 — MANDATORY)
+- [ ] `uv run pytest --junitxml=reports/test_results.xml --cov=src/drone_rl --cov-report=html`
+- [ ] Save test execution output to log file: `uv run pytest > reports/test_run.log 2>&1`
+- [ ] Verify JUnit XML file exists: `reports/test_results.xml` (contains pass/fail counts, timing, details)
 - [x] Verify coverage ≥85% across all modules
 - [x] Run `uv run ruff check .`
 - [x] Verify zero Ruff violations
@@ -1735,7 +1735,7 @@
 
 - **Version:** 1.00
 - **Compliance:** Dr. Yoram Segal Professional Software Guidelines
-- **Last Updated:** April 12, 2026
+- **Last Updated:** April 14, 2026
 - **Target Release:** v1.00 (production)
 - **Workflow:** PRD → PLAN → TODO → Development → Release
 

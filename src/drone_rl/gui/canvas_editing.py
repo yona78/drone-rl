@@ -49,8 +49,12 @@ class CanvasEditingMixin:
                 command=lambda t=ct, row=r, col=c: self._set_cell_type(row, col, t),
             )
         menu.add_separator()
-        menu.add_command(label="Set Start", command=lambda row=r, col=c: self._set_start_position(row, col))
-        menu.add_command(label="Set Goal", command=lambda row=r, col=c: self._set_goal_position(row, col))
+        menu.add_command(
+            label="Set Start", command=lambda row=r, col=c: self._set_start_position(row, col)
+        )
+        menu.add_command(
+            label="Set Goal", command=lambda row=r, col=c: self._set_goal_position(row, col)
+        )
         menu.tk_popup(event.x_root, event.y_root)
 
     def _on_shift_click(self, event: tk.Event) -> None:
@@ -95,7 +99,7 @@ class CanvasEditingMixin:
         self._grid.cells.pop((row, col), None)
         self._grid.start_pos = Coordinate(row, col)
         self.draw_grid()
-        self.draw_agent(row, col) # Move drone to new start
+        self.draw_agent(row, col)  # Move drone to new start
         if self._on_change:
             self._on_change()
 
